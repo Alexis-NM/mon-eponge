@@ -1,0 +1,14 @@
+@import "../commons.scss";
+
+.title-container {
+  display: flex;
+  .main-title {
+    font-size: 2rem;
+    margin-left: 2rem;
+    font-weight: 700;
+  }
+  .sponge-logo {
+    width: 2.5rem;
+    margin-left: .5rem;
+  }
+}
