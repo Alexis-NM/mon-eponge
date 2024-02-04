@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 class TipManager extends AbstractManager {
@@ -10,11 +11,11 @@ class TipManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create(tip) {
-    const { tipName, userId, pictureId } = tip;
+    const { tip_name, user_id, picture_id } = tip;
     // Execute the SQL INSERT query to add a new tip to the "tip" table
     const [result] = await this.database.query(
       `insert into ${this.table} (tip_name, user_id, picture_id) values (?, ?, ?)`,
-      [tipName, userId, pictureId]
+      [tip_name, user_id, picture_id]
     );
 
     // Return the ID of the newly inserted tip
@@ -35,10 +36,22 @@ class TipManager extends AbstractManager {
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all tips from the "tip" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
-
-    // Return the array of tips
+    const [rows] = await this.database.query(`
+    SELECT 
+      tip.id,
+      tip.tip_name,
+      tip.user_id,
+      tip.picture_id,
+      picture.picture_url,
+      GROUP_CONCAT(DISTINCT step.step_content ORDER BY step.step_number) AS steps,
+      GROUP_CONCAT(DISTINCT ingredient.ingredient_name) AS ingredients
+    FROM tip
+    LEFT JOIN picture ON tip.picture_id = picture.id
+    LEFT JOIN step ON tip.id = step.tip_id
+    LEFT JOIN tip_ingredient ON tip.id = tip_ingredient.tip_id
+    LEFT JOIN ingredient ON tip_ingredient.ingredient_id = ingredient.id
+    GROUP BY tip.id
+  `);
     return rows;
   }
 

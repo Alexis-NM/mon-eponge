@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 class TipIngredientManager extends AbstractManager {
@@ -9,12 +10,12 @@ class TipIngredientManager extends AbstractManager {
 
   // The C of CRUD - Create operation
 
-  async create(tipIngredient) {
-    const { tipId, ingredientId } = tipIngredient;
+  async create(tip_ingredient) {
+    const { tip_id, ingredient_id } = tip_ingredient;
     // Execute the SQL INSERT query to add a new tip_ingredient to the "tip_ingredient" table
     const [result] = await this.database.query(
       `insert into ${this.table} (tip_id, ingredient_id) values (?, ?)`,
-      [tipId, ingredientId]
+      [tip_id, ingredient_id]
     );
 
     // Return the ID of the newly inserted tip_ingredient

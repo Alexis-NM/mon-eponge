@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 class StepManager extends AbstractManager {
@@ -10,11 +11,11 @@ class StepManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create(step) {
-    const { tipId, stepNumber, stepContent } = step;
+    const { tip_id, step_number, step_content } = step;
     // Execute the SQL INSERT query to add a new step to the "step" table
     const [result] = await this.database.query(
       `insert into ${this.table} (tip_id, step_number, step_content) values (?, ?, ?)`,
-      [tipId, stepNumber, stepContent]
+      [tip_id, step_number, step_content]
     );
 
     // Return the ID of the newly inserted step
