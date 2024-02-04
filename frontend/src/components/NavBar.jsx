@@ -1,10 +1,15 @@
+import Title from "./Title";
+
+import "../styles/components/NavBar.scss";
+
 function NavBar() {
   return (
     <nav>
-      <ul>
-        <li>Accueil</li>
-        <li>Les Astuces</li>
-        <li>Proposer une astuce</li>
+      <Title />
+      <ul className="nav-container">
+        <li className="nav-box">Accueil</li>
+        <li className="nav-box">Les Astuces</li>
+        <li className="nav-box">Proposer une astuce</li>
       </ul>
     </nav>
   );

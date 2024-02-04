@@ -24,8 +24,8 @@ function Naviguate() {
       <div className="visitor-phrase">
         <img className="plant-logo" src={plant} alt="Logo de plante Monstera" />
         <p>
-          Je suis un simple visiteur qui souhaite garder une maison propre et
-          respectueuse de l'environnement
+          Je souhaite garder une maison propre et respectueuse de
+          l'environnement
         </p>
       </div>
     </>

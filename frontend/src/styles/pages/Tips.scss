@@ -1,0 +1,12 @@
+.navbar-desktop {
+  display: none;
+}
+
+@media (min-width: 821px) {
+  .navbar-desktop {
+    display:block;
+  }
+  .navbar-mobile {
+    display: none;
+  }
+}

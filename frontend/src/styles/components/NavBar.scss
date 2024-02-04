@@ -1,0 +1,24 @@
+@import "../commons.scss";
+
+.nav-container {
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+  margin-right: 10vw;
+  margin-top: 0;
+  .nav-box {
+    list-style: none;
+    background-color: $warm-white;
+    width: 10.2rem;
+    text-align: center;
+    padding: 0.5rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+    border-radius: 20px;
+
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}
