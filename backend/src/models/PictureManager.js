@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const AbstractManager = require("./AbstractManager");
 
 class PictureManager extends AbstractManager {
@@ -10,11 +11,11 @@ class PictureManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create(picture) {
-    const { pictureUrl } = picture;
+    const { picture_url } = picture;
     // Execute the SQL INSERT query to add a new picture to the "picture" table
     const [result] = await this.database.query(
       `insert into ${this.table} (picture_url) values (?)`,
-      [pictureUrl]
+      [picture_url]
     );
 
     // Return the ID of the newly inserted picture

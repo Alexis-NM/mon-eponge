@@ -17,8 +17,8 @@ const seed = async () => {
     /* ************************************************************************* */
 
     const picturesToInsert = [
-      { picture_url: "./chemin/vers/la/picture" },
-      { picture_url: "./chemin/vers/la/picture" },
+      { picture_url: "bath.svg" },
+      { picture_url: "bottle.svg" },
     ];
 
     const queriesPicture = [];
@@ -138,7 +138,7 @@ const seed = async () => {
 
     const tipIngredientsToInsert = [
       { tip_id: "1", ingredient_id: "1" },
-      { tip_id: "1", ingredient_id: "1" },
+      { tip_id: "1", ingredient_id: "2" },
     ];
 
     const queriesTipIngredient = [];
@@ -159,11 +159,11 @@ const seed = async () => {
     /* ************************************************************************* */
 
     const stepsToInsert = [
-      { tip_id: "1", step_number: "1", step_content: "Nettoyant multi-usage" },
-      { tip_id: "1", step_number: "2", step_content: "Nettoyant multi-usage" },
-      { tip_id: "1", step_number: "3", step_content: "Nettoyant multi-usage" },
-      { tip_id: "1", step_number: "1", step_content: "Nettoyant multi-usage" },
-      { tip_id: "1", step_number: "1", step_content: "Nettoyant multi-usage" },
+      { tip_id: "1", step_number: "1", step_content: "Étape 1" },
+      { tip_id: "1", step_number: "2", step_content: "Étape 2" },
+      { tip_id: "1", step_number: "3", step_content: "Étape 3" },
+      { tip_id: "2", step_number: "1", step_content: "Étape 1" },
+      { tip_id: "2", step_number: "2", step_content: "Étape 2" },
     ];
 
     const queriesStep = [];
