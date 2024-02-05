@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import PictureSelector from "../components/PictureSelector"; // Importez ou créez un composant d'image sélecteur
+import IngredientSelector from "../components/IngrediantSelector"; // Importez ou créez un composant de sélection d'ingrédients
 
 function TipForm() {
   const [formData, setFormData] = useState({
@@ -13,7 +15,7 @@ function TipForm() {
   useEffect(() => {
     // Charger la liste des ingrédients depuis le backend
     axios
-      .get("/api/ingredients")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/ingredients`)
       .then((response) => console.info(response.data))
       .catch((error) =>
         console.error("Erreur lors du chargement des ingrédients", error)
@@ -26,12 +28,26 @@ function TipForm() {
     setFormData({ ...formData, steps: newSteps });
   };
 
+  const handleImageSelect = (selectedImage) => {
+    setFormData({ ...formData, picture_id: selectedImage.id });
+  };
+
+  const handleIngredientsSelect = (selectedIngredients) => {
+    setFormData({ ...formData, ingredients: selectedIngredients });
+  };
+
+  const handleDeleteStep = (index) => {
+    const newSteps = [...formData.steps];
+    newSteps.splice(index, 1); // Supprime l'étape à l'index spécifié
+    setFormData({ ...formData, steps: newSteps });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Envoyer les données au backend
     axios
-      .post("/api/tips", formData)
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/tips`, formData)
       .then((response) => {
         console.info("Astuce créée avec succès", response.data);
         // Réinitialiser le formulaire ou effectuer d'autres actions
@@ -55,16 +71,23 @@ function TipForm() {
         />
       </label>
 
-      <label>
+      <label htmlFor="pictureSelector">
         Image à sélectionner:
-        {/* Ajoutez ici un composant de sélection d'image */}
+        <PictureSelector id="pictureSelector" onSelect={handleImageSelect} />
+      </label>
+      <label htmlFor="ingredients">
+        Ingrédients:
+        <IngredientSelector
+          id="ingredients"
+          onSelect={handleIngredientsSelect}
+        />
       </label>
       <label>
         Étapes:
         {formData.steps.map((step, index) => (
-          <div key={step.step_content}>
-            <input
-              type="text"
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={index}>
+            <textarea
               value={step.step_content}
               onChange={(e) =>
                 handleInputChange(index, "step_content", e.target.value)
@@ -72,10 +95,7 @@ function TipForm() {
               required
             />
             {index !== 0 && (
-              <button
-                type="button"
-                onClick={() => handleInputChange(index, "step_content", "")}
-              >
+              <button type="button" onClick={() => handleDeleteStep(index)}>
                 Supprimer l'étape
               </button>
             )}
@@ -93,11 +113,6 @@ function TipForm() {
           Ajouter une étape
         </button>
       </label>
-      <label>
-        Ingrédients:
-        {/* Ajoutez ici un composant de sélection d'ingrédients */}
-      </label>
-
       <button type="submit">Créer Astuce</button>
     </form>
   );
