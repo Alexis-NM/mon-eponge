@@ -2,10 +2,25 @@ const Joi = require("joi");
 
 const getTipSchema = () => {
   return Joi.object({
-    id: Joi.number().presence("optional"),
-    tip_name: Joi.string().max(255).presence("required"),
-    user_id: Joi.number().presence("required"),
-    picture_id: Joi.number().presence("required"),
+    id: Joi.number().optional(),
+    tip_name: Joi.string().max(255).required(),
+    user_id: Joi.number().required(),
+    picture_id: Joi.number().required(),
+    steps: Joi.array()
+      .items(
+        Joi.object({
+          step_content: Joi.string().required(),
+        })
+      )
+      .optional(),
+    ingredients: Joi.array()
+      .items(
+        Joi.object({
+          id: Joi.number(), // Ajout d'une validation pour l'ID de l'ingrédient
+          ingredient_name: Joi.string().max(255).required(),
+        })
+      )
+      .optional(),
   });
 };
 

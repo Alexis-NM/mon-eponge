@@ -11,15 +11,59 @@ class TipManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create(tip) {
-    const { tip_name, user_id, picture_id } = tip;
+    const { tip_name, user_id, picture_id, steps, ingredients } = tip;
+
     // Execute the SQL INSERT query to add a new tip to the "tip" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (tip_name, user_id, picture_id) values (?, ?, ?)`,
+      `INSERT INTO ${this.table} (tip_name, user_id, picture_id) VALUES (?, ?, ?)`,
       [tip_name, user_id, picture_id]
     );
 
+    // Retrieve the ID of the newly inserted tip
+    const tipId = result.insertId;
+
+    // Check if steps and ingredients are provided
+    if (steps && steps.length > 0) {
+      // Insert steps into the "step" table
+      await Promise.all(
+        steps.map(async (step, index) => {
+          await this.database.query(
+            `INSERT INTO step (tip_id, step_number, step_content) VALUES (?, ?, ?)`,
+            [tipId, index + 1, step.step_content]
+          );
+        })
+      );
+    }
+
+    if (ingredients && ingredients.length > 0) {
+      // Iterate through ingredients and insert them or retrieve existing ones
+      await Promise.all(
+        ingredients.map(async (ingredient) => {
+          if (ingredient.id) {
+            // If ingredient has an ID, assume it already exists
+            await this.database.query(
+              `INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES (?, ?)`,
+              [tipId, ingredient.id]
+            );
+          } else {
+            // If ingredient has no ID, assume it's a new ingredient
+            const [ingredientResult] = await this.database.query(
+              `INSERT INTO ingredient (ingredient_name) VALUES (?)`,
+              [ingredient.ingredient_name]
+            );
+
+            // Insert the new ingredient into the tip_ingredient table
+            await this.database.query(
+              `INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES (?, ?)`,
+              [tipId, ingredientResult.insertId]
+            );
+          }
+        })
+      );
+    }
+
     // Return the ID of the newly inserted tip
-    return result.insertId;
+    return tipId;
   }
 
   // The Rs of CRUD - Read operations
