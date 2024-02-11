@@ -1,0 +1,126 @@
+@import "../commons.scss";
+
+.connexion-title-register {
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  border-width: 1px;
+  padding: 1.5rem;
+  background-color: $light-yellow;
+  width: 12rem;
+  border-radius: 15px;
+  border-style: solid;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.account-phrase-register {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  .lamp-logo {
+    width: 2rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.form-area-register {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 18.5rem;
+
+  .input-container-register {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    .text-form-register {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .form-input-register {
+      border: solid 3px $light-purple;
+      min-width: 9rem;
+      border-radius: 15px;
+      margin-left: 0.5rem;
+      padding: 0.6rem;
+    }
+  }
+}
+
+.submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 2rem;
+  padding: 1.2rem;
+  background-color: $green;
+  width: 15rem;
+  border-radius: 15px;
+  border-style: none;
+  color: $warm-white;
+  cursor: pointer;
+  font-size: 1rem;
+  .button-icon-register {
+    width: 1.5rem;
+    margin-left: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 425px) {
+  .account-phrase-register {
+    margin-bottom: 3rem;
+  }
+  .form-area-register {
+    max-width: 26rem;
+    .form-input-register {
+      width: 10rem;
+    }
+  }
+  .submit-button {
+    margin-top: 6rem;
+  }
+}
+@media screen and (min-width: 821px) {
+  .connexion-title-register {
+    padding: 2rem;
+    border-radius: 20px;
+    width: 20rem;
+    font-size: 1.2rem;
+  }
+  .account-phrase-register {
+    margin-bottom: 6rem;
+    margin-top: 4rem;
+    font-size: 1.1rem;
+    .lamp-logo {
+      width: 3rem;
+      margin-right: 1rem;
+    }
+  }
+  .form-area-register {
+    margin-top: rem;
+    max-width: 55rem;
+    .input-container-register {
+      justify-content: flex-end;
+      margin-right: 13rem;
+      .text-form-register {
+        font-size: 1.2rem;
+      }
+      .form-input-register {
+        width: 18rem;
+        padding: 0.8rem;
+      }
+    }
+  }
+  .submit-button {
+    margin-top: 8vh;
+    font-size: 1.2rem;
+    width: 22rem;
+  }
+}

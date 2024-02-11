@@ -69,7 +69,8 @@
     top: 10.8rem;
     left: 7vw;
     width: 21.5rem;
-    height: 48.1rem;
+    height: 48.2rem;
+
     .ingredient-title {
       font-size: 1.4rem;
     }
@@ -81,6 +82,21 @@
     .ingredient-list {
       font-size: 1rem;
       margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .paperclip {
+    margin-left: 14rem;
+  }
+  .indredient-container {
+    width: 29rem;
+    .ingredient-title {
+      font-size: 1.8rem;
+    }
+    .ingredient-list {
+      font-size: 1.2rem;
     }
   }
 }
