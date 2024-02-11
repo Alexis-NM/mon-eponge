@@ -96,3 +96,21 @@
     }
   }
 }
+@media screen and (min-width: 1500px) {
+  .tip-main-container {
+    width: 42rem;
+    max-width: 100rem;
+    .tip-main-title {
+      font-size: 1.8rem;
+    }
+    .tip-title {
+      font-size: 1.4rem;
+    }
+    .step-list {
+      font-size: 1.3rem;
+    }
+    .tip-icon {
+      width: 4rem;
+    }
+  }
+}
