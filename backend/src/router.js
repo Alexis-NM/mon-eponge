@@ -24,66 +24,105 @@ const router = express.Router();
 //   },
 // });
 
-const stepControllers = require("./controllers/stepControllers");
+/* ******************************* MiddleWare ****************************** */
+
+const { hashPassword, verifyToken } = require("./services/auth");
 const validateStep = require("./services/validateStep");
+const validateTipIngredient = require("./services/validateTipIngredient");
+const validateTip = require("./services/validateTip");
+const validateIngredient = require("./services/validateIngredient");
+const validateUser = require("./services/validateUser");
+const validatePicture = require("./services/validatePicture");
+
+/* ******************************* Controllers ****************************** */
+
+const authControllers = require("./controllers/authControllers");
+const stepControllers = require("./controllers/stepControllers");
+const tipIngredientControllers = require("./controllers/tipIngredientControllers");
+const tipControllers = require("./controllers/tipControllers");
+const ingredientControllers = require("./controllers/ingredientControllers");
+const userControllers = require("./controllers/userControllers");
+const pictureControllers = require("./controllers/pictureControllers");
+
+/* ******************************* Login ****************************** */
+
+router.post("/login", authControllers.login);
+
+/* ******************************* Steps ****************************** */
 
 router.get("/steps", stepControllers.browse);
 router.get("/steps/:id", stepControllers.read);
-router.post("/steps", validateStep, stepControllers.add);
-router.put("/steps/:id", validateStep, stepControllers.edit);
-router.delete("/steps/:id", stepControllers.destroy);
+router.post("/steps", verifyToken, validateStep, stepControllers.add);
+router.put("/steps/:id", verifyToken, validateStep, stepControllers.edit);
+router.delete("/steps/:id", verifyToken, stepControllers.destroy);
 
-const tipIngredientControllers = require("./controllers/tipIngredientControllers");
-const validateTipIngredient = require("./services/validateTipIngredient");
+/* ******************************* Tip Ingredients ****************************** */
 
 router.get("/tip_ingredients", tipIngredientControllers.browse);
 router.get("/tip_ingredients/:id", tipIngredientControllers.read);
 router.post(
   "/tip_ingredients",
+  verifyToken,
   validateTipIngredient,
   tipIngredientControllers.add
 );
 router.put(
   "/tip_ingredients/:id",
+  verifyToken,
   validateTipIngredient,
   tipIngredientControllers.edit
 );
-router.delete("/tip_ingredients/:id", tipIngredientControllers.destroy);
+router.delete(
+  "/tip_ingredients/:id",
+  verifyToken,
+  tipIngredientControllers.destroy
+);
 
-const tipControllers = require("./controllers/tipControllers");
-const validateTip = require("./services/validateTip");
+/* ******************************* Tips ****************************** */
 
 router.get("/tips", tipControllers.browse);
 router.get("/tips/:id", tipControllers.read);
-router.post("/tips", validateTip, tipControllers.add);
-router.put("/tips/:id", validateTip, tipControllers.edit);
-router.delete("/tips/:id", tipControllers.destroy);
+router.post("/tips", verifyToken, validateTip, tipControllers.add);
+router.put("/tips/:id", verifyToken, validateTip, tipControllers.edit);
+router.delete("/tips/:id", verifyToken, tipControllers.destroy);
 
-const ingredientControllers = require("./controllers/ingredientControllers");
-const validateIngredient = require("./services/validateIngredient");
+/* ******************************* Ingredients ****************************** */
 
 router.get("/ingredients", ingredientControllers.browse);
 router.get("/ingredients/:id", ingredientControllers.read);
-router.post("/ingredients", validateIngredient, ingredientControllers.add);
-router.put("/ingredients/:id", validateIngredient, ingredientControllers.edit);
-router.delete("/ingredients/:id", ingredientControllers.destroy);
+router.post(
+  "/ingredients",
+  verifyToken,
+  validateIngredient,
+  ingredientControllers.add
+);
+router.put(
+  "/ingredients/:id",
+  verifyToken,
+  validateIngredient,
+  ingredientControllers.edit
+);
+router.delete("/ingredients/:id", verifyToken, ingredientControllers.destroy);
 
-const userControllers = require("./controllers/userControllers");
-const validateUser = require("./services/validateUser");
+/* ******************************* Users ****************************** */
 
 router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);
-router.post("/users", validateUser, userControllers.add);
-router.put("/users/:id", validateUser, userControllers.edit);
-router.delete("/users/:id", userControllers.destroy);
+router.post("/users", hashPassword, validateUser, userControllers.add);
+router.put("/users/:id", verifyToken, validateUser, userControllers.edit);
+router.delete("/users/:id", verifyToken, userControllers.destroy);
 
-const pictureControllers = require("./controllers/pictureControllers");
-const validatePicture = require("./services/validatePicture");
+/* ******************************* Pictures ****************************** */
 
 router.get("/pictures", pictureControllers.browse);
 router.get("/pictures/:id", pictureControllers.read);
-router.post("/pictures", validatePicture, pictureControllers.add);
-router.put("/pictures/:id", validatePicture, pictureControllers.edit);
-router.delete("/pictures/:id", pictureControllers.destroy);
+router.post("/pictures", verifyToken, validatePicture, pictureControllers.add);
+router.put(
+  "/pictures/:id",
+  verifyToken,
+  validatePicture,
+  pictureControllers.edit
+);
+router.delete("/pictures/:id", verifyToken, pictureControllers.destroy);
 
 module.exports = router;

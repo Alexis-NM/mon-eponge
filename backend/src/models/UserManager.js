@@ -11,11 +11,11 @@ class UserManager extends AbstractManager {
   // The C of CRUD - Create operation
 
   async create(user) {
-    const { user_name, password, picture_id, is_admin } = user;
+    const { user_name, hashed_password, picture_id, is_admin } = user;
     // Execute the SQL INSERT query to add a new user to the "user" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (user_name, password, picture_id, is_admin) values (?, ?, ?, ?)`,
-      [user_name, password, picture_id, is_admin]
+      `insert into ${this.table} (user_name, hashed_password, picture_id, is_admin) values (?, ?, ?, ?)`,
+      [user_name, hashed_password, picture_id, is_admin]
     );
 
     // Return the ID of the newly inserted user
@@ -27,7 +27,7 @@ class UserManager extends AbstractManager {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific user by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `select id, user_name, picture_id, is_admin from ${this.table} where id = ?`,
       [id]
     );
 
@@ -37,10 +37,22 @@ class UserManager extends AbstractManager {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `select id, user_name, picture_id, is_admin from ${this.table}`
+    );
 
     // Return the array of users
     return rows;
+  }
+
+  async readByUserNameWithPassword(user_name) {
+    // Execute the SQL SELECT query to retrieve a specific user by its email
+    const [rows] = await this.database.query(
+      `select * from ${this.table} where user_name = ?`,
+      [user_name]
+    );
+    // Return the first row of the result, which represents the user
+    return rows[0];
   }
 
   // The U of CRUD - Update operation
