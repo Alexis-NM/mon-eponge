@@ -4,14 +4,17 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import Home from "./pages/Home";
-import Tips from "./pages/Tips";
-import ShareTip from "./pages/ShareTip";
-import ErrorPage from "./pages/ErrorPage";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+
+import { AuthContextProvider } from "./context/AuthContext";
+
 import Admin from "./pages/Admin";
 import EditTip from "./pages/EditTip";
+import ErrorPage from "./pages/ErrorPage";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ShareTip from "./pages/ShareTip";
+import Tips from "./pages/Tips";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +57,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>
 );
