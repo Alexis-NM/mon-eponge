@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App";
+import Layout from "./components/Layout";
 
 import { AuthContextProvider } from "./context/AuthContext";
 
@@ -18,7 +18,7 @@ import Tips from "./pages/Tips";
 
 const router = createBrowserRouter([
   {
-    element: <App />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
