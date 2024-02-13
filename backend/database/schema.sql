@@ -13,7 +13,7 @@ CREATE TABLE picture (
 CREATE TABLE user (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_name VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  hashed_password VARCHAR(255) NOT NULL,
   picture_id INT NOT NULL DEFAULT 1,
   is_admin BOOLEAN DEFAULT false,
   CONSTRAINT fk_user_picture FOREIGN KEY (picture_id) REFERENCES picture(id)
