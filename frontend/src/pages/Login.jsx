@@ -76,25 +76,29 @@ function Login() {
       <p className="connexion-title">Connexion</p>
       <form className="form-area">
         <div className="input-container">
-          <p className="text-form">Identifiant :</p>
-          <input
-            className="form-input"
-            type="text"
-            placeholder=""
-            value={loginInfo.user_name}
-            onChange={handleLoginRegister}
-          />
+          <label htmlFor="user_name" className="text-form">
+            Identifiant :
+            <input
+              className="form-input"
+              type="text"
+              placeholder=""
+              value={loginInfo.user_name}
+              onChange={handleLoginRegister}
+            />
+          </label>
         </div>
         <div className="input-container">
-          <p className="text-form">Mot de passe :</p>
-          <input
-            className="form-input"
-            id="password"
-            type="password"
-            placeholder=""
-            value={loginInfo.password}
-            onChange={handleLoginRegister}
-          />
+          <label htmlFor="password" className="text-form">
+            Mot de passe :
+            <input
+              className="form-input"
+              id="password"
+              type="password"
+              placeholder=""
+              value={loginInfo.password}
+              onChange={handleLoginRegister}
+            />
+          </label>
         </div>
         <button type="button" className="submit-button" onClick={handleLogin}>
           Je me connecte
