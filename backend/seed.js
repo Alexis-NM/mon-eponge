@@ -36,10 +36,17 @@ const seed = async () => {
     /* ************************************************************************* */
 
     const usersToInsert = [
-      { user_name: "Nono", password: "Nono", picture_id: "1", is_admin: true },
+      {
+        user_name: "Nono",
+        hashed_password:
+          "$argon2id$v=19$m=19,t=2,p=1$WnlodktQTUJjaldtSU40ag$+T2KYe86I3GQzQ",
+        picture_id: "1",
+        is_admin: true,
+      },
       {
         user_name: "Estelle",
-        password: "SecondUser",
+        hashed_password:
+          "$argon2id$v=19$m=65536,t=5,p=1$HIExBMINy6J2KCFkaXUTGA$RhPP/QXbHoxL1IUYwW6cVA+jfDXioQz6x/FQhBejLYk",
         picture_id: "1",
         is_admin: false,
       },
@@ -51,8 +58,8 @@ const seed = async () => {
     usersToInsert.forEach((user) => {
       queriesUser.push(
         database.query(
-          "insert into user(user_name, password, picture_id, is_admin) values (?, ?, ?, ?)",
-          [user.user_name, user.password, user.picture_id, user.is_admin]
+          "insert into user(user_name, hashed_password, picture_id, is_admin) values (?, ?, ?, ?)",
+          [user.user_name, user.hashed_password, user.picture_id, user.is_admin]
         )
       );
     });

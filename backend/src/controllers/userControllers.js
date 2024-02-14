@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // Import access to database tables
 const tables = require("../tables");
 
@@ -55,14 +56,14 @@ const edit = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the user data from the request body
-  const user = req.body;
+  const { user_name, picture_id, is_admin } = req.body;
 
   try {
     // Insert the user into the database
-    const insertId = await tables.user.create(user);
+    const insertId = await tables.user.create(req.body);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted user
-    res.status(201).json({ ...req.body, id: insertId });
+    res.status(201).json({ id: insertId, user_name, picture_id, is_admin });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
