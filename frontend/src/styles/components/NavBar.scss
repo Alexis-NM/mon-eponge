@@ -2,10 +2,11 @@
 
 .nav-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 2rem;
   margin-right: 10vw;
   margin-top: 0;
+
   .nav-box {
     list-style: none;
     background-color: $warm-white;
@@ -18,6 +19,17 @@
 
     &:hover {
       font-weight: bold;
+      cursor: pointer;
+    }
+  }
+  button.nav-link {
+    background-color: $warm-white;
+    border: none;
+    font-size: 1rem;
+    text-decoration: none;
+    &:hover {
+      font-weight: bold;
+      font-size: 0.95rem;
       cursor: pointer;
     }
   }

@@ -1,64 +1,91 @@
-import { createContext, useMemo, useState, useEffect } from "react";
-import axios from "axios";
+/* eslint-disable camelcase */
+import React, { createContext, useState, useMemo, useEffect } from "react";
+import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState({ is_admin: 0 });
+  const [user, setUser] = useState({
+    isLoggedIn: false,
+    id: null,
+    userName: "",
+    pictureId: null,
+    isAdmin: 0,
+  });
 
-  const handleAuth = async () => {
-    const getToken = localStorage.getItem("token");
+  const [userInfo, setUserInfo] = useState({});
 
-    if (getToken) {
-      const decodeToken = jwtDecode(getToken);
-      const userId = decodeToken.user_id;
+  const fetchUserInfo = async (userId) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`
+      );
 
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`
-        );
-        setUser(data);
-      } catch (error) {
-        console.warn("Une erreur est survenue!", error);
-      }
+      const userInfoData = response.data;
+
+      setUser((prevUser) => ({
+        ...prevUser,
+        userName: userInfoData.user_name,
+        pictureId: userInfoData.picture_id,
+      }));
+
+      setUserInfo(userInfoData);
+    } catch (error) {
+      console.error("Error fetching user info:", error);
     }
   };
 
   useEffect(() => {
-    handleAuth();
-  }, []);
-
-  // sert pour les className
-  function userMode() {
-    if (user.is_administrator === 0) {
-      return "user-mode";
+    if (user.isLoggedIn && user.id) {
+      fetchUserInfo(user.id);
     }
-    if (user.is_administrator === 1) {
-      return "admin-mode";
-    }
-    return "";
-  }
+  }, [user.isLoggedIn, user.id]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser({ is_administrator: 0 });
+  const handleAuth = async (token) => {
+    if (!token) return;
+
+    try {
+      const decodedToken = jwtDecode(token);
+
+      const { user_id } = decodedToken;
+
+      // Récupération d'informations supplémentaires via une requête à l'API
+
+      const userAdditionalInfo = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/${user_id}`
+      );
+
+      const { picture_id, is_admin } = userAdditionalInfo.data;
+
+      setUser({
+        isLoggedIn: true,
+        id: user_id,
+        isAdmin: is_admin,
+      });
+
+      setUserInfo({
+        userName: userAdditionalInfo.data.user_name,
+        pictureId: picture_id,
+      });
+    } catch (error) {
+      console.error("Error handling authentication:", error);
+    }
   };
 
-  const userMemo = useMemo(
-    () => ({
-      user,
-      setUser,
-      handleAuth,
-      userMode,
-      handleLogout,
-    }),
-    [user, setUser, handleAuth, userMode, handleLogout]
+  const contextValue = useMemo(
+    () => ({ user, handleAuth, userInfo }),
+    [user, handleAuth, userInfo]
   );
 
   return (
-    <AuthContext.Provider value={userMemo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
 
-export { AuthContext, AuthContextProvider };
+AuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export { AuthContextProvider, AuthContext };

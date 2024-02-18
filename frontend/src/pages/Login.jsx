@@ -1,51 +1,32 @@
 /* eslint-disable camelcase */
-import { useState, useContext } from "react";
-import { jwtDecode } from "jwt-decode";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 import Title from "../components/Title";
-
-import "../styles/pages/Login.scss";
 import onButton from "../assets/icons/on_button.svg";
+import "../styles/pages/Login.scss";
 
 function Login() {
   const { handleAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
     user_name: "",
     password: "",
   });
 
-  const navigate = useNavigate();
-
-  const redirectTo = async () => {
-    const getToken = localStorage.getItem("token");
-    if (getToken) {
-      const decodeToken = jwtDecode(getToken);
-      const userId = decodeToken.user_id;
-
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/${userId}`
-        );
-
-        if (data.is_administrator === 1) {
-          return navigate("/user/admin");
-        }
-      } catch (error) {
-        console.warn("Une erreur est survenue!", error);
-      }
-    }
-    return navigate("/carte");
+  const handleUserNameChange = (event) => {
+    const { value } = event.target;
+    setLoginInfo({ ...loginInfo, user_name: value });
   };
 
-  const handleLoginRegister = (event) => {
-    const { name, value } = event.target;
-    setLoginInfo({ ...loginInfo, [name]: value });
+  const handlePasswordChange = (event) => {
+    const { value } = event.target;
+    setLoginInfo({ ...loginInfo, password: value });
   };
 
-  // créer la fonction handleLogin avec ses filtres pour vérifier que tous les champs sont remplis et que l'adresse mail n'existe pas déjà
   const handleLogin = async (e) => {
     e.preventDefault();
     const { user_name, password } = loginInfo;
@@ -55,21 +36,36 @@ function Login() {
     }
 
     try {
-      // Appel à l'API pour demander une connexion
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/login`,
         loginInfo
       );
-      // Récupération du token
-      await localStorage.setItem("token", res.data.token);
-      // Décodage du token et récupération des données
-      await handleAuth();
-      // Redirection en fonction du statut de l'utilisateur
-      redirectTo();
+
+      const { token } = res.data;
+
+      localStorage.setItem("token", token);
+
+      const decodedToken = jwtDecode(token);
+      const { user_id } = decodedToken;
+
+      const userAdditionalInfo = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/${user_id}`
+      );
+
+      const { is_admin } = userAdditionalInfo.data;
+
+      await handleAuth(token);
+
+      if (is_admin) {
+        navigate("/admin");
+      } else {
+        navigate("/astuces");
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Login error:", err);
     }
   };
+
   return (
     <div>
       <Title />
@@ -81,9 +77,10 @@ function Login() {
             <input
               className="form-input"
               type="text"
+              id="user_name"
               placeholder=""
               value={loginInfo.user_name}
-              onChange={handleLoginRegister}
+              onChange={handleUserNameChange}
             />
           </label>
         </div>
@@ -92,11 +89,11 @@ function Login() {
             Mot de passe :
             <input
               className="form-input"
-              id="password"
               type="password"
+              id="password"
               placeholder=""
               value={loginInfo.password}
-              onChange={handleLoginRegister}
+              onChange={handlePasswordChange}
             />
           </label>
         </div>
@@ -108,4 +105,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;
