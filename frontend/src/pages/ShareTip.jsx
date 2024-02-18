@@ -1,12 +1,23 @@
-import { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import PictureSelector from "../components/PictureSelector"; // Importez ou créez un composant d'image sélecteur
-import IngredientSelector from "../components/IngrediantSelector"; // Importez ou créez un composant de sélection d'ingrédients
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import PictureSelector from "../components/PictureSelector";
+import IngredientSelector from "../components/IngrediantSelector";
 
 function TipForm() {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+      navigate("/connexion");
+    }
+  }, [user.isLoggedIn, navigate]);
+
   const [formData, setFormData] = useState({
     tip_name: "",
-    user_id: 2,
+    user_id: user.id,
     picture_id: null,
     steps: [{ step_content: "" }],
     ingredients: [],

@@ -3,9 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Layout from "./components/Layout";
-
-import { AuthContextProvider } from "./context/AuthContext";
+import App from "./App";
 
 import Admin from "./pages/Admin";
 import EditTip from "./pages/EditTip";
@@ -18,7 +16,7 @@ import Tips from "./pages/Tips";
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -57,8 +55,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

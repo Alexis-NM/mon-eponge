@@ -13,10 +13,9 @@ function Register() {
   const [registerInfo, setRegisterInfo] = useState({
     user_name: "",
     password: "",
-    passwordRepeat: "", // Ajout de la propriété manquante
-    picture_id: 1,
     is_admin: false,
   });
+  const [passwordRepeat, setPasswordRepeat] = useState("");
   const [errMessage, setErrMessage] = useState("");
 
   const navigate = useNavigate();
@@ -24,6 +23,11 @@ function Register() {
   const handleChangeRegister = (event) => {
     const { name, value, type, checked } = event.target;
     const newValue = type === "checkbox" ? checked : value;
+
+    if (name === "password") {
+      setPasswordRepeat(""); // Reset password repeat when password changes
+    }
+
     setRegisterInfo({ ...registerInfo, [name]: newValue });
   };
 
@@ -33,9 +37,9 @@ function Register() {
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    // créer les fonctions pour vérifier regex
-    const { user_name, password, passwordRepeat } = registerInfo; // Ajout de la variable manquante
-    console.info(registerInfo);
+
+    const { user_name, password } = registerInfo;
+
     if (user_name === "" || password === "" || passwordRepeat === "") {
       setErrMessage("Merci de remplir tous les champs");
       return;
@@ -73,7 +77,7 @@ function Register() {
         <div className="input-container-register">
           <p className="text-form-register">Identifiant :</p>
           <input
-            name="user_name" // Ajout du nom de la propriété manquante
+            name="user_name"
             className="form-input-register"
             type="text"
             placeholder=""
@@ -84,7 +88,7 @@ function Register() {
         <div className="input-container-register">
           <p className="text-form-register">Mot de passe :</p>
           <input
-            name="password" // Ajout du nom de la propriété manquante
+            name="password"
             className="form-input-register"
             type="password"
             placeholder=""
@@ -95,12 +99,12 @@ function Register() {
         <div className="input-container-register">
           <p className="text-form-register">Confirmer le mot de passe :</p>
           <input
-            name="passwordRepeat" // Ajout du nom de la propriété manquante
+            name="passwordRepeat"
             className="form-input-register"
             type="password"
             placeholder=""
-            value={registerInfo.passwordRepeat}
-            onChange={handleChangeRegister}
+            value={passwordRepeat}
+            onChange={(e) => setPasswordRepeat(e.target.value)}
           />
         </div>
         <button
@@ -108,7 +112,7 @@ function Register() {
           className="submit-button"
           onClick={handleRegister}
         >
-          Je crée mon compte {/* Correction de la faute de frappe */}
+          Je crée mon compte
           <img
             src={plusButton}
             alt="on_button"
