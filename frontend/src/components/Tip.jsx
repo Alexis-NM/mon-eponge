@@ -1,11 +1,28 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 import pin from "../assets/logos/pin.svg";
 
 import "../styles/components/Tip.scss";
 
-function Tip() {
+const tipHasSelectedIngredients = (tip, selectedIngredients) => {
+  // Assurez-vous que tip.ingredients est défini et est une chaîne
+  const ingredientsString =
+    typeof tip.ingredients === "string" ? tip.ingredients : "";
+
+  // Convertissez la chaîne en un tableau d'ingrédients
+  const ingredientsArray = ingredientsString.split(",");
+
+  console.log("Ingredients Array:", ingredientsArray);
+
+  // Vérifiez si l'astuce contient au moins un ingrédient sélectionné
+  return ingredientsArray.some((ingredient) =>
+    selectedIngredients.includes(ingredient.trim())
+  );
+};
+
+function Tip({ selectedIngredients }) {
   const [tips, setTips] = useState([]);
 
   useEffect(() => {
@@ -21,7 +38,10 @@ function Tip() {
     };
 
     fetchTips();
-  }, []);
+  }, [selectedIngredients]);
+
+  console.log("Selected Ingredients:", selectedIngredients);
+  console.log("Tips:", tips);
 
   return (
     <>
@@ -29,26 +49,37 @@ function Tip() {
       <div className="tip-main-container">
         <h2 className="tip-main-title">Les Astuces</h2>
         <div className="tip-container">
-          {tips.map((tip) => (
-            <div key={tip.id} className="tip-wrapper">
-              <img
-                src={`/assets/tip_icons/${tip.picture_url}`}
-                alt={tip.tip_name}
-                className="tip-icon"
-              />
-              <h3 className="tip-title">{tip.tip_name}</h3>
-              <ul className="step-list">
-                {tip.steps &&
-                  tip.steps
-                    .split(",")
-                    .map((step) => <li key={step.trim()}>{step.trim()}</li>)}
-              </ul>
-            </div>
-          ))}
+          {tips
+            .filter((tip) =>
+              selectedIngredients.length === 0
+                ? true
+                : tipHasSelectedIngredients(tip, selectedIngredients)
+            )
+            .map((tip) => (
+              <div key={tip.id} className="tip-wrapper">
+                <img
+                  src={`/assets/tip_icons/${tip.picture_url}`}
+                  alt={tip.tip_name}
+                  className="tip-icon"
+                />
+                <h3 className="tip-title">{tip.tip_name}</h3>
+                <ul className="step-list">
+                  {tip.steps &&
+                    tip.steps
+                      .split(/(?<=\.)\s*,/)
+                      // eslint-disable-next-line react/no-array-index-key
+                      .map((step, index) => <li key={index}>{step.trim()}</li>)}
+                </ul>
+              </div>
+            ))}
         </div>
       </div>
     </>
   );
 }
+
+Tip.propTypes = {
+  selectedIngredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Tip;

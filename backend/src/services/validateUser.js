@@ -5,7 +5,7 @@ const getUserSchema = () => {
     id: Joi.number().presence("optional"),
     user_name: Joi.string().max(255).presence("required"),
     hashed_password: Joi.string().max(255).presence("required"),
-    picture_id: Joi.number().default(1), // Valeur par défaut pour picture_id
+    picture_id: Joi.number().default(11), // Valeur par défaut pour picture_id
     is_admin: Joi.boolean().default(false), // Valeur par défaut pour is_admin
   });
 };

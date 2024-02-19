@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import emptyBox from "../assets/icons/emptybox.svg";
 import checkBox from "../assets/icons/checkbox.svg";
@@ -7,7 +8,7 @@ import paperclip from "../assets/logos/paperclip.svg";
 
 import "../styles/components/Ingredients.scss";
 
-function Ingredients() {
+function Ingredients({ onIngredientsChange }) {
   const [ingredients, setIngredients] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const backendURL =
@@ -35,6 +36,10 @@ function Ingredients() {
 
     fetchIngredients();
   }, []);
+
+  useEffect(() => {
+    onIngredientsChange(checkedIngredients);
+  }, [checkedIngredients, onIngredientsChange]);
 
   return (
     <>
@@ -67,5 +72,8 @@ function Ingredients() {
     </>
   );
 }
+Ingredients.propTypes = {
+  onIngredientsChange: PropTypes.func.isRequired,
+};
 
 export default Ingredients;
