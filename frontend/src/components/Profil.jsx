@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import ProfilBubble from "../assets/icons/profil_bubble.svg";
 import { AuthContext } from "../context/AuthContext";
-
-import ProfilBubble from "../../public/assets/tip_icons/profil_bubble.svg";
 
 function Profil() {
   const { user } = useContext(AuthContext);
