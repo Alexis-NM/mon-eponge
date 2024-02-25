@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <Admin />,
       },
       {
-        path: "/editer-astuce",
+        path: "/editer-astuce/:tipId",
         element: <EditTip />,
       },
     ],

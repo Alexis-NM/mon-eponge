@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 function PictureSelector({ onSelect }) {
   const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     // Charger la liste des images depuis le backend
@@ -16,14 +17,21 @@ function PictureSelector({ onSelect }) {
       );
   }, []);
 
+  const handleImageSelect = (image) => {
+    setSelectedImage(image);
+    onSelect(image);
+  };
+
   return (
     <div>
       {images.map((image) => (
         <label key={image.id}>
           <input
-            type="checkbox"
+            type="radio"
+            name="selectedImage"
             value={image.id}
-            onChange={() => onSelect(image)}
+            checked={selectedImage ? selectedImage.id === image.id : false}
+            onChange={() => handleImageSelect(image)}
           />
           <img
             src={`/assets/tip_icons/${image.picture_url}`}

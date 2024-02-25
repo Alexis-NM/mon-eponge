@@ -7,16 +7,11 @@ import pin from "../assets/logos/pin.svg";
 import "../styles/components/Tip.scss";
 
 const tipHasSelectedIngredients = (tip, selectedIngredients) => {
-  // Assurez-vous que tip.ingredients est défini et est une chaîne
   const ingredientsString =
     typeof tip.ingredients === "string" ? tip.ingredients : "";
 
-  // Convertissez la chaîne en un tableau d'ingrédients
   const ingredientsArray = ingredientsString.split(",");
 
-  console.log("Ingredients Array:", ingredientsArray);
-
-  // Vérifiez si l'astuce contient au moins un ingrédient sélectionné
   return ingredientsArray.some((ingredient) =>
     selectedIngredients.includes(ingredient.trim())
   );
@@ -39,9 +34,6 @@ function Tip({ selectedIngredients }) {
 
     fetchTips();
   }, [selectedIngredients]);
-
-  console.log("Selected Ingredients:", selectedIngredients);
-  console.log("Tips:", tips);
 
   return (
     <>
