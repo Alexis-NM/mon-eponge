@@ -26,7 +26,7 @@ const router = express.Router();
 
 /* ******************************* MiddleWare ****************************** */
 
-const { hashPassword, verifyToken } = require("./services/auth");
+const { hashPassword, verifyToken, checkIsAdmin } = require("./services/auth");
 const validateStep = require("./services/validateStep");
 const validateTipIngredient = require("./services/validateTipIngredient");
 const validateTip = require("./services/validateTip");
@@ -69,12 +69,14 @@ router.post(
 router.put(
   "/tip_ingredients/:id",
   verifyToken,
+  checkIsAdmin,
   validateTipIngredient,
   tipIngredientControllers.edit
 );
 router.delete(
   "/tip_ingredients/:id",
   verifyToken,
+  checkIsAdmin,
   tipIngredientControllers.destroy
 );
 
@@ -83,8 +85,14 @@ router.delete(
 router.get("/tips", tipControllers.browse);
 router.get("/tips/:id", tipControllers.read);
 router.post("/tips", verifyToken, validateTip, tipControllers.add);
-router.put("/tips/:id", verifyToken, validateTip, tipControllers.edit);
-router.delete("/tips/:id", verifyToken, tipControllers.destroy);
+router.put(
+  "/tips/:id",
+  verifyToken,
+  checkIsAdmin,
+  validateTip,
+  tipControllers.edit
+);
+router.delete("/tips/:id", verifyToken, checkIsAdmin, tipControllers.destroy);
 
 /* ******************************* Ingredients ****************************** */
 
@@ -99,10 +107,16 @@ router.post(
 router.put(
   "/ingredients/:id",
   verifyToken,
+  checkIsAdmin,
   validateIngredient,
   ingredientControllers.edit
 );
-router.delete("/ingredients/:id", verifyToken, ingredientControllers.destroy);
+router.delete(
+  "/ingredients/:id",
+  verifyToken,
+  checkIsAdmin,
+  ingredientControllers.destroy
+);
 
 /* ******************************* Users ****************************** */
 
@@ -116,13 +130,25 @@ router.delete("/users/:id", verifyToken, userControllers.destroy);
 
 router.get("/pictures", pictureControllers.browse);
 router.get("/pictures/:id", pictureControllers.read);
-router.post("/pictures", verifyToken, validatePicture, pictureControllers.add);
+router.post(
+  "/pictures",
+  verifyToken,
+  checkIsAdmin,
+  validatePicture,
+  pictureControllers.add
+);
 router.put(
   "/pictures/:id",
   verifyToken,
+  checkIsAdmin,
   validatePicture,
   pictureControllers.edit
 );
-router.delete("/pictures/:id", verifyToken, pictureControllers.destroy);
+router.delete(
+  "/pictures/:id",
+  verifyToken,
+  checkIsAdmin,
+  pictureControllers.destroy
+);
 
 module.exports = router;
