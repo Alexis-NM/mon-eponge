@@ -1,5 +1,6 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+const tables = require("../tables");
 
 // Options de hachage (voir documentation : https://github.com/ranisalt/node-argon2/wiki/Options)
 // Recommandations **minimales** de l'OWASP : https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
@@ -58,7 +59,40 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+// Middleware pour vérifier si l'utilisateur est administrateur
+const checkIsAdmin = async (req, res, next) => {
+  try {
+    // Utiliser le token déjà vérifié par le middleware verifyToken
+    const decodedToken = req.auth;
+
+    // Utiliser l'ID du token pour obtenir les détails de l'utilisateur depuis la base de données
+    const user = await tables.user.read(decodedToken.user_id);
+
+    if (!user) {
+      // Si l'utilisateur associé à l'ID n'est pas trouvé, renvoyer une réponse non autorisée
+      throw new Error("User not found");
+    }
+
+    // Vérifier si l'utilisateur a le rôle d'administrateur
+    if (Boolean(user.is_admin) !== true) {
+      // Log temporaire pour afficher le résultat de la vérification
+      console.info("User is not an admin");
+
+      // Si l'utilisateur n'est pas un administrateur, renvoyer une réponse non autorisée
+      throw new Error("User is not an admin");
+    }
+
+    req.auth = decodedToken;
+
+    next();
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(401);
+  }
+};
+
 module.exports = {
   hashPassword,
   verifyToken,
+  checkIsAdmin,
 };

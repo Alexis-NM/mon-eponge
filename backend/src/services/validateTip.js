@@ -16,7 +16,7 @@ const getTipSchema = () => {
     ingredients: Joi.array()
       .items(
         Joi.object({
-          id: Joi.number(), // Ajout d'une validation pour l'ID de l'ingrédient
+          id: Joi.number(),
           ingredient_name: Joi.string().max(255).required(),
         })
       )

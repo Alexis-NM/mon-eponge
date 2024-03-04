@@ -71,7 +71,23 @@ class TipManager extends AbstractManager {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific tip by its ID
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `
+    SELECT 
+      tip.id,
+      tip.tip_name,
+      tip.user_id,
+      tip.picture_id,
+      picture.picture_url,
+      GROUP_CONCAT(DISTINCT step.step_content ORDER BY step.step_number) AS steps,
+      GROUP_CONCAT(DISTINCT ingredient.ingredient_name) AS ingredients
+    FROM tip
+    LEFT JOIN picture ON tip.picture_id = picture.id
+    LEFT JOIN step ON tip.id = step.tip_id
+    LEFT JOIN tip_ingredient ON tip.id = tip_ingredient.tip_id
+    LEFT JOIN ingredient ON tip_ingredient.ingredient_id = ingredient.id
+    WHERE tip.id = ?
+    GROUP BY tip.id, tip.tip_name, tip.user_id, tip.picture_id, picture.picture_url
+  `,
       [id]
     );
 
@@ -102,14 +118,62 @@ class TipManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing tip
 
+  // The U of CRUD - Update operation
   async update(tip, id) {
-    // Execute the SQL INSERT query to update the row with tie id on the "tip" table
-    const result = await this.database.query(
-      `update ${this.table} set ? where id = ?`,
-      [tip, id]
+    const { tip_name, steps, ingredients } = tip;
+
+    // Execute the SQL UPDATE query to update the row with the id in the "tip" table
+    await this.database.query(
+      `UPDATE ${this.table} SET tip_name = ? WHERE id = ?`,
+      [tip_name, id]
     );
 
-    return result;
+    // Delete existing steps for the tip
+    await this.database.query(`DELETE FROM step WHERE tip_id = ?`, [id]);
+
+    // Insert new steps for the tip
+    if (steps && steps.length > 0) {
+      await Promise.all(
+        steps.map(async (step, index) => {
+          await this.database.query(
+            `INSERT INTO step (tip_id, step_number, step_content) VALUES (?, ?, ?)`,
+            [id, index + 1, step]
+          );
+        })
+      );
+    }
+
+    // Delete existing tip_ingredient records for the tip
+    await this.database.query(`DELETE FROM tip_ingredient WHERE tip_id = ?`, [
+      id,
+    ]);
+
+    // Insert new tip_ingredient records for the tip
+    if (ingredients && ingredients.length > 0) {
+      await Promise.all(
+        ingredients.map(async (ingredient) => {
+          if (ingredient.id) {
+            // If ingredient has an ID, assume it already exists
+            await this.database.query(
+              `INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES (?, ?)`,
+              [id, ingredient.id]
+            );
+          } else {
+            // If ingredient has no ID, assume it's a new ingredient
+            const [ingredientResult] = await this.database.query(
+              `INSERT INTO ingredient (ingredient_name) VALUES (?)`,
+              [ingredient.ingredient_name]
+            );
+
+            // Insert the new ingredient into the tip_ingredient table
+            await this.database.query(
+              `INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES (?, ?)`,
+              [id, ingredientResult.insertId]
+            );
+          }
+        })
+      );
+    }
   }
 
   // The D of CRUD - Delete operation
