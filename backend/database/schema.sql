@@ -112,8 +112,7 @@ INSERT INTO ingredient (ingredient_name) VALUES
 ("Huile essentielle de menthe verte"),
 ("Feuilles de basilic"),
 ("Vodka"),
-("Huile essentielle de ylang-ylang"),
-("Miel");
+("Huile essentielle de ylang-ylang");
 
 -- Insertion des conseils dans la table tip
 INSERT INTO tip (tip_name, user_id, picture_id) VALUES

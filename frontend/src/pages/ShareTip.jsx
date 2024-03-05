@@ -122,7 +122,7 @@ function ShareTip() {
         </label>
 
         <label htmlFor="pictureSelector">
-          Choisir une Icône{" "}
+          Choisir une Icône:
           <PictureSelector id="pictureSelector" onSelect={handleImageSelect} />
         </label>
 

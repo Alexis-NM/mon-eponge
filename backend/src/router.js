@@ -2,28 +2,6 @@ const express = require("express");
 
 const router = express.Router();
 
-// const path = require("path");
-
-// const multer = require("multer");
-
-// const uploads = require("./services/upload");
-
-// const uploadPicture = multer({
-//   dest: "public/uploads/pictures",
-//   fileFilter: (_req, file, cb) => {
-//     const fileTypes = /jpeg|jpg|png/;
-//     const mimetype = fileTypes.test(file.mimetype);
-//     const extname = fileTypes.test(path.extname(file.originalname));
-//     if (mimetype && extname) {
-//       return cb(null, true);
-//     }
-//     cb(
-//       `Error: File upload only supports the following filetypes - ${fileTypes}`
-//     );
-//     return "";
-//   },
-// });
-
 /* ******************************* MiddleWare ****************************** */
 
 const { hashPassword, verifyToken, checkIsAdmin } = require("./services/auth");
@@ -33,6 +11,7 @@ const validateTip = require("./services/validateTip");
 const validateIngredient = require("./services/validateIngredient");
 const validateUser = require("./services/validateUser");
 const validatePicture = require("./services/validatePicture");
+const uploadPicture = require("./services/uploadPicture");
 
 /* ******************************* Controllers ****************************** */
 
@@ -132,11 +111,13 @@ router.get("/pictures", pictureControllers.browse);
 router.get("/pictures/:id", pictureControllers.read);
 router.post(
   "/pictures",
+  uploadPicture,
   verifyToken,
   checkIsAdmin,
   validatePicture,
   pictureControllers.add
 );
+
 router.put(
   "/pictures/:id",
   verifyToken,

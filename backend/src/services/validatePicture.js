@@ -2,8 +2,8 @@ const Joi = require("joi");
 
 const getPictureSchema = () => {
   return Joi.object({
-    id: Joi.number().presence("optional"),
-    picture_url: Joi.string().max(255).presence("required"),
+    id: Joi.number().optional(),
+    picture_url: Joi.string().max(255).required(),
   });
 };
 
@@ -12,7 +12,8 @@ const validatePicture = (req, res, next) => {
 
   const { error } = schema.validate(
     {
-      ...req.body,
+      id: req.body.id,
+      picture_url: req.file ? req.file.filename : req.body.picture_url,
     },
     { abortEarly: false }
   );

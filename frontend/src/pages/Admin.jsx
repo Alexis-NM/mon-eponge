@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Title from "../components/Title";
@@ -27,7 +27,7 @@ function Admin() {
       <Profil />
       <AdminTips />
       <Link to="/astuces">
-        <button>Aller vers Astuces</button>
+        <button type="button">Aller vers Astuces</button>
       </Link>
     </div>
   );

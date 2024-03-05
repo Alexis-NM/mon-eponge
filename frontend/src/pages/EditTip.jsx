@@ -1,11 +1,13 @@
-// EditTip.jsx
+/* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../context/AuthContext";
+import Title from "../components/Title";
 import PictureSelector from "../components/PictureSelector";
 import IngredientSelector from "../components/IngredientSelector";
+import PictureUpload from "../components/PictureUpload";
 
 function EditTip() {
   const { tipId } = useParams();
@@ -15,6 +17,7 @@ function EditTip() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [editedSteps, setEditedSteps] = useState([]);
+  const [imageUploadSuccess, setImageUploadSuccess] = useState(false);
 
   useEffect(() => {
     // Check if the user is an admin before allowing access to the edit page
@@ -42,17 +45,26 @@ function EditTip() {
 
       fetchTip();
     }
-  }, [tipId, user, navigate]);
+  }, [tipId, user, navigate, imageUploadSuccess]);
 
   const handleTitleChange = (newTitle) => {
+    console.log("Title changed:", newTitle);
     setEditedTitle(newTitle);
   };
 
   const handleImageSelect = (newSelectedImage) => {
+    console.log("Selected image:", newSelectedImage);
     setSelectedImage(newSelectedImage);
   };
 
+  const handleImageUploadSuccess = (imageId) => {
+    console.log("Image upload success:", imageId);
+    setSelectedImage({ id: imageId });
+    setImageUploadSuccess(true);
+  };
+
   const handleAddNewIngredient = (newIngredient) => {
+    console.log("Added new ingredient:", newIngredient);
     setSelectedIngredients((prevIngredients) => [
       ...prevIngredients,
       newIngredient,
@@ -60,6 +72,7 @@ function EditTip() {
   };
 
   const handleIngredientsSelect = (newSelectedIngredients) => {
+    console.log("Selected ingredients:", newSelectedIngredients);
     if (Array.isArray(newSelectedIngredients)) {
       setSelectedIngredients((prevSelectedIngredients) => [
         ...prevSelectedIngredients,
@@ -74,6 +87,7 @@ function EditTip() {
   };
 
   const handleStepChange = (index, newStep) => {
+    console.log(`Step ${index} changed:`, newStep);
     // Vérifiez si la première lettre n'est pas une majuscule
     let updatedStep = newStep;
     if (newStep && newStep[0] !== newStep[0].toUpperCase()) {
@@ -87,10 +101,9 @@ function EditTip() {
   };
 
   const handleAddStep = () => {
+    console.log("Added a new step");
     setEditedSteps((prevSteps) => [...prevSteps, ""]);
   };
-
-  // ... (le reste du code)
 
   const handleSaveChanges = async () => {
     try {
@@ -124,7 +137,7 @@ function EditTip() {
         steps: stepsArray,
       };
 
-      console.log("Updated Tip Object:", updatedTip);
+      console.log("Changes to be saved:", updatedTip);
 
       // Send a PUT request with the user's token in the Authorization header
       const response = await axios.put(
@@ -137,19 +150,17 @@ function EditTip() {
         }
       );
 
-      console.log("Updated Tip Response:", response.data);
+      console.info("Updated Tip Response:", response.data);
     } catch (error) {
       console.error("Error updating tip:", error);
       // Handle error (e.g., display an error message)
     }
   };
 
-  // ... (le reste du code)
-
   return (
-    <div>
+    <>
+      <Title />
       <h2>Edit Tip {tipId}</h2>
-      {/* Display the tip details and your editing form */}
       <p>
         <label htmlFor="tipTitle">Tip Title: </label>
         <input
@@ -160,9 +171,15 @@ function EditTip() {
         />
       </p>
       <label htmlFor="pictureSelector">
-        Choose an Icon{" "}
-        <PictureSelector id="pictureSelector" onSelect={handleImageSelect} />
+        Choose an Icon
+        <PictureSelector
+          id="pictureSelector"
+          onSelect={handleImageSelect}
+          key={imageUploadSuccess}
+        />
       </label>
+      <PictureUpload onImageUpload={handleImageUploadSuccess} />
+
       <label htmlFor="ingredients">
         Ingrédients:
         <IngredientSelector
@@ -182,11 +199,14 @@ function EditTip() {
             />
           </div>
         ))}
-        <button onClick={handleAddStep}>Ajouter une étape</button>
+        <button type="button" onClick={handleAddStep}>
+          Ajouter une étape
+        </button>
       </label>
-      <button onClick={handleSaveChanges}>Save Changes</button>
-      {/* Add more details or buttons as needed */}
-    </div>
+      <button type="button" onClick={handleSaveChanges}>
+        Save Changes
+      </button>
+    </>
   );
 }
 
