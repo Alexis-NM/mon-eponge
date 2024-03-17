@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import search from "../assets/icons/search.svg";
+import search from "../../assets/icons/search.svg";
 
-import "../styles/components/SearchBar.scss";
+import "../../styles/components/Header/SearchBar.scss";
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");

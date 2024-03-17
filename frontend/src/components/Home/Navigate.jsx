@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import lamp from "../assets/logos/lamp.svg";
-import plant from "../assets/logos/monstera.svg";
-import "../styles/components/Naviguate.scss";
+import lamp from "../../assets/logos/lamp.svg";
+import plant from "../../assets/logos/monstera.svg";
+import "../../styles/components/Home/Naviguate.scss";
 
 function Naviguate() {
   return (

@@ -1,6 +1,6 @@
 @import "../commons.scss";
 
-.home-header {
+.home-banner {
   display: flex;
   margin: auto;
   width: 85vw;
@@ -18,7 +18,7 @@
 }
 
 @media screen and (min-width: 821px) {
-  .home-header {
+  .home-banner {
     justify-content: center;
     padding: 5rem;
     width: 50vw;

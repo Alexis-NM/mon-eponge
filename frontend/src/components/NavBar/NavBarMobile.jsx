@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Title from "./Title";
+import Title from "../Header/Title";
 
-import "../styles/components/NavBarResponsive.scss";
+import "../../styles/components/NavBar/NavBarMobile.scss";
 
-function NavBarResponsive() {
+function NavBarMobile() {
   const [contentVisible, setContentVisible] = useState(true);
 
   const toggleContentVisible = () => {
@@ -40,4 +40,4 @@ function NavBarResponsive() {
   );
 }
 
-export default NavBarResponsive;
+export default NavBarMobile;

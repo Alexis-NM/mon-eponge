@@ -1,4 +1,4 @@
--- Your DROP TABLE statements
+-- DROP TABLE
 
 DROP TABLE IF EXISTS step;
 DROP TABLE IF EXISTS tip_ingredient;
@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS picture;
 DROP TABLE IF EXISTS ingredient;
 DROP TABLE IF EXISTS user;
 
--- Your CREATE TABLE statements
+-- CREATE TABLE
 
 CREATE TABLE picture (
     id INT AUTO_INCREMENT PRIMARY KEY,

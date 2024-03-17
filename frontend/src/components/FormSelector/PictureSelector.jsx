@@ -1,14 +1,15 @@
-// ImageSelector.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+
+import "../../styles/components/FormSelector/PictureSelector.scss";
 
 function PictureSelector({ onSelect }) {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    // Charger la liste des images depuis le backend
+    // Chargement de la liste des images depuis le backend
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/pictures`)
       .then((response) => setImages(response.data))
@@ -23,7 +24,7 @@ function PictureSelector({ onSelect }) {
   };
 
   return (
-    <div>
+    <section className="picture-selector">
       {images.map((image) => (
         <label key={image.id}>
           <input
@@ -32,15 +33,17 @@ function PictureSelector({ onSelect }) {
             value={image.id}
             checked={selectedImage ? selectedImage.id === image.id : false}
             onChange={() => handleImageSelect(image)}
+            className="radio-button"
           />
           <img
             src={`/assets/tip_icons/${image.picture_url}`}
             alt="Icône de l'astuce"
             style={{ width: "50px", height: "50px", marginRight: "5px" }}
+            className="icon"
           />
         </label>
       ))}
-    </div>
+    </section>
   );
 }
 

@@ -1,8 +1,8 @@
 function ErrorPage() {
   return (
-    <div>
+    <section>
       <h1>Oups, il n'y a rien ici.</h1>
-    </div>
+    </section>
   );
 }
 

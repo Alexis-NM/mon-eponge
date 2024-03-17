@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import sponge from "../assets/logos/sponge.svg";
-import "../styles/components/Title.scss";
+import sponge from "../../assets/logos/sponge.svg";
+import "../../styles/components/Header/Title.scss";
 
 function Title() {
   const handleClick = () => {

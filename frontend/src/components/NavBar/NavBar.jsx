@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
-import Title from "./Title";
+import Title from "../Header/Title";
 
-import "../styles/components/NavBar.scss";
+import "../../styles/components/NavBar/NavBar.scss";
 
 function NavBar() {
   const { user } = useContext(AuthContext);

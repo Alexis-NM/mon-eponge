@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-import emptyBox from "../assets/icons/emptybox.svg";
-import checkBox from "../assets/icons/checkbox.svg";
-import paperclip from "../assets/logos/paperclip.svg";
+import emptyBox from "../../assets/icons/emptybox.svg";
+import checkBox from "../../assets/icons/checkbox.svg";
+import paperclip from "../../assets/logos/paperclip.svg";
 
-import "../styles/components/Ingredients.scss";
+import "../../styles/components/Tips/Ingredients.scss";
 
 function Ingredients({ onIngredientsChange }) {
   const [ingredients, setIngredients] = useState([]);

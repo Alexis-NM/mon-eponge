@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import "../../styles/components/Admin/AdminTips.scss";
+
 function AdminTips() {
   const [tips, setTips] = useState([]);
   const navigate = useNavigate();

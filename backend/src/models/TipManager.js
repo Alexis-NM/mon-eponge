@@ -118,14 +118,13 @@ class TipManager extends AbstractManager {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing tip
 
-  // The U of CRUD - Update operation
   async update(tip, id) {
-    const { tip_name, steps, ingredients } = tip;
+    const { tip_name, steps, ingredients, picture_id } = tip;
 
     // Execute the SQL UPDATE query to update the row with the id in the "tip" table
     await this.database.query(
-      `UPDATE ${this.table} SET tip_name = ? WHERE id = ?`,
-      [tip_name, id]
+      `UPDATE ${this.table} SET tip_name = ?, picture_id = ? WHERE id = ?`,
+      [tip_name, picture_id, id]
     );
 
     // Delete existing steps for the tip
@@ -137,7 +136,7 @@ class TipManager extends AbstractManager {
         steps.map(async (step, index) => {
           await this.database.query(
             `INSERT INTO step (tip_id, step_number, step_content) VALUES (?, ?, ?)`,
-            [id, index + 1, step]
+            [id, index + 1, step.step_content]
           );
         })
       );
@@ -152,15 +151,21 @@ class TipManager extends AbstractManager {
     if (ingredients && ingredients.length > 0) {
       await Promise.all(
         ingredients.map(async (ingredient) => {
-          if (ingredient.id) {
-            // If ingredient has an ID, assume it already exists
+          // Check if the ingredient already exists in the database
+          const [existingIngredient] = await this.database.query(
+            `SELECT id FROM ingredient WHERE ingredient_name = ?`,
+            [ingredient.ingredient_name]
+          );
+
+          if (existingIngredient.length > 0) {
+            // If the ingredient exists, insert it into the tip_ingredient table
             await this.database.query(
               `INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES (?, ?)`,
-              [id, ingredient.id]
+              [id, existingIngredient[0].id]
             );
           } else {
-            // If ingredient has no ID, assume it's a new ingredient
-            const [ingredientResult] = await this.database.query(
+            // If the ingredient doesn't exist, insert it into the ingredient table first
+            const [result] = await this.database.query(
               `INSERT INTO ingredient (ingredient_name) VALUES (?)`,
               [ingredient.ingredient_name]
             );
@@ -168,7 +173,7 @@ class TipManager extends AbstractManager {
             // Insert the new ingredient into the tip_ingredient table
             await this.database.query(
               `INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES (?, ?)`,
-              [id, ingredientResult.insertId]
+              [id, result.insertId]
             );
           }
         })

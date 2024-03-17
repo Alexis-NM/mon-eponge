@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
@@ -52,7 +52,7 @@ function PictureUpload({ onImageUpload }) {
       <input
         type="file"
         id="pictureSelector"
-        accept="image/*" // Vous pouvez spécifier les types de fichiers acceptés ici
+        accept="image/svg"
         onChange={handleFileChange}
       />
     </div>

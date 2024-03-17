@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import NavBar from "../components/NavBar";
-import NavBarResponsive from "../components/NavBarResponsive";
-import SearchBar from "../components/SearchBar";
-import Ingredients from "../components/Ingredients";
-import Tip from "../components/Tip";
+import NavBar from "../components/NavBar/NavBar";
+import NavBarMobile from "../components/NavBar/NavBarMobile";
+import SearchBar from "../components/Header/SearchBar";
+import Ingredients from "../components/Tips/Ingredients";
+import Tip from "../components/Tips/Tip";
 
 import "../styles/pages/Tips.scss";
 
@@ -16,7 +16,7 @@ function Tips() {
         <NavBar />
       </div>
       <div className="navbar-mobile">
-        <NavBarResponsive />
+        <NavBarMobile />
       </div>
       <SearchBar />
       <Ingredients

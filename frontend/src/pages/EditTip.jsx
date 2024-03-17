@@ -4,10 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../context/AuthContext";
-import Title from "../components/Title";
-import PictureSelector from "../components/PictureSelector";
-import IngredientSelector from "../components/IngredientSelector";
-import PictureUpload from "../components/PictureUpload";
+import Title from "../components/Header/Title";
+import PictureSelector from "../components/FormSelector/PictureSelector";
+import IngredientSelector from "../components/FormSelector/IngredientSelector";
+import PictureUpload from "../components/FormSelector/PictureUpload";
 
 function EditTip() {
   const { tipId } = useParams();
@@ -101,8 +101,29 @@ function EditTip() {
   };
 
   const handleAddStep = () => {
-    console.log("Added a new step");
-    setEditedSteps((prevSteps) => [...prevSteps, ""]);
+    setEditedSteps((prevSteps) => {
+      const newSteps = [...prevSteps];
+      const lastIndex = newSteps.length - 1;
+
+      if (
+        lastIndex >= 0 &&
+        newSteps[lastIndex].trim() &&
+        newSteps[lastIndex].charAt(newSteps[lastIndex].length - 1) !== "."
+      ) {
+        newSteps[lastIndex] += ".";
+      }
+
+      newSteps.push("");
+      console.log("Added a new step");
+      return newSteps;
+    });
+  };
+
+  const handleDeleteStep = (index) => {
+    console.log("Deleted step at index:", index);
+    const updatedSteps = [...editedSteps];
+    updatedSteps.splice(index, 1);
+    setEditedSteps(updatedSteps);
   };
 
   const handleSaveChanges = async () => {
@@ -197,12 +218,16 @@ function EditTip() {
               value={step}
               onChange={(e) => handleStepChange(index, e.target.value)}
             />
+            <button type="button" onClick={() => handleDeleteStep(index)}>
+              Supprimer L'étape
+            </button>
           </div>
         ))}
         <button type="button" onClick={handleAddStep}>
           Ajouter une étape
         </button>
       </label>
+
       <button type="button" onClick={handleSaveChanges}>
         Save Changes
       </button>

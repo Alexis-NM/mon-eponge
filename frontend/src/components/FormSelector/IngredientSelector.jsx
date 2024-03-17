@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 function IngredientSelector({ onSelect }) {
   const { user, handleAuth } = useContext(AuthContext);

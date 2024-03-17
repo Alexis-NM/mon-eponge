@@ -2,20 +2,22 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import PictureSelector from "../components/PictureSelector";
-import IngredientSelector from "../components/IngredientSelector";
-import Title from "../components/Title";
+import PictureSelector from "../components/FormSelector/PictureSelector";
+import IngredientSelector from "../components/FormSelector/IngredientSelector";
+import Title from "../components/Header/Title";
 
 function ShareTip() {
   const { user, handleAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // Redirection si l'utilisateur n'est pas connecté
   useEffect(() => {
     if (!user.isLoggedIn) {
       navigate("/connexion");
     }
   }, [user.isLoggedIn, navigate]);
 
+  // Initialisation du formulaire
   const [formData, setFormData] = useState({
     tip_name: "",
     user_id: user.id,
@@ -24,6 +26,12 @@ function ShareTip() {
     ingredients: [],
   });
 
+  // Choisir une image
+  const handleImageSelect = (selectedImage) => {
+    setFormData({ ...formData, picture_id: selectedImage.id });
+  };
+
+  // Mise à jour de la liste des ingrédients
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/ingredients`)
@@ -36,16 +44,7 @@ function ShareTip() {
       .catch((error) => console.error("Error loading ingredients", error));
   }, []);
 
-  const handleInputChange = (index, field, value) => {
-    const newSteps = [...formData.steps];
-    newSteps[index][field] = value;
-    setFormData({ ...formData, steps: newSteps });
-  };
-
-  const handleImageSelect = (selectedImage) => {
-    setFormData({ ...formData, picture_id: selectedImage.id });
-  };
-
+  // Choisir les ingrédients
   const handleIngredientsSelect = (selectedIngredients) => {
     const ingredientsArray = Array.isArray(selectedIngredients)
       ? selectedIngredients
@@ -53,6 +52,7 @@ function ShareTip() {
     setFormData({ ...formData, ingredients: ingredientsArray });
   };
 
+  // Ajouter un nouvel ingrédient
   const handleAddNewIngredient = (newIngredient) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -60,12 +60,47 @@ function ShareTip() {
     }));
   };
 
+  // Écrire une étape
+  const handleInputChange = (index, field, value) => {
+    const newSteps = [...formData.steps];
+    newSteps[index][field] = value;
+    if (field === "step_content") {
+      newSteps[index][field] =
+        newSteps[index][field].charAt(0).toUpperCase() +
+        newSteps[index][field].slice(1);
+    }
+
+    setFormData({ ...formData, steps: newSteps });
+  };
+
+  // Ajouter une étape
+  const handleAddStep = () => {
+    const newSteps = [...formData.steps];
+    const lastIndex = newSteps.length - 1;
+
+    if (
+      lastIndex >= 0 &&
+      newSteps[lastIndex].step_content.trim() &&
+      newSteps[lastIndex].step_content.charAt(
+        newSteps[lastIndex].step_content.length - 1
+      ) !== "."
+    ) {
+      newSteps[lastIndex].step_content += ".";
+    }
+
+    newSteps.push({ step_content: "" });
+
+    setFormData({ ...formData, steps: newSteps });
+  };
+
+  // Supprimer une étape
   const handleDeleteStep = (index) => {
     const newSteps = [...formData.steps];
     newSteps.splice(index, 1);
     setFormData({ ...formData, steps: newSteps });
   };
 
+  // Fonction d'envoi du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -154,20 +189,14 @@ function ShareTip() {
               )}
             </div>
           ))}
-          <button
-            type="button"
-            onClick={() =>
-              setFormData({
-                ...formData,
-                steps: [...formData.steps, { step_content: "" }],
-              })
-            }
-          >
+          <button type="button" onClick={handleAddStep}>
             Ajouter une étape
           </button>
         </label>
 
-        <button type="submit">Proposer une astuce</button>
+        <button className="share-button" type="submit">
+          Je propose cette astuce !
+        </button>
       </form>
     </>
   );

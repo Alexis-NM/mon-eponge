@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import pin from "../assets/logos/pin.svg";
+import pin from "../../assets/logos/pin.svg";
 
-import "../styles/components/Tip.scss";
+import "../../styles/components/Tips/Tip.scss";
 
 const tipHasSelectedIngredients = (tip, selectedIngredients) => {
   const ingredientsString =

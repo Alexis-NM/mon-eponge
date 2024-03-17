@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
-import Title from "../components/Title";
+import Title from "../components/Header/Title";
 import onButton from "../assets/icons/on_button.svg";
 import "../styles/pages/Login.scss";
 

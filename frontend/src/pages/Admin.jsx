@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import Title from "../components/Title";
-import Profil from "../components/Profil";
-import AdminTips from "../components/AdminTips";
+import Title from "../components/Header/Title";
+import Profil from "../components/Header/Profil";
+import AdminTips from "../components/Admin/AdminTips";
 
 function Admin() {
   const { user } = useContext(AuthContext);

@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import ProfilBubble from "../assets/icons/profil_bubble.svg";
-import { AuthContext } from "../context/AuthContext";
+import ProfilBubble from "../../assets/icons/profil_bubble.svg";
+import { AuthContext } from "../../context/AuthContext";
+
+import "../../styles/components/Header/Profil.scss";
 
 function Profil() {
   const { user } = useContext(AuthContext);
@@ -35,7 +37,7 @@ function Profil() {
             alt="Avatar"
             className="avatar"
           />
-          <p>{user.userName}</p>
+          <p className="user_name">{user.userName}</p>
         </>
       ) : (
         <img src={ProfilBubble} alt="Avatar" className="avatar" />

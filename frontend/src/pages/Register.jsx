@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import Title from "../components/Title";
+import Title from "../components/Header/Title";
 
 import "../styles/pages/Register.scss";
 import plusButton from "../assets/icons/white_plus.svg";

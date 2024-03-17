@@ -1,8 +1,12 @@
-@import "../commons.scss";
+@import "../../commons.scss";
 
 .title-container {
   display: flex;
   justify-content: center;
+  @media screen and (min-width: 821px) {
+    justify-content: start;
+    width: 100vw;
+  }
   .main-title {
     font-size: 2rem;
     margin-left: 2rem;
@@ -11,12 +15,5 @@
   .sponge-logo {
     width: 2.5rem;
     margin-left: 0.5rem;
-  }
-}
-
-@media screen and (min-width: 821px) {
-  .title-container {
-    justify-content: start;
-    width: 100vw;
   }
 }
