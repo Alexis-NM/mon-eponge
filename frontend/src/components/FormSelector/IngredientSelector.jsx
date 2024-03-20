@@ -1,40 +1,52 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { AuthContext } from "../../context/AuthContext";
 
-function IngredientSelector({ onSelect }) {
+function IngredientSelector({ setSelectedIngredients }) {
   const { user, handleAuth } = useContext(AuthContext);
-
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
+  const [rerender, setRerender] = useState(false); // État pour déclencher le rerender
 
   useEffect(() => {
-    // Load the list of ingredients from the backend
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/ingredients`)
-      .then((response) => setIngredients(response.data))
+      .then((response) => {
+        const initializedIngredients = response.data.map((ingredient) => ({
+          ...ingredient,
+          isChecked: false,
+        }));
+        setIngredients(initializedIngredients);
+      })
       .catch((error) => console.error("Error loading ingredients", error));
-  }, []);
+  }, [rerender]); // Rerender dépend de cet état
 
   const handleCheckboxChange = (selectedIngredient) => {
-    onSelect(selectedIngredient);
+    const updatedIngredient = { ...selectedIngredient };
+    updatedIngredient.isChecked = !updatedIngredient.isChecked;
+
+    const updatedIngredients = ingredients.map((ingredient) =>
+      ingredient.id === updatedIngredient.id ? updatedIngredient : ingredient
+    );
+
+    setIngredients(updatedIngredients);
+
+    const updatedSelectedIngredients = updatedIngredients.filter(
+      (ingredient) => ingredient.isChecked
+    );
+    setSelectedIngredients(updatedSelectedIngredients);
   };
 
   const handleAddNewIngredient = async () => {
-    // Check if the user is authenticated
     if (!user.isLoggedIn) {
-      // Redirect to the login page or take other action
       return;
     }
 
-    // Get the user's token
     const token = localStorage.getItem("token");
 
-    // Authenticate using the token
     await handleAuth(token);
 
-    // Send a POST request to add the new ingredient on the server
     axios
       .post(
         `${import.meta.env.VITE_BACKEND_URL}/api/ingredients`,
@@ -49,11 +61,7 @@ function IngredientSelector({ onSelect }) {
       )
       .then((response) => {
         console.info("New ingredient added", response.data);
-        // Update the local state with the new list of ingredients
-        setIngredients((prevIngredients) => [
-          ...prevIngredients,
-          response.data,
-        ]);
+        setRerender(!rerender); // Déclencher le rerender en inversant l'état
       })
       .catch((error) => console.error("Error adding ingredient", error));
 
@@ -69,6 +77,7 @@ function IngredientSelector({ onSelect }) {
             id={`ingredient-${ingredient.id}`}
             value={ingredient.id}
             onChange={() => handleCheckboxChange(ingredient)}
+            checked={ingredient.isChecked}
           />
           <label htmlFor={`ingredient-${ingredient.id}`}>
             {ingredient.ingredient_name}
@@ -92,7 +101,7 @@ function IngredientSelector({ onSelect }) {
 }
 
 IngredientSelector.propTypes = {
-  onSelect: PropTypes.func.isRequired,
+  setSelectedIngredients: PropTypes.func.isRequired,
 };
 
 export default IngredientSelector;

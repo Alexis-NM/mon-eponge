@@ -18,6 +18,7 @@ function EditTip() {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [editedSteps, setEditedSteps] = useState([]);
   const [imageUploadSuccess, setImageUploadSuccess] = useState(false);
+  const [selectedImageId, setSelectedImageId] = useState(null);
 
   useEffect(() => {
     // Check if the user is an admin before allowing access to the edit page
@@ -32,6 +33,7 @@ function EditTip() {
             `${import.meta.env.VITE_BACKEND_URL}/api/tips/${tipId}`
           );
           setEditedTitle(response.data.tip_name);
+          setSelectedImageId(response.data.picture_id); // Initialiser selectedImageId avec l'ID de l'image initiale
           setSelectedImage(response.data.picture_id);
           // Split steps based on comma followed by an uppercase letter
           const stepsArray = response.data.steps.split(/,(?=[A-Z])/);
@@ -48,46 +50,19 @@ function EditTip() {
   }, [tipId, user, navigate, imageUploadSuccess]);
 
   const handleTitleChange = (newTitle) => {
-    console.log("Title changed:", newTitle);
     setEditedTitle(newTitle);
   };
 
   const handleImageSelect = (newSelectedImage) => {
-    console.log("Selected image:", newSelectedImage);
     setSelectedImage(newSelectedImage);
   };
 
   const handleImageUploadSuccess = (imageId) => {
-    console.log("Image upload success:", imageId);
     setSelectedImage({ id: imageId });
     setImageUploadSuccess(true);
   };
 
-  const handleAddNewIngredient = (newIngredient) => {
-    console.log("Added new ingredient:", newIngredient);
-    setSelectedIngredients((prevIngredients) => [
-      ...prevIngredients,
-      newIngredient,
-    ]);
-  };
-
-  const handleIngredientsSelect = (newSelectedIngredients) => {
-    console.log("Selected ingredients:", newSelectedIngredients);
-    if (Array.isArray(newSelectedIngredients)) {
-      setSelectedIngredients((prevSelectedIngredients) => [
-        ...prevSelectedIngredients,
-        ...newSelectedIngredients,
-      ]);
-    } else {
-      setSelectedIngredients((prevSelectedIngredients) => [
-        ...prevSelectedIngredients,
-        newSelectedIngredients,
-      ]);
-    }
-  };
-
   const handleStepChange = (index, newStep) => {
-    console.log(`Step ${index} changed:`, newStep);
     // Vérifiez si la première lettre n'est pas une majuscule
     let updatedStep = newStep;
     if (newStep && newStep[0] !== newStep[0].toUpperCase()) {
@@ -114,17 +89,17 @@ function EditTip() {
       }
 
       newSteps.push("");
-      console.log("Added a new step");
       return newSteps;
     });
   };
 
   const handleDeleteStep = (index) => {
-    console.log("Deleted step at index:", index);
     const updatedSteps = [...editedSteps];
     updatedSteps.splice(index, 1);
     setEditedSteps(updatedSteps);
   };
+
+  /// SAUVEGARDER LES MODIFICATIONS ///
 
   const handleSaveChanges = async () => {
     try {
@@ -153,7 +128,7 @@ function EditTip() {
       const updatedTip = {
         tip_name: editedTitle,
         user_id: userIdFromToken, // Utilisez l'ID extrait du token
-        picture_id: selectedImage?.id,
+        picture_id: selectedImage?.id || selectedImageId,
         ingredients: ingredientsArray,
         steps: stepsArray,
       };
@@ -177,13 +152,14 @@ function EditTip() {
       // Handle error (e.g., display an error message)
     }
   };
+  console.log("Selected ingredients state:", selectedIngredients);
 
   return (
     <>
       <Title />
-      <h2>Edit Tip {tipId}</h2>
+      <h2>Édition de l'astuce : {editedTitle}</h2>
       <p>
-        <label htmlFor="tipTitle">Tip Title: </label>
+        <label htmlFor="tipTitle">Titre de l'astuce : </label>
         <input
           type="text"
           id="tipTitle"
@@ -192,21 +168,22 @@ function EditTip() {
         />
       </p>
       <label htmlFor="pictureSelector">
-        Choose an Icon
+        Choisissez une icône :{" "}
         <PictureSelector
           id="pictureSelector"
           onSelect={handleImageSelect}
+          selectedImageId={selectedImageId}
           key={imageUploadSuccess}
         />
       </label>
       <PictureUpload onImageUpload={handleImageUploadSuccess} />
-
       <label htmlFor="ingredients">
         Ingrédients:
         <IngredientSelector
           id="ingredients"
-          onSelect={handleIngredientsSelect}
-          onAddNewIngredient={handleAddNewIngredient}
+          selectedIngredients={selectedIngredients}
+          setSelectedIngredients={setSelectedIngredients}
+          tipId={parseInt(tipId, 10)}
         />
       </label>
       <label>
@@ -227,7 +204,6 @@ function EditTip() {
           Ajouter une étape
         </button>
       </label>
-
       <button type="button" onClick={handleSaveChanges}>
         Save Changes
       </button>

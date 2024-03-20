@@ -70,7 +70,10 @@ INSERT INTO picture (picture_url) VALUES
 ("spoon.svg"),
 ("towel.svg"),
 ("yellow-soap.svg"),
-("broom.svg");
+("broom.svg"),
+("sapin.svg"),
+("spray.svg");
+
 
 -- Insertion des utilisateurs dans la table user
 INSERT INTO user (user_name, hashed_password, picture_id, is_admin) VALUES

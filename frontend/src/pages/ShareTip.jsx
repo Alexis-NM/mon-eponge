@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,14 +11,12 @@ function ShareTip() {
   const { user, handleAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Redirection si l'utilisateur n'est pas connecté
   useEffect(() => {
     if (!user.isLoggedIn) {
       navigate("/connexion");
     }
   }, [user.isLoggedIn, navigate]);
 
-  // Initialisation du formulaire
   const [formData, setFormData] = useState({
     tip_name: "",
     user_id: user.id,
@@ -25,42 +24,12 @@ function ShareTip() {
     steps: [{ step_content: "" }],
     ingredients: [],
   });
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
 
-  // Choisir une image
   const handleImageSelect = (selectedImage) => {
     setFormData({ ...formData, picture_id: selectedImage.id });
   };
 
-  // Mise à jour de la liste des ingrédients
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/ingredients`)
-      .then((response) => {
-        setFormData((prevData) => ({
-          ...prevData,
-          ingredients: response.data,
-        }));
-      })
-      .catch((error) => console.error("Error loading ingredients", error));
-  }, []);
-
-  // Choisir les ingrédients
-  const handleIngredientsSelect = (selectedIngredients) => {
-    const ingredientsArray = Array.isArray(selectedIngredients)
-      ? selectedIngredients
-      : [selectedIngredients];
-    setFormData({ ...formData, ingredients: ingredientsArray });
-  };
-
-  // Ajouter un nouvel ingrédient
-  const handleAddNewIngredient = (newIngredient) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      ingredients: [...prevData.ingredients, newIngredient],
-    }));
-  };
-
-  // Écrire une étape
   const handleInputChange = (index, field, value) => {
     const newSteps = [...formData.steps];
     newSteps[index][field] = value;
@@ -73,7 +42,6 @@ function ShareTip() {
     setFormData({ ...formData, steps: newSteps });
   };
 
-  // Ajouter une étape
   const handleAddStep = () => {
     const newSteps = [...formData.steps];
     const lastIndex = newSteps.length - 1;
@@ -93,28 +61,22 @@ function ShareTip() {
     setFormData({ ...formData, steps: newSteps });
   };
 
-  // Supprimer une étape
   const handleDeleteStep = (index) => {
     const newSteps = [...formData.steps];
     newSteps.splice(index, 1);
     setFormData({ ...formData, steps: newSteps });
   };
 
-  // Fonction d'envoi du formulaire
+  useEffect(() => {
+    const ingredientsArray = selectedIngredients.map((ingredient) => ({
+      id: ingredient.id,
+      ingredient_name: ingredient.ingredient_name,
+    }));
+    setFormData({ ...formData, ingredients: ingredientsArray });
+  }, [selectedIngredients]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const ingredientsString = formData.ingredients
-      .map((ingredient) => ingredient.ingredient_name)
-      .join(",");
-
-    setFormData({
-      ...formData,
-      steps: formData.steps.map((step) => ({
-        step_content: step.step_content,
-      })),
-      ingredients: ingredientsString,
-    });
 
     const token = localStorage.getItem("token");
 
@@ -133,7 +95,6 @@ function ShareTip() {
       })
       .then((response) => {
         console.info("Tip created successfully", response.data);
-        handleAddNewIngredient(response.data.ingredients);
       })
       .catch((error) => {
         console.error("Error creating tip", error);
@@ -165,15 +126,14 @@ function ShareTip() {
           Ingrédients:
           <IngredientSelector
             id="ingredients"
-            onSelect={handleIngredientsSelect}
-            onAddNewIngredient={handleAddNewIngredient}
+            selectedIngredients={selectedIngredients}
+            setSelectedIngredients={setSelectedIngredients}
           />
         </label>
 
         <label>
           Étape(s):
           {formData.steps.map((step, index) => (
-            // eslint-disable-next-line react/no-array-index-key
             <div key={index}>
               <textarea
                 value={step.step_content}
