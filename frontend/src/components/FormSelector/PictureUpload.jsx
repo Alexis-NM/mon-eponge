@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
+import "../../styles/components/FormSelector/PictureUpload.scss";
+
+import CrossIcon from "../../assets/icons/green_plus.svg";
+
 function PictureUpload({ onImageUpload }) {
   const [images, setImages] = useState([]);
 
@@ -47,15 +51,18 @@ function PictureUpload({ onImageUpload }) {
   }, []);
 
   return (
-    <div>
-      <label htmlFor="pictureSelector">Choisir une image:</label>
+    <section className="input-container">
+      <label htmlFor="pictureSelector">
+        <img src={CrossIcon} alt="Cross Icon" className="cross-icon" />
+      </label>
       <input
         type="file"
         id="pictureSelector"
         accept="image/svg"
         onChange={handleFileChange}
+        className="picture-upload-input"
       />
-    </div>
+    </section>
   );
 }
 

@@ -1,67 +1,95 @@
-.ingredient-selector {
-  font-family: Arial, sans-serif;
-}
+@import "../../commons.scss";
 
-.dropdown {
-  position: relative;
-}
-
-.dropdown-header {
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.ingredient-selector-container {
   display: flex;
-  justify-content: space-between;
-}
+  flex-direction: column;
+  justify-content: flex-start;
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 28rem;
+    @media screen and (min-width: 576px) {
+      gap: 1.5rem;
+      flex-direction: row;
+    }
+    .drop-container {
+      position: relative;
+    }
 
-.dropdown-header img {
-  width: 16px;
-  height: 16px;
-  transform: rotate(0deg);
-  transition: transform 0.3s ease;
-}
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background-color: $light-grey;
+      border-radius: 15px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-style: italic;
+      height: 2.5rem;
+      width: 18rem;
 
-.dropdown-content {
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1;
-}
+      img {
+        width: 2rem;
+        margin-left: 1.5rem;
+      }
+    }
+  }
 
-.dropdown-content div {
-  padding: 5px;
+  .ingredient-dropdown {
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 1rem, 0rem, 1rem, 0rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 12rem;
+    overflow-y: auto;
+    border-radius: 2px 2px 15px 15px;
+  }
 }
+.add-ingredient-container {
+  display: flex;
+  border: 1px solid $black;
+  width: 13rem;
+  height: 2.2rem;
+  padding: 0.2rem;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
 
-.dropdown-content div:hover {
-  background-color: #f2f2f2;
+  .add-button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    .cross-icon {
+      width: 2rem;
+      background-color: $warm-white;
+      border-radius: 8px;
+    }
+  }
+  .add-ingredient-input {
+    border: none;
+    border-radius: 15px;
+    background-color: $warm-white;
+    min-width: 10rem;
+    height: 2rem;
+    text-align: center;
+  }
+  .add-ingredient-input::placeholder {
+    text-align: center;
+    color: $black;
+    font-size: 0.9rem;
+  }
 }
-
-.add-ingredient {
-  margin-top: 10px;
-}
-
-.add-ingredient input {
-  padding: 5px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.add-ingredient button {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-ingredient button:hover {
-  background-color: #0056b3;
+.add-ingredient-container:hover {
+  background-color: $green;
 }

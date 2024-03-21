@@ -1,0 +1,16 @@
+@import "../../commons.scss";
+.input-container {
+  width: 2rem;
+
+  .cross-icon {
+    width: 2rem;
+  }
+  .cross-icon:hover {
+    cursor: pointer;
+    border: 2px solid $green;
+    border-radius: 8px;
+  }
+  .picture-upload-input {
+    display: none;
+  }
+}

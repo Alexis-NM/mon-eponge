@@ -74,28 +74,28 @@ function Login() {
         <div className="input-container">
           <label htmlFor="user_name" className="text-form">
             Identifiant :
-            <input
-              className="form-input"
-              type="text"
-              id="user_name"
-              placeholder=""
-              value={loginInfo.user_name}
-              onChange={handleUserNameChange}
-            />
           </label>
+          <input
+            className="form-input"
+            type="text"
+            id="user_name"
+            placeholder=""
+            value={loginInfo.user_name}
+            onChange={handleUserNameChange}
+          />
         </div>
         <div className="input-container">
           <label htmlFor="password" className="text-form">
             Mot de passe :
-            <input
-              className="form-input"
-              type="password"
-              id="password"
-              placeholder=""
-              value={loginInfo.password}
-              onChange={handlePasswordChange}
-            />
           </label>
+          <input
+            className="form-input"
+            type="password"
+            id="password"
+            placeholder=""
+            value={loginInfo.password}
+            onChange={handlePasswordChange}
+          />
         </div>
         <button type="button" className="submit-button" onClick={handleLogin}>
           Je me connecte

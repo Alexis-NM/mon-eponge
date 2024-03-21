@@ -184,12 +184,35 @@ class TipManager extends AbstractManager {
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an tip by its ID
   async delete(id) {
-    const result = await this.database.query(
-      `delete from ${this.table} where id = ?`,
-      [id]
-    );
+    try {
+      // Begin a database transaction
+      await this.database.query("START TRANSACTION");
 
-    return result;
+      // Delete related records in tip_ingredient table
+      await this.database.query(`DELETE FROM tip_ingredient WHERE tip_id = ?`, [
+        id,
+      ]);
+
+      // Delete related records in step table
+      await this.database.query(`DELETE FROM step WHERE tip_id = ?`, [id]);
+
+      // Ajoutez ici des requêtes pour supprimer les enregistrements liés dans d'autres tables le cas échéant
+
+      // Delete the tip record
+      await this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+
+      // Commit the transaction if all queries succeed
+      await this.database.query("COMMIT");
+
+      // Return success message
+      return { success: true, message: "Tip deleted successfully" };
+    } catch (error) {
+      // Rollback the transaction if any error occurs
+      await this.database.query("ROLLBACK");
+
+      // Throw the error to be caught by the error handling middleware
+      throw error;
+    }
   }
 }
 

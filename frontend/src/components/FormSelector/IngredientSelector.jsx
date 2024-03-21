@@ -1,13 +1,19 @@
+// IngredientSelector.js
+
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { AuthContext } from "../../context/AuthContext";
+import DownArrow from "../../assets/icons/down_arrow.svg";
+import "../../styles/components/FormSelector/IngredientSelector.scss";
+
+import CrossIcon from "../../assets/icons/green_plus.svg";
 
 function IngredientSelector({ setSelectedIngredients }) {
   const { user, handleAuth } = useContext(AuthContext);
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
-  const [rerender, setRerender] = useState(false); // État pour déclencher le rerender
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -20,16 +26,14 @@ function IngredientSelector({ setSelectedIngredients }) {
         setIngredients(initializedIngredients);
       })
       .catch((error) => console.error("Error loading ingredients", error));
-  }, [rerender]); // Rerender dépend de cet état
+  }, []);
 
-  const handleCheckboxChange = (selectedIngredient) => {
-    const updatedIngredient = { ...selectedIngredient };
-    updatedIngredient.isChecked = !updatedIngredient.isChecked;
-
+  const handleCheckboxChange = (ingredientId) => {
     const updatedIngredients = ingredients.map((ingredient) =>
-      ingredient.id === updatedIngredient.id ? updatedIngredient : ingredient
+      ingredient.id === ingredientId
+        ? { ...ingredient, isChecked: !ingredient.isChecked }
+        : ingredient
     );
-
     setIngredients(updatedIngredients);
 
     const updatedSelectedIngredients = updatedIngredients.filter(
@@ -61,42 +65,66 @@ function IngredientSelector({ setSelectedIngredients }) {
       )
       .then((response) => {
         console.info("New ingredient added", response.data);
-        setRerender(!rerender); // Déclencher le rerender en inversant l'état
+        setIngredients([
+          ...ingredients,
+          {
+            id: response.data.id,
+            ingredient_name: newIngredient,
+            isChecked: false,
+          },
+        ]);
+        setNewIngredient("");
       })
       .catch((error) => console.error("Error adding ingredient", error));
-
-    setNewIngredient("");
   };
 
   return (
-    <div>
-      {ingredients.map((ingredient) => (
-        <div key={ingredient.id}>
-          <input
-            type="checkbox"
-            id={`ingredient-${ingredient.id}`}
-            value={ingredient.id}
-            onChange={() => handleCheckboxChange(ingredient)}
-            checked={ingredient.isChecked}
-          />
-          <label htmlFor={`ingredient-${ingredient.id}`}>
-            {ingredient.ingredient_name}
-          </label>
+    <section className="ingredient-selector-container">
+      <article className="menu-list">
+        <div className="drop-container">
+          <button
+            className="dropdown-toggle"
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+          >
+            Cochez les ingredients <img src={DownArrow} alt="down arrow" />
+          </button>
+          {isOpen && (
+            <div className="ingredient-dropdown">
+              {ingredients.map((ingredient) => (
+                <div key={ingredient.id}>
+                  <input
+                    type="checkbox"
+                    id={`ingredient-${ingredient.id}`}
+                    onChange={() => handleCheckboxChange(ingredient.id)}
+                    checked={ingredient.isChecked}
+                  />
+                  <label htmlFor={`ingredient-${ingredient.id}`}>
+                    {ingredient.ingredient_name}
+                  </label>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      ))}
-
-      <div>
+      </article>
+      <article className="add-ingredient-container">
+        <button
+          type="button"
+          onClick={handleAddNewIngredient}
+          className="add-button"
+        >
+          <img src={CrossIcon} alt="Cross Icon" className="cross-icon" />
+        </button>
         <input
           type="text"
-          placeholder="Nouvel ingrédient"
+          placeholder="Ajouter un ingrédient"
           value={newIngredient}
           onChange={(e) => setNewIngredient(e.target.value)}
+          className="add-ingredient-input"
         />
-        <button type="button" onClick={handleAddNewIngredient}>
-          ajouter
-        </button>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 
