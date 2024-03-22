@@ -55,7 +55,7 @@ CREATE TABLE step (
 
 -- Insertion des images dans la table picture
 INSERT INTO picture (picture_url) VALUES
-("profil_bubble.svg"),
+("profile_bubble.svg"),
 ("bath.svg"),
 ("bottle.svg"),
 ("brush.svg"),
@@ -84,38 +84,12 @@ INSERT INTO user (user_name, hashed_password, picture_id, is_admin) VALUES
 INSERT INTO ingredient (ingredient_name) VALUES
 ("Vinaigre Blanc"),
 ("Bicarbonate de soude"),
-("Savon de Marseille"),
-("Acide citrique"),
-("Savon Noir"),
-("Percarbonate de soude"),
-("Huile essentielle d'arbre à thé"),
-("Cristaux de soude"),
-("Vinaigre de cidre"),
 ("Citron"),
 ("Huile essentielle de citron"),
-("Borax"),
+("Huile essentielle d'arbre à thé"),
 ("Huile essentielle de lavande"),
-("Sel"),
-("Amidon de maïs"),
-("Huile essentielle de menthe poivrée"),
-("Huile de coco"),
-("Feuilles de thé usagées"),
-("Jus de citron"),
 ("Huile essentielle d'eucalyptus"),
-("Cire d'abeille"),
-("Cristaux de soude"),
-("Fécule de maïs"),
-("Huile essentielle de romarin"),
-("Argile blanche"),
-("Vinaigre de vin rouge"),
-("Écorce de citron"),
-("Huile essentielle de citronnelle"),
-("Feuilles de sauge"),
-("Huile essentielle de thym"),
-("Huile essentielle de menthe verte"),
-("Feuilles de basilic"),
-("Vodka"),
-("Huile essentielle de ylang-ylang");
+("Savon de Marseille");
 
 -- Insertion des conseils dans la table tip
 INSERT INTO tip (tip_name, user_id, picture_id) VALUES
@@ -132,14 +106,14 @@ INSERT INTO tip (tip_name, user_id, picture_id) VALUES
 
 -- Insertion des ingrédients associés aux conseils dans la table tip_ingredient
 INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES
-(1, 1), (1, 7), (1, 11), (1, 13),
-(2, 1), (1, 7), (2, 10), (2, 13),
-(3, 2), (3, 11), (3, 13),
-(4, 1), (4, 11),
+(1, 1), (1, 4), (1, 5), (1, 6),
+(2, 1), (2, 4), (2, 5), (2, 6), (2, 7),
+(3, 1), (3, 4), (3, 6), (3, 7),
+(4, 1), (4, 4),
 (5, 1), (5, 2),
 (6, 2),
-(7, 3),
-(8, 1), (8, 11),
+(7, 8),
+(8, 1),
 (9, 1),
 (10, 1), (10, 2);
 

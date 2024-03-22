@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import EditIcon from "../../assets/icons/pencil.svg";
 import "../../styles/components/Admin/AdminTips.scss";
 
 function AdminTips() {
@@ -29,13 +29,32 @@ function AdminTips() {
   };
 
   return (
-    <div className="all-tips-main-container">
-      <h2 className="all-tips-main-title">Tous les Astuces</h2>
-      <div className="all-tips-container">
+    <div className="tips-admin-container">
+      <div className="admin-tip-container">
         {tips.map((tip) => (
-          <div key={tip.id} className="all-tips-wrapper">
-            <h3 className="all-tips-title">{tip.tip_name}</h3>
-            <button onClick={() => handleEditClick(tip.id)}>Éditer</button>
+          <div key={tip.id} className="admin-tip-wrapper">
+            <img
+              src={`/assets/tip_icons/${tip.picture_url}`}
+              alt={tip.tip_name}
+              className="admin-tip-icon"
+            />
+            <h3 className="admin-tip-title">{tip.tip_name}</h3>
+            <div className="tip-wrapper">
+              <ul className="admin-step-list">
+                {tip.steps &&
+                  tip.steps
+                    .split(/(?<=\.)\s*,/)
+                    // eslint-disable-next-line react/no-array-index-key
+                    .map((step, index) => <li key={index}>{step.trim()}</li>)}
+              </ul>
+              <button
+                onClick={() => handleEditClick(tip.id)}
+                type="button"
+                className="edit-button"
+              >
+                <img src={EditIcon} alt="Modifier" className="edit-icon" />
+              </button>
+            </div>
           </div>
         ))}
       </div>

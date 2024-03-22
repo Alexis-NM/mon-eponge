@@ -196,7 +196,20 @@ class TipManager extends AbstractManager {
       // Delete related records in step table
       await this.database.query(`DELETE FROM step WHERE tip_id = ?`, [id]);
 
-      // Ajoutez ici des requêtes pour supprimer les enregistrements liés dans d'autres tables le cas échéant
+      // Supprimer les ingrédients associés uniquement à la pointe spécifiée
+      await this.database.query(
+        `
+      DELETE FROM ingredient 
+      WHERE id IN (SELECT ingredient_id FROM tip_ingredient WHERE tip_id = ?)
+    `,
+        [id]
+      );
+
+      // Supprimer les ingrédients qui ne sont associés à aucune autre pointe
+      await this.database.query(`
+      DELETE FROM ingredient 
+      WHERE id NOT IN (SELECT DISTINCT ingredient_id FROM tip_ingredient)
+    `);
 
       // Delete the tip record
       await this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);

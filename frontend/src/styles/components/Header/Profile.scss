@@ -1,0 +1,26 @@
+@import "../../commons.scss";
+
+.profile-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: -4rem;
+  right: 3rem;
+  .avatar {
+    position: relative;
+    width: 6rem;
+    rotate: 40deg;
+  }
+
+  .user_name {
+    position: relative;
+    top: 5.2rem;
+    z-index: 1;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: $warm-white;
+    text-align: center;
+    cursor: pointer;
+  }
+}

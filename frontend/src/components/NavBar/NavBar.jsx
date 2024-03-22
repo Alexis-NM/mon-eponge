@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 import Title from "../Header/Title";
+import Profile from "../Header/Profile";
 
 import "../../styles/components/NavBar/NavBar.scss";
 
@@ -21,6 +22,7 @@ function NavBar() {
   return (
     <nav>
       <Title />
+      <Profile />
       <ul className="nav-container">
         <li className="nav-box">
           <Link to="/" className="nav-link">

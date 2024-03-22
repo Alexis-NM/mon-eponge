@@ -12,6 +12,8 @@ import IngredientSelector from "../components/FormSelector/IngredientSelector";
 import PictureUpload from "../components/FormSelector/PictureUpload";
 /// ICONS ///
 import EditIcon from "../assets/icons/pencil.svg";
+import WhitePlus from "../assets/icons/white_plus.svg";
+import DeleteIcon from "../assets/icons/delete.svg";
 /// STYLES ///
 import "../styles/pages/EditTip.scss";
 
@@ -276,20 +278,24 @@ function EditTip() {
             </button>
           </div>
         </section>
-        <button
-          type="button"
-          onClick={handleSaveChanges}
-          className="edit-tip-post"
-        >
-          Je mets à jour cette astuce !
-        </button>
-        <button
-          type="button"
-          onClick={handleDeleteTip}
-          className="delete-tip-button"
-        >
-          Supprimer cette astuce
-        </button>
+        <div className="button-wrapper">
+          <button
+            type="button"
+            onClick={handleSaveChanges}
+            className="edit-tip-post"
+          >
+            <img src={WhitePlus} alt="Green Plus Icon" className="green-plus" />
+            Je mets à jour cette astuce !
+          </button>
+          <button
+            type="button"
+            onClick={handleDeleteTip}
+            className="delete-tip-button"
+          >
+            <img src={DeleteIcon} alt="Delete Icon" className="delete-icon" />
+            Supprimer cette astuce
+          </button>
+        </div>
       </section>
     </div>
   );

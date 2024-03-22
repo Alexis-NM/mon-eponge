@@ -1,0 +1,32 @@
+@import "../commons.scss";
+
+.admin-tips-page {
+  .admin-title {
+    font-weight: 400;
+    border: 1px solid $black;
+    width: 20rem;
+    margin: auto;
+    text-align: center;
+    background-color: $light-green;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+  }
+  .manage-title {
+    display: flex;
+    width: 54rem;
+    margin: auto;
+    margin-bottom: 0.5rem;
+    .gear-icon{
+      width: 2.5rem;
+      margin-right: 0.2rem;
+    }
+  }
+  .admin-tips-section {
+    background-color: $warm-white;
+    width: 50rem;
+    padding: 3rem;
+    margin: auto;
+    border-radius: 30px;
+  }
+}

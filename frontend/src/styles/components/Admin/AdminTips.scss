@@ -1,0 +1,118 @@
+@import "../../commons.scss";
+
+.tips-admin-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  width: 18rem;
+  height: 25rem;
+  padding: 1.5rem;
+  background-color: $light-yellow;
+  border-radius: 20px;
+  margin: auto;
+
+  .admin-main-title {
+    text-align: center;
+  }
+  .admin-tip-container {
+    margin-top: 0;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+  .admin-tip-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-radius: 30px;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    grid-template-areas:
+      "icon title"
+      "steps steps";
+    grid-template-columns: auto 1fr;
+    column-gap: 0.8rem;
+    background-color: $warm-white;
+  }
+
+  .admin-tip-icon {
+    width: 2.5rem;
+    margin-bottom: -1.5rem;
+  }
+
+  .admin-tip-title {
+    margin: auto;
+  }
+
+  .tip-wrapper {
+    display: flex;
+    .admin-step-list {
+        max-width: 28rem;
+    }
+    .edit-button {
+      height: 2rem;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      .edit-icon {
+        width: 2.5rem;
+      }
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $light-red;
+    border-radius: 6px;
+    border: 1px solid $light-purple;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: $light-blue;
+    border-radius: 6px;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .pin-icon {
+    display: block;
+    left: 37.5vw;
+    z-index: 1;
+  }
+  .tips-admin-container {
+    width: 40rem;
+
+    .admin-tip-container {
+      padding: 0.7rem;
+    }
+    .admin-main-title {
+      font-size: 1.4rem;
+    }
+    .admin-tip-title {
+      font-size: 1rem;
+    }
+    .admin-step-list {
+      font-size: 1.1rem;
+    }
+  }
+}
+@media screen and (min-width: 1500px) {
+  .tips-admin-container {
+    width: 42rem;
+    max-width: 100rem;
+    .tip-main-title {
+      font-size: 1.8rem;
+    }
+    .admin-tip-title {
+      font-size: 1.4rem;
+    }
+    .admin-step-list {
+      font-size: 1.3rem;
+    }
+    .admin-tip-icon {
+      width: 4rem;
+    }
+  }
+}

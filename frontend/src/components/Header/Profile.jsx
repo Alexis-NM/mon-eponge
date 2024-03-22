@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import ProfilBubble from "../../assets/icons/profil_bubble.svg";
+import ProfileBubble from "../../../public/assets/tip_icons/profile_bubble.svg";
 import { AuthContext } from "../../context/AuthContext";
 
-import "../../styles/components/Header/Profil.scss";
+import "../../styles/components/Header/Profile.scss";
 
-function Profil() {
+function Profile() {
   const { user } = useContext(AuthContext);
   const [profileInfo, setProfileInfo] = useState(null);
 
@@ -32,18 +32,18 @@ function Profil() {
     <section className="profile-component">
       {profileInfo ? (
         <>
+          <p className="user_name">{user.userName}</p>
           <img
             src={`/assets/tip_icons/${profileInfo.picture_url}`}
             alt="Avatar"
             className="avatar"
           />
-          <p className="user_name">{user.userName}</p>
         </>
       ) : (
-        <img src={ProfilBubble} alt="Avatar" className="avatar" />
+        <img src={ProfileBubble} alt="Avatar" className="avatar" />
       )}
     </section>
   );
 }
 
-export default Profil;
+export default Profile;
