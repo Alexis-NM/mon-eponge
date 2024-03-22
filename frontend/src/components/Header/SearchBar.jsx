@@ -1,28 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
+
 import search from "../../assets/icons/search.svg";
 
 import "../../styles/components/Header/SearchBar.scss";
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearch = () => {
-    // Add your logic here
+    const { value } = event.target;
+    setSearchTerm(value);
+    onSearch(value); // Appeler la fonction de recherche à chaque changement
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSearch(searchTerm);
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSubmit(event);
-    }
+    onSearch(searchTerm);
   };
 
   return (
@@ -35,7 +29,6 @@ function SearchBar() {
             placeholder="Recherchez des astuces ici..."
             value={searchTerm}
             onChange={handleChange}
-            onKeyDown={handleKeyPress}
             className="search-input"
           />
         </div>
@@ -43,4 +36,9 @@ function SearchBar() {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
+
 export default SearchBar;

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { createContext, useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
@@ -66,9 +65,19 @@ function AuthContextProvider({ children }) {
     }
   };
 
+  const handleLogout = () => {
+    setUser({
+      isLoggedIn: false,
+      id: null,
+      userName: "",
+      pictureId: null,
+      isAdmin: 0,
+    });
+  };
+
   const contextValue = useMemo(
-    () => ({ user, handleAuth }),
-    [user, handleAuth]
+    () => ({ user, handleAuth, handleLogout }),
+    [user, handleAuth, handleLogout]
   );
 
   return (

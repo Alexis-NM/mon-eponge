@@ -47,15 +47,20 @@
   .tip-wrapper {
     display: flex;
     .admin-step-list {
-        max-width: 28rem;
+      max-width: 28rem;
     }
     .edit-button {
-      height: 2rem;
+      height: 2.5rem;
       border: none;
       background-color: transparent;
       cursor: pointer;
       .edit-icon {
+        padding: 0.5rem;
         width: 2.5rem;
+      }
+      .edit-icon:hover {
+        border: 2px solid $green;
+        border-radius: 15px;
       }
     }
   }
@@ -107,6 +112,8 @@
     }
     .admin-tip-title {
       font-size: 1.4rem;
+      max-width: 25rem;
+      margin: auto;
     }
     .admin-step-list {
       font-size: 1.3rem;
