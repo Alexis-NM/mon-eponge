@@ -1,8 +1,7 @@
-// Tips.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import Title from "../components/Header/Title";
 import NavBar from "../components/NavBar/NavBar";
-import NavBarMobile from "../components/NavBar/NavBarMobile";
 import SearchBar from "../components/Header/SearchBar";
 import Ingredients from "../components/Tips/Ingredients";
 import Tip from "../components/Tips/Tip";
@@ -59,17 +58,30 @@ function Tips() {
 
   return (
     <>
-      <div className="navbar-desktop">
-        <NavBar />
-      </div>
-      <div className="navbar-mobile">
-        <NavBarMobile />
-      </div>
-      <SearchBar onSearch={handleSearch} />
-      <Ingredients
-        onIngredientsChange={(selected) => setSelectedIngredients(selected)}
-      />
-      <Tip selectedIngredients={selectedIngredients} tips={filteredTips} />
+      <Title />
+      <section className="tips-page">
+        <article className="navbar">
+          <NavBar />
+        </article>
+        <article className="search-bar">
+          <SearchBar onSearch={handleSearch} />
+        </article>
+        <div className="content-wrapper">
+          <article className="ingredients-component">
+            <Ingredients
+              onIngredientsChange={(selected) =>
+                setSelectedIngredients(selected)
+              }
+            />
+          </article>
+          <article className="tips-component">
+            <Tip
+              selectedIngredients={selectedIngredients}
+              tips={filteredTips}
+            />
+          </article>
+        </div>
+      </section>
     </>
   );
 }

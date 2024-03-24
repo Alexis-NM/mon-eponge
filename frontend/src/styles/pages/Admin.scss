@@ -4,30 +4,49 @@
   .admin-title {
     font-weight: 400;
     border: 1px solid $black;
-    width: 20rem;
     margin: auto;
+    margin-top: 2rem;
     text-align: center;
     background-color: $light-green;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 15px;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    width: 15rem;
+    @include media-min("tablet-up") {
+      width: 20rem;
+      font-size: 2rem;
+    }
   }
   .manage-title {
     display: flex;
-    width: 54rem;
     margin: auto;
+    align-items: center;
+    width: 11rem;
+    font-size: 1rem;
+    margin-top: 2rem;
     margin-bottom: 0.5rem;
     cursor: default;
+    @include media-min("tablet-up") {
+      width: 54rem;
+    }
     .gear-icon {
-      width: 2.5rem;
+      width: 2rem;
       margin-right: 0.2rem;
+      @include media-min("tablet-up") {
+        width: 2.5rem;
+      }
     }
   }
   .admin-tips-section {
-    background-color: $warm-white;
-    width: 50rem;
-    padding: 3rem;
+    background-color: $light-blue;
+    width: 17rem;
     margin: auto;
     border-radius: 30px;
+    border-radius: 100px;
+    @include media-min("phone-down") {
+      background-color: $warm-white;
+      padding: 3rem;
+    }
   }
 }

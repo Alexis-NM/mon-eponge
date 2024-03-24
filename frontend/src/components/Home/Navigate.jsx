@@ -5,30 +5,30 @@ import "../../styles/components/Home/Naviguate.scss";
 
 function Naviguate() {
   return (
-    <>
-      <div className="account-container">
+    <section className="navigate-wrapper">
+      <article className="account-container">
         <Link to="/connexion" className="connexion-button">
           Connexion
         </Link>
         <Link to="/inscription" className="register-button">
           Créer mon compte
         </Link>
-      </div>
-      <div className="account-phrase">
+      </article>
+      <article className="account-phrase">
         <img className="lamp-logo" src={lamp} alt="Logo d'une ampoule" />
-        <p>Partagez de nouvelles astuces !</p>
-      </div>
+        <p className="share-phrase">Partagez de nouvelles astuces !</p>
+      </article>
       <Link to="/astuces" className="visitor-button">
         Simple visite
       </Link>
-      <div className="visitor-phrase">
+      <article className="visitor-phrase">
         <img className="plant-logo" src={plant} alt="Logo de plante Monstera" />
-        <p>
+        <p className="visit-phrase">
           Je souhaite garder une maison propre et respectueuse de
           l'environnement
         </p>
-      </div>
-    </>
+      </article>
+    </section>
   );
 }
 

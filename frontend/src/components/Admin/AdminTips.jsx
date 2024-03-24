@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditIcon from "../../assets/icons/pencil.svg";
@@ -33,18 +33,19 @@ function AdminTips() {
       <div className="admin-tip-container">
         {tips.map((tip) => (
           <div key={tip.id} className="admin-tip-wrapper">
-            <img
-              src={`/assets/tip_icons/${tip.picture_url}`}
-              alt={tip.tip_name}
-              className="admin-tip-icon"
-            />
-            <h3 className="admin-tip-title">{tip.tip_name}</h3>
+            <div className="admin-tip-header">
+              <img
+                src={`/assets/tip_icons/${tip.picture_url}`}
+                alt={tip.tip_name}
+                className="admin-tip-icon"
+              />
+              <h3 className="admin-tip-title">{tip.tip_name}</h3>
+            </div>
             <div className="tip-wrapper">
               <ul className="admin-step-list">
                 {tip.steps &&
                   tip.steps
                     .split(/(?<=\.)\s*,/)
-                    // eslint-disable-next-line react/no-array-index-key
                     .map((step, index) => <li key={index}>{step.trim()}</li>)}
               </ul>
               <button

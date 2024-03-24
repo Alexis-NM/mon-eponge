@@ -1,49 +1,87 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-
-import Title from "../Header/Title";
-import Profile from "../Header/Profile";
 
 import "../../styles/components/NavBar/NavBar.scss";
 
 function NavBar() {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const location = useLocation();
+  const [accordionTitle, setAccordionTitle] = useState("Les Astuces");
+  const [menuItems, setMenuItems] = useState([
+    { label: "Accueil", to: "/" },
+    { label: "Proposer une astuce", to: "/proposer-une-astuce" },
+  ]);
+  const [contentVisible, setContentVisible] = useState(true);
 
-  const handleProposeAstuce = () => {
-    if (!user.isLoggedIn) {
-      navigate("/connexion");
+  useEffect(() => {
+    if (user.isLoggedIn && user.isAdmin) {
+      setMenuItems([
+        { label: "Accueil", to: "/" },
+        { label: "Les Astuces", to: "/astuces" },
+        { label: "Proposer une astuce", to: "/proposer-une-astuce" },
+        { label: "Admin", to: "/admin" },
+      ]);
+    } else if (user.isLoggedIn) {
+      setMenuItems([
+        { label: "Accueil", to: "/" },
+        { label: "Proposer une astuce", to: "/proposer-une-astuce" },
+        { label: "Les Astuces", to: "/astuces" },
+      ]);
     } else {
-      navigate("/proposer-une-astuce");
+      setMenuItems([
+        { label: "Accueil", to: "/" },
+        { label: "Proposer une astuce", to: "/connexion" },
+      ]);
     }
+  }, [user]);
+
+  useEffect(() => {
+    const currentPage = menuItems.find((item) => item.to === location.pathname);
+    if (currentPage) {
+      setAccordionTitle(currentPage.label);
+    } else {
+      setAccordionTitle("Les Astuces");
+    }
+  }, [location.pathname, menuItems]);
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
+  const toggleContentVisible = () => {
+    setContentVisible(!contentVisible);
   };
 
   return (
-    <nav>
-      <Title />
-      <Profile />
-      <ul className="nav-container">
-        <li className="nav-box">
-          <Link to="/" className="nav-link">
-            Accueil
-          </Link>
-        </li>
-        <li className="nav-box">
-          <Link to="/astuces" className="nav-link">
-            Les Astuces
-          </Link>
-        </li>
-        <li className="nav-box">
-          <button
-            className="nav-link"
-            onClick={handleProposeAstuce}
-            type="button"
-          >
-            Proposer une astuce
-          </button>
-        </li>
-      </ul>
+    <nav className="accordion_container">
+      <div className="accordion">
+        <button
+          type="button"
+          className="accordion_title"
+          onClick={toggleContentVisible}
+        >
+          {accordionTitle}
+        </button>
+      </div>
+      <div
+        className={`accordion_content ${contentVisible ? "show_content" : ""}`}
+      >
+        {menuItems
+          .filter((menuItem) => menuItem.to !== location.pathname)
+          .map((menuItem, index) => (
+            <Link
+              key={index}
+              to={menuItem.to}
+              className={`list_item_container ${
+                isActive(menuItem.to) ? "active" : ""
+              }`}
+              onClick={toggleContentVisible}
+            >
+              <p>{menuItem.label}</p>
+            </Link>
+          ))}
+      </div>
     </nav>
   );
 }

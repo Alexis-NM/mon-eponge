@@ -4,15 +4,15 @@
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
-  width: 18rem;
+  width: 17rem;
   height: 25rem;
-  padding: 1.5rem;
-  background-color: $light-yellow;
+  padding: 0.3rem;
   border-radius: 20px;
+  background-color: $light-blue;
   margin: auto;
-
-  .admin-main-title {
-    text-align: center;
+  border-radius: 50%;
+  @include media-min("phone-down") {
+    background-color: $light-yellow;
   }
   .admin-tip-container {
     margin-top: 0;
@@ -24,30 +24,32 @@
     flex-direction: column;
     border-style: solid;
     border-radius: 30px;
-    padding: 1rem;
+    padding: 0.3rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    grid-template-areas:
-      "icon title"
-      "steps steps";
-    grid-template-columns: auto 1fr;
-    column-gap: 0.8rem;
     background-color: $warm-white;
   }
-
-  .admin-tip-icon {
-    width: 2.5rem;
-    margin-bottom: -1.5rem;
-  }
-
-  .admin-tip-title {
-    margin: auto;
+  .admin-tip-header {
+    display: flex;
+    height: 3rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: .5rem;
+    .admin-tip-icon {
+      width: 2rem;
+    }
+    .admin-tip-title {
+      margin-left: 0.5rem;
+    }
   }
 
   .tip-wrapper {
     display: flex;
+
     .admin-step-list {
-      max-width: 28rem;
+      padding-left: 1rem;
+      width: 11rem;
     }
     .edit-button {
       height: 2.5rem;
@@ -55,8 +57,7 @@
       background-color: transparent;
       cursor: pointer;
       .edit-icon {
-        padding: 0.5rem;
-        width: 2.5rem;
+        width: 2rem;
       }
       .edit-icon:hover {
         border: 2px solid $green;
@@ -80,46 +81,46 @@
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
   }
 }
-@media screen and (min-width: 1024px) {
-  .pin-icon {
-    display: block;
-    left: 37.5vw;
-    z-index: 1;
-  }
-  .tips-admin-container {
-    width: 40rem;
+// @media screen and (min-width: 1024px) {
+//   .pin-icon {
+//     display: block;
+//     left: 37.5vw;
+//     z-index: 1;
+//   }
+//   .tips-admin-container {
+//     width: 40rem;
 
-    .admin-tip-container {
-      padding: 0.7rem;
-    }
-    .admin-main-title {
-      font-size: 1.4rem;
-    }
-    .admin-tip-title {
-      font-size: 1rem;
-    }
-    .admin-step-list {
-      font-size: 1.1rem;
-    }
-  }
-}
-@media screen and (min-width: 1500px) {
-  .tips-admin-container {
-    width: 42rem;
-    max-width: 100rem;
-    .tip-main-title {
-      font-size: 1.8rem;
-    }
-    .admin-tip-title {
-      font-size: 1.4rem;
-      max-width: 25rem;
-      margin: auto;
-    }
-    .admin-step-list {
-      font-size: 1.3rem;
-    }
-    .admin-tip-icon {
-      width: 4rem;
-    }
-  }
-}
+//     .admin-tip-container {
+//       padding: 0.7rem;
+//     }
+//     .admin-main-title {
+//       font-size: 1.4rem;
+//     }
+//     .admin-tip-title {
+//       font-size: 1rem;
+//     }
+//     .admin-step-list {
+//       font-size: 1.1rem;
+//     }
+//   }
+// }
+// @media screen and (min-width: 1500px) {
+//   .tips-admin-container {
+//     width: 42rem;
+//     max-width: 100rem;
+//     .tip-main-title {
+//       font-size: 1.8rem;
+//     }
+//     .admin-tip-title {
+//       font-size: 1.4rem;
+//       max-width: 25rem;
+//       margin: auto;
+//     }
+//     .admin-step-list {
+//       font-size: 1.3rem;
+//     }
+//     .admin-tip-icon {
+//       width: 4rem;
+//     }
+//   }
+// }

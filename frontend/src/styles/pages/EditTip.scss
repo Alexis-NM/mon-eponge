@@ -28,7 +28,7 @@
         font-size: 1.3rem;
         font-weight: 600;
         min-width: 3.2em;
-        @media screen and (min-width: 576px) {
+        @include media-min("phone-down") {
           display: flex;
           flex-direction: row;
         }
@@ -75,44 +75,76 @@
     }
     .ingredient-container {
       display: flex;
-      align-items: center;
       gap: 3rem;
+      margin-top: 2rem;
 
       .ingredient-label {
         font-size: 1.2rem;
         font-weight: 600;
         cursor: default;
+        height: auto;
+        margin-top: 0rem;
       }
     }
     .step-container {
       display: flex;
       margin-top: 2rem;
+
       .step-label {
         font-size: 1.2rem;
         font-weight: 600;
         cursor: default;
+        min-width: 7rem;
       }
       .step-wrapper {
         display: flex;
         flex-direction: column;
+        margin-left: 0.5rem;
+        margin-bottom: 1.5rem;
         .step-list {
           display: flex;
           margin-bottom: 0.5rem;
+          align-items: center;
           .step-bullet {
             margin-left: 1rem;
             margin-right: 1rem;
           }
           .step-input {
             border: none;
-            width: 15rem;
+            width: 35rem;
+            height: 3rem;
             border-radius: 15px;
-            margin-right: 1rem;
             background-color: $light-grey;
             font-size: 0.8rem;
+            padding-left: 1rem;
           }
           .step-delete-button {
+            border: none;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            .delete-icon {
+              width: 2rem;
+            }
           }
-          .add-step-button {
+        }
+        .add-step-button {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          margin-top: 0.5rem;
+          margin-left: 2.6rem;
+          font-size: 0.9rem;
+          gap: 1rem;
+          border: 1px solid $black;
+          color: $black;
+          border-radius: 15px;
+          width: 13rem;
+          height: 2.7rem;
+          padding: 0.4rem;
+          .green-plus {
+            width: 2rem;
+            margin-right: 0.9rem;
           }
         }
       }
@@ -122,6 +154,7 @@
       justify-content: center;
       gap: 2rem;
       margin-top: 1.5rem;
+      margin-bottom: 2rem;
 
       .edit-tip-post {
         display: flex;
@@ -134,7 +167,7 @@
         border-radius: 15px;
         width: 20rem;
         padding: 0.5rem;
-        .green-plus {
+        .white-plus {
           width: 2rem;
         }
       }

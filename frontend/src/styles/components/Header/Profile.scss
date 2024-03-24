@@ -1,26 +1,43 @@
 @import "../../commons.scss";
-
-.profile-component {
+.profile {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: -4rem;
-  right: 3rem;
-  .avatar {
-    position: relative;
-    width: 6rem;
-    rotate: 40deg;
-  }
+  top: -3.5rem;
+  right: 0.5rem;
 
   .user_name {
     position: relative;
-    top: 5.2rem;
-    z-index: 1;
-    font-size: 1.3rem;
+    top: 4.2rem;
+    z-index: 2;
+    font-size: 1.2rem;
     font-weight: 500;
     color: $warm-white;
     text-align: center;
     cursor: pointer;
   }
+
+  .avatar {
+    position: relative;
+    width: 4.5rem;
+    rotate: 40deg;
+    z-index: 1;
+  }
+
+  .on_button {
+    position: absolute;
+    top: 4rem;
+    left: 0.5rem;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 4.5rem;
+    background-color: $light-red;
+    border-radius: 50%;
+  }
+}
+
+.profile:hover .on_button {
+  opacity: 1;
 }

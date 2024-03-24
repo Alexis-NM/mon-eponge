@@ -1,17 +1,16 @@
-import React from "react";
 import PropTypes from "prop-types";
-import "../../styles/components/Header/ConfirmationModal.scss";
+import "../../styles/components/Modals/ConfirmationModal.scss";
 
-function ConfirmationModal({ isOpen, onClose, onConfirm }) {
+function DeleteModal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) {
     return null;
   }
 
   return (
-    <div className="confirmation-modal">
-      <div className="modal-content">
-        <h2>Confirmer la déconnexion</h2>
-        <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+    <section className="confirmation-modal">
+      <article className="modal-content">
+        <h2>Confirmer la suppression</h2>
+        <p>Êtes-vous sûr de vouloir supprimer cette astuce ?</p>
         <div className="button-container">
           <button onClick={onConfirm} type="button">
             Confirmer
@@ -20,15 +19,15 @@ function ConfirmationModal({ isOpen, onClose, onConfirm }) {
             Annuler
           </button>
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 
-ConfirmationModal.propTypes = {
+DeleteModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired,
 };
 
-export default ConfirmationModal;
+export default DeleteModal;

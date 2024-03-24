@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import ProfileBubble from "../../../public/assets/tip_icons/profile_bubble.svg";
 import { AuthContext } from "../../context/AuthContext";
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModal from "../Modals/ConfirmationModal";
+import onButton from "../../assets/icons/on_button.svg";
 import "../../styles/components/Header/Profile.scss";
 
 function Profile() {
@@ -33,25 +33,27 @@ function Profile() {
     setShowConfirmationModal(false);
   };
 
+  if (!user.isLoggedIn) {
+    return null; // Si aucun utilisateur n'est connecté, le composant ne renvoie rien
+  }
+
   return (
     <section className="profile-component">
-      {profileInfo ? (
-        <>
-          <p className="user_name">{user.userName}</p>
-          <img
-            src={`/assets/tip_icons/${profileInfo.picture_url}`}
-            alt="Avatar"
-            className="avatar"
-          />
-        </>
-      ) : (
-        <img src={ProfileBubble} alt="Avatar" className="avatar" />
-      )}
-      {user.isLoggedIn && (
+      <article className="profile">
         <button onClick={() => setShowConfirmationModal(true)} type="button">
-          Déconnexion
+          <p className="user_name">{user.userName}</p>
+          {profileInfo && (
+            <>
+              <img
+                src={`/assets/tip_icons/${profileInfo.picture_url}`}
+                alt="Avatar"
+                className="avatar"
+              />
+              <img src={onButton} alt="on" className="on_button" />
+            </>
+          )}
         </button>
-      )}
+      </article>
       <ConfirmationModal
         isOpen={showConfirmationModal}
         onClose={() => setShowConfirmationModal(false)}

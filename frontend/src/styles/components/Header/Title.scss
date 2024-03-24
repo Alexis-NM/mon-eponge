@@ -2,18 +2,33 @@
 
 .title-container {
   display: flex;
-  justify-content: center;
-  @media screen and (min-width: 821px) {
-    justify-content: start;
-    width: 100vw;
-  }
-  .main-title {
-    font-size: 2rem;
-    margin-left: 2rem;
-    font-weight: 700;
-  }
+  gap: 1rem;
   .sponge-logo {
     width: 2.5rem;
-    margin-left: 0.5rem;
+  }
+  .main-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    @include media-min("phone-up") {
+      font-size: 2rem;
+    }
+  }
+  &.not-logged-in {
+    justify-content: center;
+    @include media-min("phone-down") {
+      width: 19rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
+    }
+  }
+  &.logged-in {
+    margin-left: .5rem;
+    margin-top: .5rem;
+    @include media-min("phone-up") {
+      justify-content: center;
+    }
+    @include media-min("tablet-up") {
+      width: 19rem;
+    }
   }
 }

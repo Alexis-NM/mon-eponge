@@ -23,31 +23,32 @@ function Tip({ selectedIngredients, tips }) {
   });
 
   return (
-    <>
+    <section className="tip-section">
       <img src={pin} alt="Épingle" className="pin-icon" />
-      <div className="tip-main-container">
+      <article className="tip-main-container">
         <h2 className="tip-main-title">Les Astuces</h2>
         <div className="tip-container">
           {filteredTips.map((tip) => (
             <div key={tip.id} className="tip-wrapper">
-              <img
-                src={`/assets/tip_icons/${tip.picture_url}`}
-                alt={tip.tip_name}
-                className="tip-icon"
-              />
-              <h3 className="tip-title">{tip.tip_name}</h3>
+              <div className="tip-header">
+                <img
+                  src={`/assets/tip_icons/${tip.picture_url}`}
+                  alt={tip.tip_name}
+                  className="tip-icon"
+                />
+                <h3 className="tip-title">{tip.tip_name}</h3>
+              </div>
               <ul className="step-list">
                 {tip.steps &&
                   tip.steps
                     .split(/(?<=\.)\s*,/)
-                    // eslint-disable-next-line react/no-array-index-key
                     .map((step, index) => <li key={index}>{step.trim()}</li>)}
               </ul>
             </div>
           ))}
         </div>
-      </div>
-    </>
+      </article>
+    </section>
   );
 }
 

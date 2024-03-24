@@ -50,12 +50,26 @@ $breakpoints: (
   }
 }
 
+html,
 body {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  margin: auto;
   margin: 0;
+  padding: 0;
   line-height: 1.5;
   box-sizing: border-box;
   min-height: 100vh;
   background-color: $light-blue;
-  overflow-x: hidden;
   font-family: "Inter", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+button {
+  border: none;
+  background-color: transparent;
 }

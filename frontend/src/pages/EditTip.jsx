@@ -10,23 +10,30 @@ import Title from "../components/Header/Title";
 import PictureSelector from "../components/FormSelector/PictureSelector";
 import IngredientSelector from "../components/FormSelector/IngredientSelector";
 import PictureUpload from "../components/FormSelector/PictureUpload";
+import UpdateModal from "../components/Modals/UpdateModal";
+import DeleteModal from "../components/Modals/DeleteModal";
 /// ICONS ///
 import EditIcon from "../assets/icons/pencil.svg";
+import GreenPlus from "../assets/icons/green_plus.svg";
 import WhitePlus from "../assets/icons/white_plus.svg";
 import DeleteIcon from "../assets/icons/delete.svg";
 /// STYLES ///
 import "../styles/pages/EditTip.scss";
+import NavBarMobile from "../components/NavBar/NavBar";
 
 function EditTip() {
   const { tipId } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  // STATES //
   const [editedTitle, setEditedTitle] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [editedSteps, setEditedSteps] = useState([]);
   const [imageUploadSuccess, setImageUploadSuccess] = useState(false);
   const [selectedImageId, setSelectedImageId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   useEffect(() => {
     // Check if the user is an admin before allowing access to the edit page
@@ -71,10 +78,10 @@ function EditTip() {
   };
 
   const handleStepChange = (index, newStep) => {
-    // Vérifiez si la première lettre n'est pas une majuscule
+    // Vérifie si la première lettre n'est pas une majuscule
     let updatedStep = newStep;
     if (newStep && newStep[0] !== newStep[0].toUpperCase()) {
-      // Mettez la première lettre en majuscule
+      // Met la première lettre en majuscule
       updatedStep = newStep.charAt(0).toUpperCase() + newStep.slice(1);
     }
 
@@ -141,8 +148,6 @@ function EditTip() {
         steps: stepsArray,
       };
 
-      console.log("Changes to be saved:", updatedTip);
-
       // Send a PUT request with the user's token in the Authorization header
       const response = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/tips/${tipId}`,
@@ -154,33 +159,31 @@ function EditTip() {
         }
       );
 
-      console.info("Updated Tip Response:", response.data);
+      console.info("Tip Updated Successfully", response.data);
+      setShowUpdateModal(true);
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1000);
     } catch (error) {
-      console.error("Error updating tip:", error);
-      // Handle error (e.g., display an error message)
+      console.error("Error saving changes:", error);
     }
   };
-  console.log("Selected ingredients state:", selectedIngredients);
 
-  const handleDeleteTip = async () => {
-    // Afficher un message de confirmation avant de supprimer l'astuce
-    const confirmDelete = window.confirm(
-      "Êtes-vous sûr de vouloir supprimer cette astuce ?"
-    );
+  /// SUPPRIMER L'ASTUCE ///
 
-    if (!confirmDelete) {
-      // Si l'utilisateur annule la suppression, ne rien faire
-      return;
-    }
+  const handleDeleteTip = () => {
+    console.info("Suppression effectuée !");
+    setShowDeleteModal(true); // Afficher la modale de confirmation avant la suppression
+  };
 
+  // Fonction pour confirmer la suppression de l'astuce
+  const confirmDeleteTip = async () => {
     try {
       // Récupérer le token depuis le local storage
       const storedToken = localStorage.getItem("token");
 
       if (!storedToken) {
-        // Gérer le cas où le token n'est pas présent dans le local storage
         console.error("Token not found in local storage");
-        // Vous pouvez également rediriger l'utilisateur vers la page de connexion si nécessaire
         return;
       }
 
@@ -200,11 +203,22 @@ function EditTip() {
       console.error("Error deleting tip:", error);
       // Handle error (e.g., display an error message)
     }
+
+    setShowDeleteModal(false);
+    setTimeout(() => {
+      navigate("/admin");
+    }, 300);
+  };
+
+  // Fonction pour annuler la suppression de l'astuce
+  const cancelDeleteTip = () => {
+    setShowDeleteModal(false); // Cacher la modale de confirmation
   };
 
   return (
     <div className="edit-page">
       <Title />
+      <NavBarMobile />
       <h2 className="edit-title">
         <img src={EditIcon} alt="Edit Icon" className="pencil-icon" />
         Éditer l'astuce :
@@ -265,7 +279,11 @@ function EditTip() {
                   onClick={() => handleDeleteStep(index)}
                   className="step-delete-button"
                 >
-                  Supprimer L'étape
+                  <img
+                    src={DeleteIcon}
+                    alt="Delete Icon"
+                    className="delete-icon"
+                  />
                 </button>
               </article>
             ))}
@@ -274,6 +292,11 @@ function EditTip() {
               onClick={handleAddStep}
               className="add-step-button"
             >
+              <img
+                src={GreenPlus}
+                alt="Green Plus Icon"
+                className="green-plus"
+              />
               Ajouter une étape
             </button>
           </div>
@@ -284,17 +307,25 @@ function EditTip() {
             onClick={handleSaveChanges}
             className="edit-tip-post"
           >
-            <img src={WhitePlus} alt="Green Plus Icon" className="green-plus" />
+            <img src={WhitePlus} alt="Green Plus Icon" className="white-plus" />
             Je mets à jour cette astuce !
           </button>
-          <button
-            type="button"
-            onClick={handleDeleteTip}
-            className="delete-tip-button"
-          >
-            <img src={DeleteIcon} alt="Delete Icon" className="delete-icon" />
-            Supprimer cette astuce
-          </button>
+          <UpdateModal isOpen={showUpdateModal} />
+          <div>
+            <button
+              type="button"
+              onClick={handleDeleteTip}
+              className="delete-tip-button"
+            >
+              <img src={DeleteIcon} alt="Delete Icon" className="delete-icon" />
+              Supprimer cette astuce
+            </button>
+            <DeleteModal
+              isOpen={showDeleteModal}
+              onClose={cancelDeleteTip}
+              onConfirm={confirmDeleteTip}
+            />
+          </div>
         </div>
       </section>
     </div>

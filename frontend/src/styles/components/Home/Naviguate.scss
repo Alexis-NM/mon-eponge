@@ -1,140 +1,166 @@
 @import "../../commons.scss";
 
-.account-container {
-  display: flex;
-  margin-top: 10vh;
-  gap: 0.5rem;
-
-  .connexion-button {
-    border-width: 1px;
-    padding: 1.5rem;
-    background-color: $light-red;
-    border-radius: 15px;
-    border-style: solid;
-    text-align: center;
-    width: 20rem;
-    cursor: pointer;
-    font-size: 0.8rem;
+.navigate-wrapper {
+  @include media-min("tablet-up") {
+    margin-top: 5rem;
   }
-  .connexion-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
+  @include media-min("desktop-up") {
+    margin-top: 8rem;
   }
-  .register-button {
-    border-width: 1px;
-    padding: 1.5rem;
-    background-color: $light-yellow;
-    border-radius: 15px;
-    border-style: solid;
-    text-align: center;
-    width: 20rem;
-    cursor: pointer;
-    font-size: 0.8rem;
-  }
-  .register-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
-  }
-}
-.account-phrase {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 8vh;
-  margin-top: 6vh;
-  font-size: 1rem;
-  .lamp-logo {
-    width: 2rem;
-    margin-right: 0.8rem;
-  }
-}
-a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.visitor-button {
-  display: block;
-  margin: auto;
-  padding: 1.5rem;
-  background-color: $light-purple;
-  border-radius: 15px;
-  border-style: solid;
-  border-width: 1px;
-  width: 12.5rem;
-  text-align: center;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-.visitor-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
-}
-
-.visitor-phrase {
-  display: flex;
-  justify-content: center;
-  width: 80vw;
-  margin: auto;
-  margin-top: 6vh;
-  font-size: 1rem;
-  .plant-logo {
-    width: 2rem;
-    margin-right: 0.8rem;
-  }
-}
-
-@media screen and (min-width: 821px) {
   .account-container {
+    display: flex;
+    margin: auto;
     justify-content: center;
-    margin-top: 3rem;
-    gap: 3rem;
-
+    gap: 0.5rem;
+    margin-top: 4rem;
+    @include media-min("desktop-up") {
+      gap: 3rem;
+      margin-top: 3rem;
+    }
     .connexion-button {
-      padding: 2rem;
-      border-radius: 20px;
-      border-style: none;
-      font-size: 1rem;
-      &:hover {
-        border-style: solid;
-        border-width: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $black;
+      background-color: $light-red;
+      padding: 0.5rem;
+      border-radius: 15px;
+      height: 3rem;
+      width: 5rem;
+      cursor: pointer;
+      @include media-min("phone-up") {
+        width: 9rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 12rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 16rem;
+        height: 4rem;
       }
     }
+    .connexion-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
+    }
     .register-button {
-      padding: 2rem;
-      border-radius: 20px;
-      border-style: none;
-      font-size: 1rem;
-      &:hover {
-        border-style: solid;
-        border-width: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $black;
+      padding: 0.5rem;
+      background-color: $light-yellow;
+      border-radius: 15px;
+      cursor: pointer;
+      height: 3rem;
+      width: 5rem;
+      @include media-min("phone-up") {
+        width: 9rem;
       }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 12rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 16rem;
+        height: 4rem;
+      }
+    }
+    .register-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
     }
   }
   .account-phrase {
-    margin-bottom: 4rem;
-    margin-top: 1.2rem;
-    .lamp-logo {
-      width: 3rem;
-      margin-right: 1rem;
-    }
-  }
-  .visitor-button {
-    padding: 2rem;
-    border-radius: 20px;
-    border-style: none;
-    width: 20rem;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
     font-size: 1rem;
-    &:hover {
-      border-style: solid;
-      border-width: 1px;
+    .lamp-logo {
+      width: 2rem;
+      margin-right: 0.8rem;
+      @include media-min("desktop-up") {
+        margin-right: 1.5rem;
+        width: 2.5rem;
+      }
+    }
+    .share-phrase {
+      width: 10rem;
+      @include media-min("phone-up") {
+        width: 15.1rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 19rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 23rem;
+      }
     }
   }
+
+  .visitor-button {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    padding: 0.5rem;
+    background-color: $light-purple;
+    border-radius: 15px;
+    border: 1px solid $black;
+    width: 11rem;
+    text-align: center;
+    cursor: pointer;
+    @include media-min("tablet-up") {
+      font-size: 1.2rem;
+      width: 12rem;
+    }
+    @include media-min("desktop-up") {
+      font-size: 1.5rem;
+      width: 16rem;
+      height: 4rem;
+    }
+  }
+  .visitor-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
+  }
+
   .visitor-phrase {
-    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    font-size: 1rem;
     .plant-logo {
-      width: 3rem;
-      margin-right: 1rem;
+      width: 2rem;
+      margin-right: 0.8rem;
+      @include media-min("desktop-up") {
+        margin-right: 1.5rem;
+        width: 2.5rem;
+      }
+    }
+    .visit-phrase {
+      width: 10rem;
+      @include media-min("phone-up") {
+        width: 15rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 22rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 30rem;
+      }
     }
   }
 }

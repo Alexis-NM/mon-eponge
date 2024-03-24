@@ -2,33 +2,37 @@
 
 .home-banner {
   display: flex;
-  margin: auto;
-  width: 85vw;
-  margin-top: 6vh;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 1rem;
+  margin-top: 3rem;
   background-color: $light-green;
   border-radius: 20px;
-  padding: 1rem;
+  @include media-min("phone-up") {
+    padding: 1.5rem;
+    gap: 0.5rem;
+  }
+  @include media-min("tablet-up") {
+    margin: auto;
+    margin-top: 4rem;
+    width: 28rem;
+  }
+  @include media-min("desktop-up") {
+    width: 46rem;
+    height: 10rem;
+    margin-top: 6rem;
+  }
   .catch-phrase {
     font-size: 1.1rem;
     font-weight: 400;
+    @include media-min("tablet-up") {
+      font-size: 1.5rem;
+    }
   }
   .bubbles-logo {
     width: 2.2rem;
-  }
-}
-
-@media screen and (min-width: 821px) {
-  .home-banner {
-    justify-content: center;
-    padding: 5rem;
-    width: 50vw;
-    margin-top: 7vh;
-    border-radius: 30px;
-    .catch-phrase {
-      margin-left: 2rem;
-    }
-    .bubbles-logo {
-      width: 3rem;
+    @include media-min("desktop-up") {
       margin-left: 1rem;
     }
   }
