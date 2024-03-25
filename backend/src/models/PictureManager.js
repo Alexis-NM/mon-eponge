@@ -12,13 +12,10 @@ class PictureManager extends AbstractManager {
 
   async create(picture) {
     const { picture_url } = picture;
-    // Execute the SQL INSERT query to add a new picture to the "picture" table
     const [result] = await this.database.query(
       `insert into ${this.table} (picture_url) values (?)`,
       [picture_url]
     );
-
-    // Return the ID of the newly inserted picture
     return result.insertId;
   }
 

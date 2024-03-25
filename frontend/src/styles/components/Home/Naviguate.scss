@@ -1,0 +1,166 @@
+@import "../../commons.scss";
+
+.navigate-wrapper {
+  @include media-min("tablet-up") {
+    margin-top: 5rem;
+  }
+  @include media-min("desktop-up") {
+    margin-top: 8rem;
+  }
+  .account-container {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 4rem;
+    @include media-min("desktop-up") {
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .connexion-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $black;
+      background-color: $light-red;
+      padding: 0.5rem;
+      border-radius: 15px;
+      height: 3rem;
+      width: 5rem;
+      cursor: pointer;
+      @include media-min("phone-up") {
+        width: 9rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 12rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 16rem;
+        height: 4rem;
+      }
+    }
+    .connexion-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
+    }
+    .register-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $black;
+      padding: 0.5rem;
+      background-color: $light-yellow;
+      border-radius: 15px;
+      cursor: pointer;
+      height: 3rem;
+      width: 5rem;
+      @include media-min("phone-up") {
+        width: 9rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 12rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 16rem;
+        height: 4rem;
+      }
+    }
+    .register-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
+    }
+  }
+  .account-phrase {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    font-size: 1rem;
+    .lamp-logo {
+      width: 2rem;
+      margin-right: 0.8rem;
+      @include media-min("desktop-up") {
+        margin-right: 1.5rem;
+        width: 2.5rem;
+      }
+    }
+    .share-phrase {
+      width: 10rem;
+      @include media-min("phone-up") {
+        width: 15.1rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 19rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 23rem;
+      }
+    }
+  }
+
+  .visitor-button {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    padding: 0.5rem;
+    background-color: $light-purple;
+    border-radius: 15px;
+    border: 1px solid $black;
+    width: 11rem;
+    text-align: center;
+    cursor: pointer;
+    @include media-min("tablet-up") {
+      font-size: 1.2rem;
+      width: 12rem;
+    }
+    @include media-min("desktop-up") {
+      font-size: 1.5rem;
+      width: 16rem;
+      height: 4rem;
+    }
+  }
+  .visitor-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 0px 2px rgba(0.2, 0.2, 0.2, 0.2);
+  }
+
+  .visitor-phrase {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    font-size: 1rem;
+    .plant-logo {
+      width: 2rem;
+      margin-right: 0.8rem;
+      @include media-min("desktop-up") {
+        margin-right: 1.5rem;
+        width: 2.5rem;
+      }
+    }
+    .visit-phrase {
+      width: 10rem;
+      @include media-min("phone-up") {
+        width: 15rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 22rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 30rem;
+      }
+    }
+  }
+}

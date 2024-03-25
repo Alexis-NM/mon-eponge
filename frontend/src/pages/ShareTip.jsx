@@ -1,10 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+
 import { AuthContext } from "../context/AuthContext";
-import PictureSelector from "../components/PictureSelector";
-import IngredientSelector from "../components/IngredientSelector";
-import Title from "../components/Title";
+
+import Title from "../components/Header/Title";
+import NavBar from "../components/NavBar/NavBar";
+import PictureSelector from "../components/FormSelector/PictureSelector";
+import IngredientSelector from "../components/FormSelector/IngredientSelector";
+import ShareModal from "../components/Modals/ShareModal";
+
+import GreenPlus from "../assets/icons/green_plus.svg";
+import WhitePlus from "../assets/icons/white_plus.svg";
+import DeleteIcon from "../assets/icons/delete.svg";
+
+import "../styles/pages/ShareTip.scss";
 
 function ShareTip() {
   const { user, handleAuth } = useContext(AuthContext);
@@ -23,41 +34,42 @@ function ShareTip() {
     steps: [{ step_content: "" }],
     ingredients: [],
   });
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/ingredients`)
-      .then((response) => {
-        setFormData((prevData) => ({
-          ...prevData,
-          ingredients: response.data,
-        }));
-      })
-      .catch((error) => console.error("Error loading ingredients", error));
-  }, []);
-
-  const handleInputChange = (index, field, value) => {
-    const newSteps = [...formData.steps];
-    newSteps[index][field] = value;
-    setFormData({ ...formData, steps: newSteps });
-  };
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const handleImageSelect = (selectedImage) => {
     setFormData({ ...formData, picture_id: selectedImage.id });
   };
 
-  const handleIngredientsSelect = (selectedIngredients) => {
-    const ingredientsArray = Array.isArray(selectedIngredients)
-      ? selectedIngredients
-      : [selectedIngredients];
-    setFormData({ ...formData, ingredients: ingredientsArray });
+  const handleInputChange = (index, field, value) => {
+    const newSteps = [...formData.steps];
+    newSteps[index][field] = value;
+    if (field === "step_content") {
+      newSteps[index][field] =
+        newSteps[index][field].charAt(0).toUpperCase() +
+        newSteps[index][field].slice(1);
+    }
+
+    setFormData({ ...formData, steps: newSteps });
   };
 
-  const handleAddNewIngredient = (newIngredient) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      ingredients: [...prevData.ingredients, newIngredient],
-    }));
+  const handleAddStep = () => {
+    const newSteps = [...formData.steps];
+    const lastIndex = newSteps.length - 1;
+
+    if (
+      lastIndex >= 0 &&
+      newSteps[lastIndex].step_content.trim() &&
+      newSteps[lastIndex].step_content.charAt(
+        newSteps[lastIndex].step_content.length - 1
+      ) !== "."
+    ) {
+      newSteps[lastIndex].step_content += ".";
+    }
+
+    newSteps.push({ step_content: "" });
+
+    setFormData({ ...formData, steps: newSteps });
   };
 
   const handleDeleteStep = (index) => {
@@ -66,20 +78,16 @@ function ShareTip() {
     setFormData({ ...formData, steps: newSteps });
   };
 
+  useEffect(() => {
+    const ingredientsArray = selectedIngredients.map((ingredient) => ({
+      id: ingredient.id,
+      ingredient_name: ingredient.ingredient_name,
+    }));
+    setFormData({ ...formData, ingredients: ingredientsArray });
+  }, [selectedIngredients]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const ingredientsString = formData.ingredients
-      .map((ingredient) => ingredient.ingredient_name)
-      .join(",");
-
-    setFormData({
-      ...formData,
-      steps: formData.steps.map((step) => ({
-        step_content: step.step_content,
-      })),
-      ingredients: ingredientsString,
-    });
 
     const token = localStorage.getItem("token");
 
@@ -96,9 +104,13 @@ function ShareTip() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        console.info("Tip created successfully", response.data);
-        handleAddNewIngredient(response.data.ingredients);
+      .then(() => {
+        console.info("Tip created successfully");
+        setShowShareModal(true);
+        setTimeout(() => {
+          setShowShareModal(false);
+          navigate("/astuces");
+        }, 3000);
       })
       .catch((error) => {
         console.error("Error creating tip", error);
@@ -108,9 +120,15 @@ function ShareTip() {
   return (
     <>
       <Title />
-      <form onSubmit={handleSubmit}>
-        <label>
-          Title:
+      <div className="navbar">
+        <NavBar />
+      </div>
+      <h2 className="share-tip-title">Proposer une astuce :</h2>
+      <form onSubmit={handleSubmit} className="form-share-container">
+        <div className="title-container">
+          <label htmlFor="titleInput" className="title-label">
+            Title:
+          </label>
           <input
             type="text"
             value={formData.tip_name}
@@ -118,56 +136,66 @@ function ShareTip() {
               setFormData({ ...formData, tip_name: e.target.value })
             }
             required
+            className="title-input"
           />
-        </label>
-
-        <label htmlFor="pictureSelector">
-          Choisir une Icône{" "}
+        </div>
+        <div className="picture-container">
+          <p className="picture-selector-title">Choisir une image :</p>
           <PictureSelector id="pictureSelector" onSelect={handleImageSelect} />
-        </label>
-
-        <label htmlFor="ingredients">
-          Ingrédients:
+        </div>
+        <div className="ingredient-container">
+          <p className="ingredient-selector-title">Les ingredients :</p>
           <IngredientSelector
             id="ingredients"
-            onSelect={handleIngredientsSelect}
-            onAddNewIngredient={handleAddNewIngredient}
+            selectedIngredients={selectedIngredients}
+            setSelectedIngredients={setSelectedIngredients}
           />
-        </label>
-
-        <label>
-          Étape(s):
-          {formData.steps.map((step, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={index}>
-              <textarea
-                value={step.step_content}
-                onChange={(e) =>
-                  handleInputChange(index, "step_content", e.target.value)
-                }
-                required
-              />
-              {index !== 0 && (
-                <button type="button" onClick={() => handleDeleteStep(index)}>
-                  Supprimer L'étape
-                </button>
-              )}
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              setFormData({
-                ...formData,
-                steps: [...formData.steps, { step_content: "" }],
-              })
-            }
-          >
-            Ajouter une étape
-          </button>
-        </label>
-
-        <button type="submit">Proposer une astuce</button>
+        </div>
+        <section className="steps-container">
+          <p className="steps-label">Les étapes :</p>
+          <div className="steps-wrapper">
+            {formData.steps.map((step, index) => (
+              <article key={index} className="step-list">
+                <p className="step-bullet">•</p>
+                <input
+                  type="text"
+                  value={step.step_content}
+                  onChange={(e) =>
+                    handleInputChange(index, "step_content", e.target.value)
+                  }
+                  required
+                  className="step-input"
+                />
+                {index !== 0 && (
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteStep(index)}
+                    className="step-delete-button"
+                  >
+                    <img
+                      src={DeleteIcon}
+                      alt="Delete Icon"
+                      className="delete-icon"
+                    />
+                  </button>
+                )}
+              </article>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddStep}
+              className="add-step-button"
+            >
+              <img src={GreenPlus} alt="green-plus" className="green-plus" />
+              Ajouter une étape
+            </button>
+          </div>
+        </section>
+        <button className="share-button" type="submit">
+          <img src={WhitePlus} alt="white-plus" className="white-plus" />
+          Je propose cette astuce !
+        </button>
+        <ShareModal isOpen={showShareModal} />
       </form>
     </>
   );

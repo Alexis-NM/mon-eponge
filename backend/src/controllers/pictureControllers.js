@@ -55,14 +55,16 @@ const edit = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the picture data from the request body
-  const picture = req.body;
+  const picture = {
+    picture_url: req.uploadedFileName,
+  };
 
   try {
     // Insert the picture into the database
     const insertId = await tables.picture.create(picture);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted picture
-    res.status(201).json({ ...req.body, id: insertId });
+    res.status(201).json({ ...picture, id: insertId });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);

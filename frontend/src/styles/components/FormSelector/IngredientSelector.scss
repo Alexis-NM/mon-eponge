@@ -1,0 +1,101 @@
+@import "../../commons.scss";
+
+.ingredient-selector-container {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  margin: auto;
+  margin-top: 1rem;
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 13rem;
+    margin: auto;
+    // max-width: 28rem;
+    @media screen and (min-width: 576px) {
+      gap: 1.5rem;
+      flex-direction: row;
+    }
+    .drop-container {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background-color: $light-grey;
+      border-radius: 15px;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-style: italic;
+      height: 2.5rem;
+      width: 16rem;
+
+      img {
+        width: 2rem;
+        margin-left: 1.5rem;
+      }
+    }
+  }
+
+  .ingredient-dropdown {
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    width: 16rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding-top: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 11rem;
+    overflow-y: auto;
+    border-radius: 8px 15px 8px 15px;
+  }
+}
+.add-ingredient-container {
+  display: flex;
+  border: 1px solid $black;
+  width: 13rem;
+  margin: auto;
+  height: 2.2rem;
+  padding: 0.2rem;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+
+  .add-button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    .cross-icon {
+      width: 2rem;
+      background-color: $warm-white;
+      border-radius: 8px;
+    }
+  }
+  .add-ingredient-input {
+    border: none;
+    border-radius: 15px;
+    background-color: $warm-white;
+    min-width: 10rem;
+    height: 2rem;
+    text-align: center;
+  }
+  .add-ingredient-input::placeholder {
+    text-align: center;
+    color: $black;
+    font-size: 0.9rem;
+  }
+}
+.add-ingredient-container:hover {
+  background-color: $green;
+}

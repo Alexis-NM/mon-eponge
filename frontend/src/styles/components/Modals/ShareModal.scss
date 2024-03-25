@@ -1,0 +1,52 @@
+@import "../../commons.scss";
+
+.share-modal {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 16rem;
+  max-width: 90%;
+  height: 15rem;
+  border: 1px solid $black;
+  border-radius: 15px;
+  background-color: $light-green;
+
+  .tip-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      width: 10rem;
+      margin: auto;
+    }
+    p {
+      width: 14rem;
+      margin: auto;
+      margin-top: 2rem;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $light-purple;
+        height: 2rem;
+        width: 6rem;
+        padding: 0.5rem;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      button:hover {
+        border: 3px solid $light-green;
+      }
+    }
+  }
+}

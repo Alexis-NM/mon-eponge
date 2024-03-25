@@ -81,6 +81,7 @@ app.use(express.json());
 // const username = req.cookies.username;
 
 /* ************************************************************************* */
+app.use(express.static("public"));
 
 // Import the API routes from the router module
 const router = require("./router");

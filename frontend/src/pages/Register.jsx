@@ -1,9 +1,8 @@
-/* eslint-disable camelcase */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import Title from "../components/Title";
+import Title from "../components/Header/Title";
 
 import "../styles/pages/Register.scss";
 import plusButton from "../assets/icons/white_plus.svg";
@@ -71,7 +70,7 @@ function Register() {
       <p className="connexion-title-register">Créer mon compte</p>
       <div className="account-phrase-register">
         <img className="lamp-logo" src={lamp} alt="Logo d'une ampoule" />
-        <p>Partagez de nouvelles astuces !</p>
+        <p className="share-phrase">Partagez de nouvelles astuces !</p>
       </div>
       <form className="form-area-register">
         <div className="input-container-register">

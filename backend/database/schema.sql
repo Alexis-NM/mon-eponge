@@ -1,4 +1,4 @@
--- Your DROP TABLE statements
+-- DROP TABLE
 
 DROP TABLE IF EXISTS step;
 DROP TABLE IF EXISTS tip_ingredient;
@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS picture;
 DROP TABLE IF EXISTS ingredient;
 DROP TABLE IF EXISTS user;
 
--- Your CREATE TABLE statements
+-- CREATE TABLE
 
 CREATE TABLE picture (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE user (
   hashed_password VARCHAR(255) NOT NULL,
   picture_id INT NOT NULL DEFAULT 1,
   is_admin BOOLEAN DEFAULT false,
-  CONSTRAINT fk_user_picture FOREIGN KEY (picture_id) REFERENCES picture(id)
+  CONSTRAINT fk_user_picture FOREIGN KEY (picture_id) REFERENCES picture(id) ON DELETE CASCADE
 );
 
 CREATE TABLE ingredient (
@@ -33,16 +33,16 @@ CREATE TABLE tip (
   tip_name VARCHAR(255) NOT NULL,
   user_id INT NOT NULL,
   picture_id INT NOT NULL,
-  CONSTRAINT fk_tip_user FOREIGN KEY (user_id) REFERENCES user(id),
-  CONSTRAINT fk_tip_picture FOREIGN KEY (picture_id) REFERENCES picture(id)
+  CONSTRAINT fk_tip_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+  CONSTRAINT fk_tip_picture FOREIGN KEY (picture_id) REFERENCES picture(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tip_ingredient (
   id INT AUTO_INCREMENT PRIMARY KEY,
   tip_id INT,
   ingredient_id INT,
-  CONSTRAINT fk_tip_ingredient_tip FOREIGN KEY (tip_id) REFERENCES tip(id),
-  CONSTRAINT fk_tip_ingredient_ingredient FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
+  CONSTRAINT fk_tip_ingredient_tip FOREIGN KEY (tip_id) REFERENCES tip(id) ON DELETE CASCADE,
+  CONSTRAINT fk_tip_ingredient_ingredient FOREIGN KEY (ingredient_id) REFERENCES ingredient(id) ON DELETE CASCADE
 );
 
 CREATE TABLE step (
@@ -50,12 +50,12 @@ CREATE TABLE step (
   tip_id INT NOT NULL,
   step_number INT NOT NULL,
   step_content VARCHAR(1000) NOT NULL,
-  CONSTRAINT fk_step_tip FOREIGN KEY (tip_id) REFERENCES tip(id)
+  CONSTRAINT fk_step_tip FOREIGN KEY (tip_id) REFERENCES tip(id) ON DELETE CASCADE
 );
 
 -- Insertion des images dans la table picture
 INSERT INTO picture (picture_url) VALUES
-("profil_bubble.svg"),
+("profile_bubble.svg"),
 ("bath.svg"),
 ("bottle.svg"),
 ("brush.svg"),
@@ -70,7 +70,10 @@ INSERT INTO picture (picture_url) VALUES
 ("spoon.svg"),
 ("towel.svg"),
 ("yellow-soap.svg"),
-("broom.svg");
+("broom.svg"),
+("sapin.svg"),
+("spray.svg");
+
 
 -- Insertion des utilisateurs dans la table user
 INSERT INTO user (user_name, hashed_password, picture_id, is_admin) VALUES
@@ -81,39 +84,12 @@ INSERT INTO user (user_name, hashed_password, picture_id, is_admin) VALUES
 INSERT INTO ingredient (ingredient_name) VALUES
 ("Vinaigre Blanc"),
 ("Bicarbonate de soude"),
-("Savon de Marseille"),
-("Acide citrique"),
-("Savon Noir"),
-("Percarbonate de soude"),
-("Huile essentielle d'arbre à thé"),
-("Cristaux de soude"),
-("Vinaigre de cidre"),
 ("Citron"),
 ("Huile essentielle de citron"),
-("Borax"),
+("Huile essentielle d'arbre à thé"),
 ("Huile essentielle de lavande"),
-("Sel"),
-("Amidon de maïs"),
-("Huile essentielle de menthe poivrée"),
-("Huile de coco"),
-("Feuilles de thé usagées"),
-("Jus de citron"),
 ("Huile essentielle d'eucalyptus"),
-("Cire d'abeille"),
-("Cristaux de soude"),
-("Fécule de maïs"),
-("Huile essentielle de romarin"),
-("Argile blanche"),
-("Vinaigre de vin rouge"),
-("Écorce de citron"),
-("Huile essentielle de citronnelle"),
-("Feuilles de sauge"),
-("Huile essentielle de thym"),
-("Huile essentielle de menthe verte"),
-("Feuilles de basilic"),
-("Vodka"),
-("Huile essentielle de ylang-ylang"),
-("Miel");
+("Savon de Marseille");
 
 -- Insertion des conseils dans la table tip
 INSERT INTO tip (tip_name, user_id, picture_id) VALUES
@@ -130,14 +106,14 @@ INSERT INTO tip (tip_name, user_id, picture_id) VALUES
 
 -- Insertion des ingrédients associés aux conseils dans la table tip_ingredient
 INSERT INTO tip_ingredient (tip_id, ingredient_id) VALUES
-(1, 1), (1, 7), (1, 11), (1, 13),
-(2, 1), (1, 7), (2, 10), (2, 13),
-(3, 2), (3, 11), (3, 13),
-(4, 1), (4, 11),
+(1, 1), (1, 4), (1, 5), (1, 6),
+(2, 1), (2, 4), (2, 5), (2, 6), (2, 7),
+(3, 1), (3, 4), (3, 6), (3, 7),
+(4, 1), (4, 4),
 (5, 1), (5, 2),
 (6, 2),
-(7, 3),
-(8, 1), (8, 11),
+(7, 8),
+(8, 1),
 (9, 1),
 (10, 1), (10, 2);
 

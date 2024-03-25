@@ -1,5 +1,4 @@
-/* eslint-disable camelcase */
-import React, { createContext, useState, useMemo, useEffect } from "react";
+import { createContext, useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -15,8 +14,6 @@ function AuthContextProvider({ children }) {
     isAdmin: 0,
   });
 
-  const [userInfo, setUserInfo] = useState({});
-
   const fetchUserInfo = async (userId) => {
     try {
       const response = await axios.get(
@@ -30,8 +27,6 @@ function AuthContextProvider({ children }) {
         userName: userInfoData.user_name,
         pictureId: userInfoData.picture_id,
       }));
-
-      setUserInfo(userInfoData);
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -52,21 +47,17 @@ function AuthContextProvider({ children }) {
       const { user_id } = decodedToken;
 
       // Récupération d'informations supplémentaires via une requête à l'API
-
       const userAdditionalInfo = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/${user_id}`
       );
 
-      const { picture_id, is_admin } = userAdditionalInfo.data;
+      const { picture_id, is_admin, user_name } = userAdditionalInfo.data;
 
       setUser({
         isLoggedIn: true,
         id: user_id,
         isAdmin: is_admin,
-      });
-
-      setUserInfo({
-        userName: userAdditionalInfo.data.user_name,
+        userName: user_name,
         pictureId: picture_id,
       });
     } catch (error) {
@@ -74,9 +65,19 @@ function AuthContextProvider({ children }) {
     }
   };
 
+  const handleLogout = () => {
+    setUser({
+      isLoggedIn: false,
+      id: null,
+      userName: "",
+      pictureId: null,
+      isAdmin: 0,
+    });
+  };
+
   const contextValue = useMemo(
-    () => ({ user, handleAuth, userInfo }),
-    [user, handleAuth, userInfo]
+    () => ({ user, handleAuth, handleLogout }),
+    [user, handleAuth, handleLogout]
   );
 
   return (

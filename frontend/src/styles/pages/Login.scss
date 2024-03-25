@@ -13,79 +13,88 @@
   text-align: center;
   cursor: pointer;
   font-size: 1rem;
+  @include media-min("phone-up") {
+    margin-top: 6rem;
+  }
+  @include media-min("tablet-up") {
+    padding: 2rem;
+    border-radius: 20px;
+    width: 18rem;
+    font-size: 1.2rem;
+  }
 }
 
 .form-area {
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 21rem;
-
+  padding: 1rem;
+  @include media-min("tablet-up") {
+    margin-top: 6rem;
+    max-width: 50rem;
+  }
   .input-container {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    width: auto;
+    margin: auto;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 1.5rem;
+    @include media-min("tablet-up") {
+      flex-direction: row;
+      width: 30rem;
+    }
 
     .text-form {
       font-size: 1rem;
       font-weight: 500;
+      min-width: 11rem;
+      margin-bottom: 0.6rem;
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 15rem;
+        margin-bottom: 2rem;
+      }
     }
-
     .form-input {
       border: solid 3px $light-purple;
-      width: 11rem;
       border-radius: 15px;
-      margin-left: 0.5rem;
       padding: 0.6rem;
-    }
-  }
-}
-
-.submit-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  margin-top: 4rem;
-  padding: 1.2rem;
-  background-color: $green;
-  width: 15rem;
-  border-radius: 15px;
-  border-style: none;
-  color: $warm-white;
-  cursor: pointer;
-  font-size: 1rem;
-  .button-icon {
-    width: 1.5rem;
-    margin-left: 0.3rem;
-  }
-}
-@media screen and (min-width: 821px) {
-  .connexion-title {
-    padding: 2rem;
-    border-radius: 20px;
-    width: 18rem;
-    font-size: 1.2rem;
-  }
-  .form-area {
-    margin-top: 10rem;
-    max-width: 50rem;
-    .input-container {
-      justify-content: flex-end;
-      margin-right: 13rem;
-      .text-form {
-        font-size: 1.2rem;
-      }
-      .form-input {
+      min-width: 11rem;
+      @include media-min("tablet-up") {
         width: 22rem;
         padding: 0.8rem;
+        margin-bottom: 2rem;
       }
     }
   }
+
   .submit-button {
-    margin-top: 8rem;
-    font-size: 1.2rem;
-    width: 22rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 4rem;
+    padding: 1.2rem;
+    background-color: $green;
+    width: 15rem;
+    border-radius: 15px;
+    border-style: none;
+    color: $warm-white;
+    cursor: pointer;
+    font-size: 1rem;
+    @include media-min("phone-up") {
+      margin-top: 6rem;
+    }
+    @include media-min("tablet-up") {
+      margin-top: 8rem;
+      font-size: 1.2rem;
+      width: 22rem;
+    }
+    .button-icon {
+      width: 1.5rem;
+      margin-left: 0.3rem;
+    }
   }
 }

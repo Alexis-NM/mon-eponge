@@ -1,0 +1,162 @@
+@import "../commons.scss";
+
+.share-tip-title {
+  display: none;
+  @include media-min("tablet-up") {
+    display: flex;
+    width: 50rem;
+    margin: auto;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+}
+.form-share-container {
+  display: flex;
+  flex-direction: column;
+  width: 16rem;
+  background-color: $warm-white;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 15px;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  @include media-min("phone-up") {
+    width: 22rem;
+  }
+
+  @include media-min("tablet-up") {
+    border-radius: 30px;
+    width: 50rem;
+    padding: 1rem;
+  }
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    .title-label {
+      width: 15rem;
+      margin: auto;
+      font-size: 1rem;
+      font-weight: 600;
+      @include media-min("tablet-up") {
+        width: 12rem;
+      }
+    }
+    .title-input {
+      display: flex;
+      width: 15rem;
+      height: 2rem;
+      border: none;
+      padding-left: 0.7rem;
+      background-color: $light-grey;
+      border-radius: 15px;
+      font-size: 1rem;
+      margin: auto;
+      font-weight: 600;
+      @include media-min("tablet-up") {
+        font-size: 1.2rem;
+        width: 32rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  .picture-container {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 1rem;
+    .picture-selector-title {
+      display: flex;
+      width: 15rem;
+      margin: auto;
+      font-weight: 600;
+    }
+  }
+
+  .ingredient-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    .ingredient-selector-title {
+      width: 15rem;
+      margin: auto;
+      font-weight: 600;
+    }
+  }
+  .steps-container {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    .steps-label {
+      width: 15.5rem;
+      margin: auto;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .steps-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .step-list {
+        display: flex;
+        align-items: center;
+        .step-bullet {
+          margin-left: 0.3rem;
+        }
+        .step-input {
+          border: none;
+          width: 11.5rem;
+          height: 2.5rem;
+          border-radius: 15px;
+          background-color: $light-grey;
+          font-size: 0.8rem;
+          padding-left: 1rem;
+        }
+        .step-delete-button {
+          border: none;
+          background-color: transparent;
+          .delete-icon {
+            width: 2.5rem;
+          }
+        }
+      }
+      .add-step-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: auto;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        gap: 1rem;
+        border: 1px solid $black;
+        color: $black;
+        border-radius: 15px;
+        width: 14rem;
+        height: 2.7rem;
+        padding: 0.4rem;
+        .green-plus {
+          width: 2rem;
+          margin-right: 0.9rem;
+        }
+      }
+    }
+  }
+  .share-button {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 1.5rem;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 2px solid $green;
+    background-color: $green;
+    color: $warm-white;
+    border-radius: 15px;
+    width: 15rem;
+    padding: 0.5rem;
+    .white-plus {
+      width: 2rem;
+    }
+  }
+}

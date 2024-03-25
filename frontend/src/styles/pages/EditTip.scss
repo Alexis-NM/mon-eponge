@@ -1,0 +1,209 @@
+@import "../commons.scss";
+
+.edit-page {
+  .edit-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    width: 15rem;
+    font-size: 1rem;
+    gap: 0.3rem;
+    @include media-min("tablet-up") {
+      justify-content: flex-start;
+      width: 53rem;
+    }
+    .pencil-icon {
+      width: 2.5rem;
+    }
+  }
+  .edit-container {
+    padding: 0.5rem 0.3rem 0.5rem 0.3rem;
+    margin: auto;
+    background-color: $warm-white;
+    width: 16rem;
+    margin-bottom: 1rem;
+    border-radius: 30px;
+
+    .editing-title {
+      display: flex;
+      align-items: center;
+      .edit-title-label {
+        font-weight: 600;
+        width: 3.5em;
+        font-size: 1rem;
+        @include media-min("phone-down") {
+          font-size: 1.3rem;
+          display: flex;
+          flex-direction: row;
+        }
+      }
+    }
+    .edit-title-input {
+      display: block;
+      margin: auto;
+      border: none;
+      background-color: $light-grey;
+      border-radius: 15px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      width: 13rem;
+      padding-left: 1rem;
+      height: 2.5rem;
+      @include media-min("tablet-up") {
+        width: 32rem;
+        font-size: 1.2rem;
+      }
+    }
+    .picture-container {
+      display: flex;
+      flex-direction: column;
+      @include media-min("tablet-up") {
+        flex-direction: row;
+      }
+      .picture-label {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        cursor: default;
+        font-size: 1rem;
+        margin: 0;
+        margin-top: 1rem;
+        @include media-min("tablet-up") {
+          font-size: 1.2rem;
+        }
+      }
+      .picture-components {
+        display: flex;
+        flex-direction: column;
+        @include media-min("phone-down") {
+          display: flex;
+          flex-direction: row;
+          margin: auto;
+          align-items: center;
+        }
+      }
+    }
+  }
+  .ingredient-label {
+    font-weight: 600;
+    cursor: default;
+    height: auto;
+    margin: 0;
+    margin-left: 0.1rem;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    width: 15rem;
+    @include media-min("tablet-up") {
+      font-size: 1.2rem;
+    }
+  }
+  .ingredient-container {
+    display: flex;
+    margin: auto;
+    width: 15rem;
+    flex-direction: column;
+  }
+  .step-container {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    .step-label {
+      width: 15.5rem;
+      margin: auto;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .step-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      .step-list {
+        display: flex;
+        align-items: center;
+        .step-bullet {
+          margin-left: 0.3rem;
+        }
+        .step-input {
+          border: none;
+          width: 11.5rem;
+          height: 2.5rem;
+          border-radius: 15px;
+          background-color: $light-grey;
+          font-size: 0.8rem;
+          padding-left: 1rem;
+        }
+        .step-delete-button {
+          border: none;
+          background-color: transparent;
+          .delete-icon {
+            width: 2.5rem;
+          }
+        }
+      }
+      .add-step-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: auto;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        gap: 1rem;
+        border: 1px solid $black;
+        color: $black;
+        border-radius: 15px;
+        width: 14rem;
+        height: 2.7rem;
+        padding: 0.4rem;
+        .green-plus {
+          width: 2rem;
+          margin-right: 0.9rem;
+        }
+      }
+    }
+  }
+  .button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+
+    .edit-tip-post {
+      display: flex;
+      align-items: center;
+      margin: auto;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 2px solid $green;
+      background-color: $green;
+      color: $warm-white;
+      border-radius: 15px;
+      width: 15rem;
+      padding: 0.5rem;
+      .white-plus {
+        width: 2rem;
+      }
+    }
+    .delete-tip-button {
+      display: flex;
+      align-items: center;
+      margin: auto;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 2px solid $red;
+      color: $red;
+      border-radius: 15px;
+      width: 15rem;
+      padding: 0.5rem;
+
+      .delete-icon {
+        width: 2rem;
+      }
+    }
+  }
+}

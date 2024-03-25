@@ -13,16 +13,51 @@
   text-align: center;
   cursor: pointer;
   font-size: 1rem;
+  @include media-min("phone-up") {
+    margin-top: 4rem;
+  }
+  @include media-min("tablet-up") {
+    padding: 2rem;
+    border-radius: 20px;
+    width: 20rem;
+    font-size: 1.2rem;
+  }
+  @include media-min("desktop-up") {
+    margin-top: 8rem;
+  }
 }
 
 .account-phrase-register {
   display: flex;
+  margin: auto;
   justify-content: center;
   margin-bottom: 2rem;
   font-size: 1rem;
+  @include media-min("phone-up") {
+    margin-bottom: 3rem;
+    margin-top: 4rem;
+  }
+  @include media-min("tablet-up") {
+    margin-bottom: 6rem;
+    margin-top: 4rem;
+    font-size: 1.1rem;
+  }
   .lamp-logo {
     width: 2rem;
     margin-right: 0.8rem;
+    @include media-min("tablet-up") {
+      width: 3rem;
+      margin-right: 1rem;
+    }
+  }
+  .share-phrase {
+    width: 10rem;
+    @include media-min("phone-up") {
+      width: 16rem;
+    }
+    @include media-min("tablet-up") {
+      width: 17rem;
+    }
   }
 }
 
@@ -30,25 +65,48 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 18.5rem;
-
+  padding: 1rem;
+  @include media-min("phone-up") {
+    max-width: 26rem;
+  }
+  @include media-min("tablet-up") {
+    margin-top: rem;
+    max-width: 55rem;
+  }
   .input-container-register {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 1.5rem;
-
+    @include media-min("tablet-up") {
+      gap: 2rem;
+    }
     .text-form-register {
+      display: flex;
+      width: 9rem;
       font-size: 1rem;
       font-weight: 500;
+      @include media-min("phone-up") {
+        width: 12rem;
+      }
+      @include media-min("tablet-up") {
+        justify-content: flex-end;
+        font-size: 1.2rem;
+        width: 17rem;
+      }
     }
 
     .form-input-register {
       border: solid 3px $light-purple;
-      min-width: 9rem;
+      width: 6.5rem;
       border-radius: 15px;
-      margin-left: 0.5rem;
       padding: 0.6rem;
+      @include media-min("phone-up") {
+        width: 10rem;
+      }
+      @include media-min("tablet-up") {
+        width: 18rem;
+        padding: 0.8rem;
+      }
     }
   }
 }
@@ -59,6 +117,7 @@
   align-items: center;
   margin: auto;
   margin-top: 2rem;
+  margin-bottom: 1rem;
   padding: 1.2rem;
   background-color: $green;
   width: 15rem;
@@ -67,60 +126,19 @@
   color: $warm-white;
   cursor: pointer;
   font-size: 1rem;
+  @include media-min("phone-up") {
+    margin-top: 6rem;
+  }
+  @include media-min("tablet-up") {
+    margin-top: 8rem;
+    font-size: 1.2rem;
+    width: 22rem;
+  }
+  @include media-min("desktop-up") {
+    margin-top: 10rem;
+  }
   .button-icon-register {
     width: 1.5rem;
     margin-left: 0.8rem;
-  }
-}
-
-@media screen and (min-width: 425px) {
-  .account-phrase-register {
-    margin-bottom: 3rem;
-  }
-  .form-area-register {
-    max-width: 26rem;
-    .form-input-register {
-      width: 10rem;
-    }
-  }
-  .submit-button {
-    margin-top: 6rem;
-  }
-}
-@media screen and (min-width: 821px) {
-  .connexion-title-register {
-    padding: 2rem;
-    border-radius: 20px;
-    width: 20rem;
-    font-size: 1.2rem;
-  }
-  .account-phrase-register {
-    margin-bottom: 6rem;
-    margin-top: 4rem;
-    font-size: 1.1rem;
-    .lamp-logo {
-      width: 3rem;
-      margin-right: 1rem;
-    }
-  }
-  .form-area-register {
-    margin-top: rem;
-    max-width: 55rem;
-    .input-container-register {
-      justify-content: flex-end;
-      margin-right: 13rem;
-      .text-form-register {
-        font-size: 1.2rem;
-      }
-      .form-input-register {
-        width: 18rem;
-        padding: 0.8rem;
-      }
-    }
-  }
-  .submit-button {
-    margin-top: 8vh;
-    font-size: 1.2rem;
-    width: 22rem;
   }
 }

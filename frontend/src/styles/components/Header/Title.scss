@@ -1,0 +1,34 @@
+@import "../../commons.scss";
+
+.title-container {
+  display: flex;
+  gap: 1rem;
+  .sponge-logo {
+    width: 2.5rem;
+  }
+  .main-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    @include media-min("phone-up") {
+      font-size: 2rem;
+    }
+  }
+  &.not-logged-in {
+    justify-content: center;
+    @include media-min("phone-down") {
+      width: 19rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
+    }
+  }
+  &.logged-in {
+    margin-left: .5rem;
+    margin-top: .5rem;
+    @include media-min("phone-up") {
+      justify-content: center;
+    }
+    @include media-min("tablet-up") {
+      width: 19rem;
+    }
+  }
+}
