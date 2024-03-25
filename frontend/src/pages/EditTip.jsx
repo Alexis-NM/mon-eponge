@@ -117,6 +117,9 @@ function EditTip() {
   /// SAUVEGARDER LES MODIFICATIONS ///
 
   const handleSaveChanges = async () => {
+    if (selectedIngredients.length === 0) {
+      return;
+    }
     try {
       // Récupérer le token depuis le local storage
       const storedToken = localStorage.getItem("token");

@@ -16,7 +16,7 @@
   }
   &.not-logged-in {
     justify-content: center;
-    @include media-min("phone-down") {
+    @include media-min("tablet-up") {
       width: 19rem;
       margin-left: 1rem;
       margin-top: 1rem;
