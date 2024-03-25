@@ -32,13 +32,15 @@
       width: 12rem;
     }
     @include media-min("tablet-up") {
-      width: 54rem;
+      width: 40rem;
+      font-size: 1.3rem;
+      margin-top: 3rem;
     }
     .gear-icon {
       width: 2rem;
       margin-right: 0.2rem;
       @include media-min("tablet-up") {
-        width: 2.5rem;
+        width: 3rem;
       }
     }
   }
@@ -53,6 +55,9 @@
     @include media-min("tablet-up") {
       background-color: $warm-white;
       padding: 3rem;
+      width: 38rem;
+      border-radius: 30px;
+      padding : 1rem 3rem 1rem 3rem; 
     }
   }
 }

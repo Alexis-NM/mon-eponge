@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 
 import Title from "../components/Header/Title";
-import NavBar from "../components/NavBar/NavBar";
+import NavBar from "../components/Header/NavBar";
 import PictureSelector from "../components/FormSelector/PictureSelector";
 import IngredientSelector from "../components/FormSelector/IngredientSelector";
 import ShareModal from "../components/Modals/ShareModal";

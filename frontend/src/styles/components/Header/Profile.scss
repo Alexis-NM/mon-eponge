@@ -6,7 +6,17 @@
   position: absolute;
   top: -3.5rem;
   right: 0.5rem;
-
+  @include media-min("phone-up") {
+    top: -2.6rem;
+  }
+  @include media-min("tablet-up") {
+    top: -3.2rem;
+    right: 1rem;
+  }
+  @include media-min("desktop-up") {
+    top: -1rem;
+    right: 4rem;
+  }
   .user_name {
     position: relative;
     top: 4.2rem;
@@ -17,6 +27,10 @@
     color: $warm-white;
     text-align: center;
     cursor: pointer;
+    @include media-min("tablet-up") {
+      top: 5.1rem;
+      font-size: 1.4rem;
+    }
   }
 
   .avatar {
@@ -25,6 +39,9 @@
     rotate: 40deg;
     z-index: 1;
     right: 0.1rem;
+    @include media-min("tablet-up") {
+      width: 5.5rem;
+    }
   }
 
   .on_button {
@@ -37,9 +54,18 @@
     width: 4.5rem;
     background-color: $light-red;
     border-radius: 50%;
+    @include media-min("tablet-up") {
+      top: 4.9rem;
+      left: 0.7rem;
+      width: 4.7rem;
+    }
+    @include media-min("desktop-up") {
+      left: .7rem;
+    }
   }
 }
 
 .profile:hover .on_button {
   opacity: 1;
+  cursor: pointer;
 }

@@ -11,6 +11,10 @@
   border: 1px solid $black;
   border-radius: 15px;
   background-color: $light-red;
+  z-index: 1;
+  @include media-min("desktop-up") {
+    top: 145%;
+  }
 
   .modal-content {
     display: flex;
@@ -42,10 +46,10 @@
         width: 6rem;
         padding: 0.5rem;
         border-radius: 10px;
-        cursor: pointer;
       }
       button:hover {
-        border: 3px solid $light-green;
+        cursor: pointer;
+        border: 3px solid $light-blue;
       }
     }
   }

@@ -4,9 +4,12 @@
   display: flex;
   width: 4rem;
   margin: auto;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   position: relative;
   top: 1rem;
+  @include media-min("tablet-up") {
+    margin-top: 0;
+  }
 }
 .indredient-container {
   display: flex;
@@ -23,8 +26,8 @@
     height: 30rem;
   }
   @include media-min("tablet-up") {
-    height: 28rem;
-    width: 18rem;
+    height: 32rem;
+    width: 19.5rem;
   }
 
   .ingredient-title {

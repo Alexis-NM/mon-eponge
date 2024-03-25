@@ -2,7 +2,7 @@
 
 .tip-section {
   @include media-min("tablet-up") {
-    margin-top: 2.5rem;
+    margin-top: 1rem;
   }
   .pin-icon {
     display: flex;
@@ -15,7 +15,7 @@
       left: 20rem;
     }
     @include media-min("tablet-up") {
-      left: 10rem;
+      left: 20rem;
       top: 2rem;
     }
   }
@@ -35,7 +35,7 @@
       height: 34rem;
     }
     @include media-min("tablet-up") {
-      height: 28rem;
+      height: 32rem;
       width: 23rem;
       margin-bottom: 0;
     }

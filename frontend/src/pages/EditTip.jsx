@@ -19,7 +19,7 @@ import WhitePlus from "../assets/icons/white_plus.svg";
 import DeleteIcon from "../assets/icons/delete.svg";
 /// STYLES ///
 import "../styles/pages/EditTip.scss";
-import NavBarMobile from "../components/NavBar/NavBar";
+import NavBarMobile from "../components/Header/NavBar";
 
 function EditTip() {
   const { tipId } = useParams();

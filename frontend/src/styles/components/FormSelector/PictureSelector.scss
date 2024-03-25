@@ -8,9 +8,15 @@
   justify-content: center;
   flex-direction: column;
   margin-bottom: 1rem;
+  @include media-min("tablet-up") {
+    width: 25rem;
+  }
 
   .picture-wrapper {
     display: flex;
+    @include media-min("tablet-up") {
+      padding-top: 1.5rem;
+    }
     .arrow-button {
       border: none;
       background-color: transparent;
@@ -19,6 +25,9 @@
       img {
         width: 2rem;
         height: auto;
+        @include media-min("tablet-up") {
+          width: 4rem;
+        }
       }
     }
 
@@ -30,15 +39,25 @@
       margin: auto;
       width: 13rem;
       justify-self: center;
+            @include media-min("tablet-up") {
+            width: 15rem;
+          }
       button {
         border: none;
         background-color: transparent;
         margin: 0;
         padding: 0;
         width: 4.3rem;
+           @include media-min("tablet-up") {
+            width: 5rem;
+          }
         cursor: pointer;
         .icon {
           padding: 0.2rem;
+          width : 2.8rem;
+          @include media-min("tablet-up") {
+            width: 4rem;
+          }
         }
         .icon.selected {
           border-radius: 15px;

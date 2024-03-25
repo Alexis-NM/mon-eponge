@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-import "../../styles/components/NavBar/NavBar.scss";
+import "../../styles/components/Header/NavBar.scss";
 
 function NavBar() {
   const { user } = useContext(AuthContext);

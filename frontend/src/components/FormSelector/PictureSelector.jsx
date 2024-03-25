@@ -69,7 +69,6 @@ function PictureSelector({ onSelect, selectedImageId }) {
               <img
                 src={`/assets/tip_icons/${image.picture_url}`}
                 alt="Icône de l'astuce"
-                style={{ width: "50px", height: "50px", marginRight: "5px" }}
                 className={`icon ${
                   localSelectedImageId === image.id ? "selected" : ""
                 }`}

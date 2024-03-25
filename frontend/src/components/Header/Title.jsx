@@ -14,16 +14,18 @@ function Title() {
   };
 
   return (
-    <header
-      className={`title-container ${
-        isLoggedIn ? "logged-in" : "not-logged-in"
-      }`}
-    >
-      <Link to="/" onClick={handleClick} className="main-title-link">
-        <h1 className="main-title">Mon Éponge</h1>
-      </Link>
-      <img className="sponge-logo" src={sponge} alt="Logo d'éponge" />
-      {isLoggedIn && <Profile />}
+    <header className="header-wrapper">
+      <section
+        className={`title-container ${
+          isLoggedIn ? "logged-in" : "not-logged-in"
+        }`}
+      >
+        <Link to="/" onClick={handleClick} className="main-title-link">
+          <h1 className="main-title">Mon Éponge</h1>
+        </Link>
+        <img className="sponge-logo" src={sponge} alt="Logo d'éponge" />
+        {isLoggedIn && <Profile />}
+      </section>
     </header>
   );
 }
