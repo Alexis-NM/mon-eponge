@@ -7,7 +7,7 @@ import "../../styles/components/FormSelector/IngredientSelector.scss";
 
 import CrossIcon from "../../assets/icons/green_plus.svg";
 
-function IngredientSelector({ setSelectedIngredients }) {
+function IngredientSelector({ setSelectedIngredients, selectedIngredients }) {
   const { user, handleAuth } = useContext(AuthContext);
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
@@ -33,6 +33,18 @@ function IngredientSelector({ setSelectedIngredients }) {
     );
     setAtLeastOneChecked(checkedIngredients.length > 0);
   }, [ingredients]);
+
+  useEffect(() => {
+    // Mettre à jour l'état des ingrédients pour qu'ils soient pré-sélectionnés
+    setIngredients((prevIngredients) =>
+      prevIngredients.map((ingredient) => ({
+        ...ingredient,
+        isChecked: selectedIngredients.some(
+          (selectedIngredient) => selectedIngredient.id === ingredient.id
+        ),
+      }))
+    );
+  }, [selectedIngredients]);
 
   const handleCheckboxChange = (ingredientId) => {
     const updatedIngredients = ingredients.map((ingredient) =>
@@ -139,6 +151,13 @@ function IngredientSelector({ setSelectedIngredients }) {
 
 IngredientSelector.propTypes = {
   setSelectedIngredients: PropTypes.func.isRequired,
+  selectedIngredients: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      ingredient_name: PropTypes.string.isRequired,
+      isChecked: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
 };
 
 export default IngredientSelector;

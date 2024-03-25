@@ -41,6 +41,17 @@ function EditTip() {
       // Redirect to the login page if the user is not an admin
       navigate("/connexion");
     } else {
+      const formatIngredients = (ingredients) => {
+        const formattedIngredients =
+          typeof ingredients === "string"
+            ? ingredients.split(",")
+            : ingredients;
+        return formattedIngredients.map((ingredient, index) => ({
+          id: index + 1,
+          ingredient_name: ingredient.trim(),
+          isChecked: false,
+        }));
+      };
       // Fetch tip details based on tipId
       const fetchTip = async () => {
         try {
@@ -50,6 +61,10 @@ function EditTip() {
           setEditedTitle(response.data.tip_name);
           setSelectedImageId(response.data.picture_id); // Initialiser selectedImageId avec l'ID de l'image initiale
           setSelectedImage(response.data.picture_id);
+          const formattedIngredients = formatIngredients(
+            response.data.ingredients
+          );
+          setSelectedIngredients(formattedIngredients);
           // Split steps based on comma followed by an uppercase letter
           const stepsArray = response.data.steps.split(/,(?=[A-Z])/);
           setEditedSteps(stepsArray);
