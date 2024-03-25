@@ -110,7 +110,7 @@ function ShareTip() {
         setTimeout(() => {
           setShowShareModal(false);
           navigate("/astuces");
-        }, 1000);
+        }, 3000);
       })
       .catch((error) => {
         console.error("Error creating tip", error);

@@ -1,9 +1,26 @@
 @import "../../commons.scss";
-.input-container {
-  width: 2rem;
 
-  .cross-icon {
-    width: 2rem;
+.input-container {
+  .picture-selector-label {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 12rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 2rem;
+    border: 1px solid $green;
+    border-radius: 15px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    .picture-upload-text {
+      display: flex;
+      font-size: 1rem;
+    }
+    .cross-icon {
+      width: 2rem;
+    }
   }
   .cross-icon:hover {
     cursor: pointer;

@@ -52,8 +52,9 @@ function PictureUpload({ onImageUpload }) {
 
   return (
     <section className="input-container">
-      <label htmlFor="pictureSelector">
+      <label htmlFor="pictureSelector" className="picture-selector-label">
         <img src={CrossIcon} alt="Cross Icon" className="cross-icon" />
+        <p className="picture-upload-text">Ajouter une image</p>
       </label>
       <input
         type="file"

@@ -252,8 +252,8 @@ function EditTip() {
             />
           </div>
         </section>
+        <p className="ingredient-label">Les ingrédients :</p>
         <section className="ingredient-container">
-          <p className="ingredient-label">Ingrédients :</p>
           <IngredientSelector
             id="ingredients"
             selectedIngredients={selectedIngredients}
@@ -263,7 +263,7 @@ function EditTip() {
           />
         </section>
         <section className="step-container">
-          <p className="step-label">Les Étapes :</p>
+          <p className="step-label">Les étapes :</p>
           <div className="step-wrapper">
             {editedSteps.map((step, index) => (
               <article key={index} className="step-list">

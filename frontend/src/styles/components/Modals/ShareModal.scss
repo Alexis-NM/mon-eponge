@@ -1,18 +1,18 @@
 @import "../../commons.scss";
 
-.confirmation-modal {
+.share-modal {
   position: absolute;
   top: 30%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 100%);
   width: 16rem;
   max-width: 90%;
   height: 15rem;
   border: 1px solid $black;
   border-radius: 15px;
-  background-color: $light-red;
+  background-color: $light-green;
 
-  .modal-content {
+  .tip-content {
     display: flex;
     flex-direction: column;
     align-items: center;
