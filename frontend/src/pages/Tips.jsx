@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Title from "../components/Header/Title";
 import NavBar from "../components/NavBar/NavBar";
-import SearchBar from "../components/Header/SearchBar";
+import SearchBar from "../components/Tips/SearchBar";
 import Ingredients from "../components/Tips/Ingredients";
 import Tip from "../components/Tips/Tip";
 

@@ -55,33 +55,39 @@ function PictureSelector({ onSelect, selectedImageId }) {
 
   return (
     <section className="picture-selector">
-      <button className="arrow-button" onClick={handlePrev} type="button">
-        <img src={leftArrowIcon} alt="Left Arrow" />
-      </button>
-      <div className="image-container">
-        {images.slice(startIdx, endIdx).map((image) => (
-          <button
-            key={image.id}
-            onClick={() => handleImageSelect(image.id)}
-            type="button"
-          >
-            <img
-              src={`/assets/tip_icons/${image.picture_url}`}
-              alt="Icône de l'astuce"
-              style={{ width: "50px", height: "50px", marginRight: "5px" }}
-              className={`icon ${
-                localSelectedImageId === image.id ? "selected" : ""
-              }`}
-            />
-          </button>
-        ))}
-      </div>
-      <button className="arrow-button" onClick={handleNext} type="button">
-        <img src={rightArrowIcon} alt="Right Arrow" />
-      </button>
+      <article className="picture-wrapper">
+        <button className="arrow-button" onClick={handlePrev} type="button">
+          <img src={leftArrowIcon} alt="Left Arrow" />
+        </button>
+        <div className="image-container">
+          {images.slice(startIdx, endIdx).map((image) => (
+            <button
+              key={image.id}
+              onClick={() => handleImageSelect(image.id)}
+              type="button"
+            >
+              <img
+                src={`/assets/tip_icons/${image.picture_url}`}
+                alt="Icône de l'astuce"
+                style={{ width: "50px", height: "50px", marginRight: "5px" }}
+                className={`icon ${
+                  localSelectedImageId === image.id ? "selected" : ""
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+        <button className="arrow-button" onClick={handleNext} type="button">
+          <img src={rightArrowIcon} alt="Right Arrow" />
+        </button>
+      </article>
+      {localSelectedImageId === null && (
+        <p className="error-message">Veuillez sélectionner une image.</p>
+      )}
     </section>
   );
 }
+
 PictureSelector.propTypes = {
   onSelect: PropTypes.func.isRequired,
   selectedImageId: PropTypes.number,
@@ -90,4 +96,5 @@ PictureSelector.propTypes = {
 PictureSelector.defaultProps = {
   selectedImageId: null,
 };
+
 export default PictureSelector;

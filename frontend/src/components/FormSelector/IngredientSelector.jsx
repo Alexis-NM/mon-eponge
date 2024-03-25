@@ -12,6 +12,7 @@ function IngredientSelector({ setSelectedIngredients }) {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [atLeastOneChecked, setAtLeastOneChecked] = useState(false);
 
   useEffect(() => {
     axios
@@ -25,6 +26,13 @@ function IngredientSelector({ setSelectedIngredients }) {
       })
       .catch((error) => console.error("Error loading ingredients", error));
   }, []);
+
+  useEffect(() => {
+    const checkedIngredients = ingredients.filter(
+      (ingredient) => ingredient.isChecked
+    );
+    setAtLeastOneChecked(checkedIngredients.length > 0);
+  }, [ingredients]);
 
   const handleCheckboxChange = (ingredientId) => {
     const updatedIngredients = ingredients.map((ingredient) =>
@@ -122,6 +130,9 @@ function IngredientSelector({ setSelectedIngredients }) {
           className="add-ingredient-input"
         />
       </article>
+      {!atLeastOneChecked && (
+        <p className="error-message">Veuillez sélectionner un ingrédient.</p>
+      )}
     </section>
   );
 }

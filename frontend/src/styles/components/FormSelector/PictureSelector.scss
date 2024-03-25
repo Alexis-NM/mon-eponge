@@ -6,41 +6,61 @@
   width: 16rem;
   margin: auto;
   justify-content: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
 
-  .arrow-button {
-    border: none;
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-    img {
-      width: 2rem;
-      height: auto;
-    }
-  }
-
-  .image-container {
+  .picture-wrapper {
     display: flex;
-    justify-content: space-between;
-    padding: 0.3rem;
-    min-height: 5rem;
-    margin: auto;
-    width: 13rem;
-    justify-self: center;
-    button {
+    .arrow-button {
       border: none;
       background-color: transparent;
       margin: 0;
       padding: 0;
-      width: 4.3rem;
-      cursor: pointer;
-      .icon {
-        padding: 0.2rem;
+      img {
+        width: 2rem;
+        height: auto;
       }
-      .icon.selected {
-        border-radius: 15px;
-        border: 3px solid $green;
-        padding: 0.2rem;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem;
+      min-height: 5rem;
+      margin: auto;
+      width: 13rem;
+      justify-self: center;
+      button {
+        border: none;
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        width: 4.3rem;
+        cursor: pointer;
+        .icon {
+          padding: 0.2rem;
+        }
+        .icon.selected {
+          border-radius: 15px;
+          border: 3px solid $green;
+          padding: 0.2rem;
+        }
       }
+    }
+  }
+  .error-message {
+    background-color: $light-red;
+    width: 16rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-top: 0;
+    @include media-min("phone-up") {
+      font-size: 1rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
   }
 }

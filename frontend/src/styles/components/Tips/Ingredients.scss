@@ -18,6 +18,10 @@
   padding: 0.6rem;
   background-color: $warm-white;
   border-radius: 20px;
+  @include media-min("phone-up") {
+    width: 22rem;
+    height: 30rem;
+  }
   @include media-min("tablet-up") {
     height: 28rem;
     width: 18rem;
@@ -31,6 +35,10 @@
     margin-top: 0;
     overflow-y: auto;
     padding-left: 0;
+    @include media-min("phone-up") {
+      height: 24.5rem;
+      margin: auto;
+    }
   }
   .check-icon {
     width: 2.5rem;
@@ -44,6 +52,10 @@
   .ingredient-list {
     list-style: none;
     margin-bottom: 0.2rem;
+    @include media-min("phone-up") {
+      font-size: 0.9rem;
+      width: 17rem;
+    }
     @include media-min("tablet-up") {
       font-size: 0.9rem;
     }

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import search from "../../assets/icons/search.svg";
 
-import "../../styles/components/Header/SearchBar.scss";
+import "../../styles/components/Tips/SearchBar.scss";
 
 function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");

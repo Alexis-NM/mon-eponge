@@ -27,6 +27,10 @@
     margin-top: 2rem;
     margin-bottom: 0.5rem;
     cursor: default;
+    @include media-min("phone-up") {
+      font-size: 1.1rem;
+      width: 12rem;
+    }
     @include media-min("tablet-up") {
       width: 54rem;
     }
@@ -42,9 +46,11 @@
     background-color: $light-blue;
     width: 17rem;
     margin: auto;
-    border-radius: 30px;
-    border-radius: 100px;
-    @include media-min("phone-down") {
+    margin-bottom: 1rem;
+    @include media-min("phone-up") {
+      width: 25rem;
+    }
+    @include media-min("tablet-up") {
       background-color: $warm-white;
       padding: 3rem;
     }

@@ -32,11 +32,18 @@
   .title-container {
     display: flex;
     flex-direction: column;
+    @include media-min("phone-up") {
+      flex-direction: row;
+      gap: 0;
+    }
     .title-label {
       width: 15rem;
       margin: auto;
       font-size: 1rem;
       font-weight: 600;
+      @include media-min("phone-up") {
+        width: 3rem;
+      }
       @include media-min("tablet-up") {
         width: 12rem;
       }
@@ -49,13 +56,24 @@
       padding-left: 0.7rem;
       background-color: $light-grey;
       border-radius: 15px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       margin: auto;
       font-weight: 600;
+      @include media-min("phone-up") {
+        width: 16.5rem;
+        font-size: 1rem;
+      }
       @include media-min("tablet-up") {
         font-size: 1.2rem;
         width: 32rem;
         height: 3rem;
+      }
+    }
+    ::placeholder {
+      font-size: 0.9rem;
+      font-style: italic;
+      @include media-min("phone-up") {
+        font-size: 1rem;
       }
     }
   }
@@ -71,6 +89,9 @@
       width: 15rem;
       margin: auto;
       font-weight: 600;
+      @include media-min("phone-up") {
+        width: 21rem;
+      }
     }
   }
 
@@ -82,6 +103,9 @@
       width: 15rem;
       margin: auto;
       font-weight: 600;
+      @include media-min("phone-up") {
+        width: 21rem;
+      }
     }
   }
   .steps-container {
@@ -93,6 +117,9 @@
       margin: auto;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      @include media-min("phone-up") {
+        width: 21rem;
+      }
     }
     .steps-wrapper {
       display: flex;
@@ -102,7 +129,10 @@
         display: flex;
         align-items: center;
         .step-bullet {
-          margin-left: 0.3rem;
+          margin-right: 0.3rem;
+          @include media-min("phone-up") {
+            margin-right: 0.5rem;
+          }
         }
         .step-input {
           border: none;
@@ -112,6 +142,17 @@
           background-color: $light-grey;
           font-size: 0.8rem;
           padding-left: 1rem;
+          @include media-min("phone-up") {
+            width: 17rem;
+            font-size: 1rem;
+          }
+        }
+        ::placeholder {
+          font-size: 0.9rem;
+          font-style: italic;
+          @include media-min("phone-up") {
+            font-size: 1rem;
+          }
         }
         .step-delete-button {
           border: none;
@@ -124,20 +165,22 @@
       .add-step-button {
         display: flex;
         align-items: center;
-        justify-content: space-around;
         margin: auto;
         margin-top: 0.5rem;
         font-size: 0.9rem;
-        gap: 1rem;
+        gap: 1.3rem;
         border: 1px solid $black;
         color: $black;
         border-radius: 15px;
         width: 14rem;
         height: 2.7rem;
         padding: 0.4rem;
+        @include media-min("phone-up") {
+          font-size: 1rem;
+        }
         .green-plus {
           width: 2rem;
-          margin-right: 0.9rem;
+          margin-left: 0.5rem;
         }
       }
     }
@@ -155,6 +198,13 @@
     border-radius: 15px;
     width: 15rem;
     padding: 0.5rem;
+    @include media-min("phone-up") {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 18rem;
+    }
     .white-plus {
       width: 2rem;
     }
