@@ -79,7 +79,8 @@ function Login() {
             className="form-input"
             type="text"
             id="user_name"
-            placeholder=""
+            autoComplete="username"
+            placeholder="Saisissez votre identifiant"
             value={loginInfo.user_name}
             onChange={handleUserNameChange}
           />
@@ -92,7 +93,8 @@ function Login() {
             className="form-input"
             type="password"
             id="password"
-            placeholder=""
+            autoComplete="current-password"
+            placeholder="Saisissez le mot de passe"
             value={loginInfo.password}
             onChange={handlePasswordChange}
           />

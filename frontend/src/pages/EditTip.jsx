@@ -270,8 +270,8 @@ function EditTip() {
             />
           </div>
         </section>
-        <p className="ingredient-label">Les ingrédients :</p>
         <section className="ingredient-container">
+          <p className="ingredient-label">Les ingrédients :</p>
           <IngredientSelector
             id="ingredients"
             selectedIngredients={selectedIngredients}

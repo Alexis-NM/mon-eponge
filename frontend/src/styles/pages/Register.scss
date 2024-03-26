@@ -43,6 +43,9 @@
     font-size: 1.3rem;
     width: 35rem;
   }
+  @include media-min("desktop-up") {
+    margin-bottom: 1rem;;
+    }
   .lamp-logo {
     width: 2rem;
     margin-right: 0.8rem;
@@ -139,7 +142,7 @@
     width: 22rem;
   }
   @include media-min("desktop-up") {
-    margin-top: 10rem;
+    margin-top: 4rem;
   }
   .button-icon-register {
     width: 1.5rem;

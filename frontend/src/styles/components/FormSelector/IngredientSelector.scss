@@ -13,6 +13,9 @@
     width: 26rem;
     margin-left: 0rem;
   }
+  // @include media-min("desktop-up") {
+  //   // margin-left: 0.5rem;
+  // }
   .menu-list {
     display: flex;
     flex-direction: column;
@@ -99,6 +102,9 @@
       margin: 0;
       margin-left: 1.2rem;
       margin-top: 1.5rem;
+    }
+    @include media-min("desktop-up") {
+      margin-left: 3rem;
     }
 
     .add-button {

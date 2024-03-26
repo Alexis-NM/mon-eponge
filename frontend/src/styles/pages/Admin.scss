@@ -15,7 +15,12 @@
     width: 15rem;
     @include media-min("tablet-up") {
       width: 20rem;
-      font-size: 2rem;
+      font-size: 1.5rem;
+      margin-top: 1;
+    }
+
+    @include media-min("desktop-up") {
+      margin-top: 0;
     }
   }
   .manage-title {
@@ -34,7 +39,11 @@
     @include media-min("tablet-up") {
       width: 40rem;
       font-size: 1.3rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
+    }
+    @include media-min("desktop-up") {
+      font-size: 1.5rem;
+      width: 55rem;
     }
     .gear-icon {
       width: 2rem;
@@ -53,11 +62,10 @@
       width: 25rem;
     }
     @include media-min("tablet-up") {
-      background-color: $warm-white;
-      padding: 3rem;
-      width: 38rem;
-      border-radius: 30px;
-      padding : 1rem 3rem 1rem 3rem; 
+      width: 43rem;
+    }
+    @include media-min("desktop-up") {
+      width: 60rem;
     }
   }
 }

@@ -1,7 +1,7 @@
 @import "../../commons.scss";
 .header-wrapper {
   display: flex;
-  max-width: 68rem;
+  max-width: 70rem;
   margin: auto;
   position: relative;
 }
@@ -59,7 +59,6 @@
       margin-left: 2rem;
     }
     @include media-min("desktop-up") {
-      margin-top: 2rem;
       width: 28rem;
     }
   }

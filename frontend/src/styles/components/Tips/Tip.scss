@@ -18,6 +18,10 @@
       left: 20rem;
       top: 2rem;
     }
+    @include media-min("desktop-up") {
+      left: 31rem;
+      top: 2.2rem;
+    }
   }
   .tip-main-container {
     display: flex;
@@ -39,9 +43,22 @@
       width: 23rem;
       margin-bottom: 0;
     }
+    @include media-min("desktop-up") {
+      width: 35rem;
+      height: 37rem;
+    }
+
     .tip-main-title {
       text-align: center;
       margin-bottom: 0;
+      font-size: 1rem;
+
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+      }
     }
     .tip-container {
       margin-top: 0;
@@ -75,8 +92,15 @@
           @include media-min("tablet-up") {
             width: 16rem;
           }
+          @include media-min("desktop-up") {
+            width: 32rem;
+          }
           .tip-icon {
             width: 2.5rem;
+            @include media-min("desktop-up") {
+              width: 3rem;
+              margin-left: 2rem;
+            }
           }
 
           .tip-title {
@@ -88,10 +112,18 @@
             @include media-min("tablet-up") {
               width: 13rem;
             }
+            @include media-min("desktop-up") {
+              width: 22rem;
+              font-size: 1.1rem;
+            }
           }
         }
         ul {
           padding-left: 1rem;
+          @include media-min("desktop-up") {
+            font-size: 1rem;
+            padding-left: 2.5rem;
+          }
           .step-list {
             margin-right: 0;
           }
@@ -114,47 +146,3 @@
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
   }
 }
-// @media screen and (min-width: 1024px) {
-//   .pin-icon {
-//     display: block;
-//     left: 37.5vw;
-//     z-index: 1;
-//   }
-//   .tip-main-container {
-//     margin-right: 10vw;
-//     width: 38vw;
-//     max-width: 34.5rem;
-//     min-height: 31rem;
-//     height: 40.3rem;
-//     .tip-container {
-//       padding: 0.7rem;
-//     }
-//     .tip-main-title {
-//       font-size: 1.4rem;
-//     }
-//     .tip-title {
-//       font-size: 1rem;
-//     }
-//     .step-list {
-//       font-size: 1.1rem;
-//     }
-//   }
-// }
-// @media screen and (min-width: 1500px) {
-//   .tip-main-container {
-//     width: 42rem;
-//     max-width: 100rem;
-//     .tip-main-title {
-//       font-size: 1.8rem;
-//     }
-//     .tip-title {
-//       font-size: 1.4rem;
-//     }
-//     .step-list {
-//       font-size: 1.3rem;
-//     }
-//     .tip-icon {
-//       width: 4rem;
-//     }
-//   }
-// }

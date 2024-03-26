@@ -17,6 +17,9 @@
       width: 45.5rem;
       margin-bottom: 3rem;
     }
-
+    @include media-min("desktop-up") {
+      width:62rem;
+      gap: 2rem;
+    }
   }
 }

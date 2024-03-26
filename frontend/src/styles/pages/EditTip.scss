@@ -20,6 +20,11 @@
       font-size: 1.3rem;
       margin-top: 2rem;
     }
+    @include media-min("desktop-up") {
+      width: 52rem;
+      margin-top: 3rem;
+      font-size: 1.5rem;
+    }
     .pencil-icon {
       width: 2.5rem;
       @include media-min("tablet-up") {
@@ -40,7 +45,10 @@
     }
     @include media-min("tablet-up") {
       width: 40rem;
-      padding : 1rem 3rem 1rem 3rem;
+      padding: 1rem 3rem 1rem 3rem;
+    }
+    @include media-min("desktop-up") {
+      width: 50rem;
     }
     .editing-title {
       display: flex;
@@ -57,6 +65,10 @@
           display: flex;
           flex-direction: row;
           width: 4rem;
+        }
+        @include media-min("desktop-up") {
+          font-size: 1.5rem;
+          width: 5rem;
         }
       }
     }
@@ -80,6 +92,10 @@
         font-size: 1.3rem;
         height: 3rem;
       }
+      @include media-min("desktop-up") {
+        width: 40rem;
+        font-size: 1.5rem;
+      }
     }
     .picture-container {
       display: flex;
@@ -100,6 +116,10 @@
           font-size: 1.3rem;
           width: 15rem;
         }
+        @include media-min("desktop-up") {
+          font-size: 1.5rem;
+          width: 17rem;
+        }
       }
       .picture-components {
         display: flex;
@@ -114,20 +134,7 @@
       }
     }
   }
-  .ingredient-label {
-    font-weight: 600;
-    cursor: default;
-    height: auto;
-    margin: 0;
-    margin-left: 0.1rem;
-    font-size: 1rem;
-    margin-top: 1.5rem;
-    width: 15rem;
-    @include media-min("tablet-up") {
-      font-size: 1.3rem;
-      margin-top: 4rem;
-    }
-  }
+
   .ingredient-container {
     display: flex;
     margin: auto;
@@ -136,12 +143,39 @@
     @include media-min("phone-up") {
       width: 18rem;
     }
+    @include media-min("tablet-up") {
+      flex-direction: row;
+      width: 50rem;
+      margin-top: 2.5rem;
+    }
+    .ingredient-label {
+      font-weight: 600;
+      cursor: default;
+      height: auto;
+      margin: 0;
+      margin-left: 0.1rem;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      width: 15rem;
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 13rem;
+        margin-right: 8rem;
+        margin-top: 0.5;
+      }
+    }
   }
   .step-container {
     display: flex;
     margin: auto;
     flex-direction: column;
     margin-top: 1.5rem;
+    @include media-min("desktop-up") {
+      margin-top: 2rem;
+    }
 
     .step-label {
       width: 15.5rem;
@@ -157,6 +191,10 @@
         width: 8rem;
         margin: 0;
         margin-top: 2rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+        width: 9rem;
       }
     }
     .step-wrapper {
@@ -177,6 +215,9 @@
           justify-content: flex-end;
           margin-left: 1rem;
           width: 39rem;
+        }
+        @include media-min("desktop-up") {
+          width: 50rem;
         }
 
         .step-bullet {
@@ -201,6 +242,9 @@
             height: 3rem;
             font-size: 1.3rem;
             width: 24rem;
+          }
+          @include media-min("desktop-up") {
+            width: 32rem;
           }
         }
         .step-delete-button {
@@ -233,6 +277,9 @@
           height: 2.8rem;
           margin-top: 1rem;
           margin-left: 12rem;
+        }
+        @include media-min("desktop-up") {
+          margin-left: 24rem;
         }
         .green-plus {
           width: 2rem;

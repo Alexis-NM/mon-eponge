@@ -78,8 +78,9 @@ function Register() {
           <input
             name="user_name"
             className="form-input-register"
+            autoComplete="username"
             type="text"
-            placeholder=""
+            placeholder="Choisir un identifiant"
             value={registerInfo.user_name}
             onChange={handleChangeRegister}
           />
@@ -90,7 +91,8 @@ function Register() {
             name="password"
             className="form-input-register"
             type="password"
-            placeholder=""
+            autoComplete="new-password"
+            placeholder="Saisir le mot de passe"
             value={registerInfo.password}
             onChange={handleChangeRegister}
           />
@@ -101,7 +103,8 @@ function Register() {
             name="passwordRepeat"
             className="form-input-register"
             type="password"
-            placeholder=""
+            autoComplete="new-password"
+            placeholder="Confirmer le mot de passe"
             value={passwordRepeat}
             onChange={(e) => setPasswordRepeat(e.target.value)}
           />

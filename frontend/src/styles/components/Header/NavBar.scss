@@ -14,7 +14,9 @@
   }
   @include media-min("tablet-up") {
     width: 30rem;
-    // margin-top: 2rem;
+  }
+  @include media-min("desktop-up") {
+    width: 40rem;
   }
 
   .accordion_title {
@@ -30,6 +32,9 @@
     background-color: $light-yellow;
     @include media-min("tablet-up") {
       font-size: 1.3rem;
+    }
+    @include media-min("desktop-up") {
+      font-size: 1.5rem;
     }
 
     &:hover {
@@ -56,6 +61,9 @@
       font-size: 14px;
       @include media-min("tablet-up") {
         font-size: 1.1rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.3rem;
       }
     }
   }

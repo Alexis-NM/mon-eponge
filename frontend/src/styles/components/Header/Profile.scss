@@ -14,7 +14,7 @@
     right: 1rem;
   }
   @include media-min("desktop-up") {
-    top: -1rem;
+    top: -2rem;
     right: 4rem;
   }
   .user_name {
@@ -60,7 +60,7 @@
       width: 4.7rem;
     }
     @include media-min("desktop-up") {
-      left: .7rem;
+      left: 0.7rem;
     }
   }
 }
