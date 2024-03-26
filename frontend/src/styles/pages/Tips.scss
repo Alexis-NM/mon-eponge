@@ -1,0 +1,25 @@
+@import "../commons.scss";
+.tips-page {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    @include media-min("tablet-up") {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      margin: auto;
+      width: 45.5rem;
+      margin-bottom: 3rem;
+    }
+    @include media-min("desktop-up") {
+      width:62rem;
+      gap: 2rem;
+    }
+  }
+}

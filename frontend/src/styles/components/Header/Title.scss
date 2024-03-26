@@ -1,0 +1,65 @@
+@import "../../commons.scss";
+.header-wrapper {
+  display: flex;
+  max-width: 70rem;
+  margin: auto;
+  position: relative;
+}
+.title-container {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  @include media-min("tablet-up") {
+    text-align: center;
+  }
+
+  .sponge-logo {
+    width: 2.5rem;
+    @include media-min("tablet-up") {
+      width: 3rem;
+    }
+  }
+  .main-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    @include media-min("phone-up") {
+      font-size: 2rem;
+      padding-left: 1rem;
+    }
+    @include media-min("tablet-up") {
+      font-size: 2.5rem;
+      width: 16rem;
+    }
+    @include media-min("desktop-up") {
+      font-size: 3rem;
+      width: 19rem;
+    }
+  }
+  &.not-logged-in {
+    justify-content: center;
+    @include media-min("tablet-up") {
+      width: 19rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
+    }
+    @include media-min("desktop-up") {
+      margin: auto;
+      margin-top: 1rem;
+    }
+  }
+  &.logged-in {
+    margin-left: 0.5rem;
+    margin-top: 0.8rem;
+    @include media-min("phone-up") {
+      justify-content: center;
+      width: 18rem;
+    }
+    @include media-min("tablet-up") {
+      width: 19rem;
+      margin-left: 2rem;
+    }
+    @include media-min("desktop-up") {
+      width: 28rem;
+    }
+  }
+}

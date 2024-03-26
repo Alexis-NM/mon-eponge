@@ -1,0 +1,40 @@
+@import "../commons.scss";
+
+.home-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin: 1rem;
+  margin-top: 3rem;
+  background-color: $light-green;
+  border-radius: 20px;
+  @include media-min("phone-up") {
+    padding: 1.5rem;
+    gap: 0.5rem;
+  }
+  @include media-min("tablet-up") {
+    margin: auto;
+    margin-top: 4rem;
+    width: 28rem;
+  }
+  @include media-min("desktop-up") {
+    width: 54rem;
+    height: 6rem;
+    margin-bottom: 0rem;
+    margin-top: 1rem;
+  }
+  .catch-phrase {
+    font-size: 1.1rem;
+    font-weight: 400;
+    @include media-min("tablet-up") {
+      font-size: 1.5rem;
+    }
+  }
+  .bubbles-logo {
+    width: 2.2rem;
+    @include media-min("desktop-up") {
+      margin-left: 1rem;
+    }
+  }
+}

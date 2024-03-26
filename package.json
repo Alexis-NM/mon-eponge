@@ -13,7 +13,6 @@
   "scripts": {
     "postinstall": "cross-env-shell \"husky install && cd ./frontend && npm install && cd ../backend && npm install\"",
     "db:migrate": "cd ./backend && node migrate.js",
-    "db:seed": "cd ./backend && node seed.js",
     "dev": "cross-env-shell 'concurrently -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"npm:dev-*\"'",
     "dev-front": "cross-env-shell \"cd ./frontend && npm run dev\"",
     "dev-back": "cross-env-shell \"cd ./backend && npm run dev\"",
@@ -31,5 +30,9 @@
     "cross-env": "^7.0.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3"
+  },
+  "dependencies": {
+    "argon2": "^0.31.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }
