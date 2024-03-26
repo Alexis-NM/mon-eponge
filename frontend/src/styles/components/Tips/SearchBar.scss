@@ -1,0 +1,60 @@
+@import "../../commons.scss";
+
+.search-bar-form {
+  display: flex;
+  margin: auto;
+  margin-top: 2rem;
+  width: 17rem;
+  background-color: $warm-white;
+  border-radius: 15px;
+  justify-content: center;
+  @include media-min("phone-up") {
+    width: 23rem;
+  }
+  @include media-min("tablet-up") {
+    width: 30rem;
+    height: 3.5rem;
+  }
+  @include media-min("desktop-up") {
+    width: 40rem;
+  }
+}
+.search-icon {
+  width: 1.3rem;
+  margin-left: 0.8rem;
+  margin-right: 0.5rem;
+  @include media-min("phone-up") {
+    width: 2rem;
+  }
+  @include media-min("tablet-up") {
+    width: 2.5rem;
+  }
+  @include media-min("desktop-up") {
+    margin-left: 1.5rem;
+  }
+}
+.search-input {
+  width: 15rem;
+  margin: auto;
+  border-radius: 15px;
+  border: none;
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: $black;
+  background-color: $warm-white;
+  @include media-min("phone-up") {
+    width: 18rem;
+    font-size: 1rem;
+  }
+  @include media-min("tablet-up") {
+    font-size: 1.3rem;
+    width: 24rem;
+  }
+  @include media-min("desktop-up") {
+    width: 32rem;
+  }
+}
+.search-input::placeholder {
+  font-style: italic;
+}

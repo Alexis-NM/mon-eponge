@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 
 import Title from "../components/Header/Title";
-import NavBar from "../components/NavBar/NavBar";
+import NavBar from "../components/Header/NavBar";
 import PictureSelector from "../components/FormSelector/PictureSelector";
 import IngredientSelector from "../components/FormSelector/IngredientSelector";
 import ShareModal from "../components/Modals/ShareModal";
@@ -89,6 +89,10 @@ function ShareTip() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (selectedIngredients.length === 0) {
+      return;
+    }
+
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -127,7 +131,7 @@ function ShareTip() {
       <form onSubmit={handleSubmit} className="form-share-container">
         <div className="title-container">
           <label htmlFor="titleInput" className="title-label">
-            Title:
+            Titre :
           </label>
           <input
             type="text"
@@ -137,6 +141,7 @@ function ShareTip() {
             }
             required
             className="title-input"
+            placeholder="Commencez par un titre d'astuce"
           />
         </div>
         <div className="picture-container">
@@ -165,6 +170,7 @@ function ShareTip() {
                   }
                   required
                   className="step-input"
+                  placeholder="Ajouter une étape ici"
                 />
                 {index !== 0 && (
                   <button

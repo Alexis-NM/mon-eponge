@@ -19,7 +19,7 @@ CREATE TABLE user (
   user_name VARCHAR(255) NOT NULL,
   hashed_password VARCHAR(255) NOT NULL,
   picture_id INT NOT NULL DEFAULT 1,
-  is_admin BOOLEAN DEFAULT false,
+  is_admin BOOLEAN DEFAULT false NOT NULL,
   CONSTRAINT fk_user_picture FOREIGN KEY (picture_id) REFERENCES picture(id) ON DELETE CASCADE
 );
 
@@ -39,8 +39,8 @@ CREATE TABLE tip (
 
 CREATE TABLE tip_ingredient (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  tip_id INT,
-  ingredient_id INT,
+  tip_id INT NOT NULL,
+  ingredient_id INT NOT NULL,
   CONSTRAINT fk_tip_ingredient_tip FOREIGN KEY (tip_id) REFERENCES tip(id) ON DELETE CASCADE,
   CONSTRAINT fk_tip_ingredient_ingredient FOREIGN KEY (ingredient_id) REFERENCES ingredient(id) ON DELETE CASCADE
 );

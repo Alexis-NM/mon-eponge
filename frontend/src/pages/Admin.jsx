@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Title from "../components/Header/Title";
-import NavBar from "../components/NavBar/NavBar";
+import NavBar from "../components/Header/NavBar";
 import AdminTips from "../components/Admin/AdminTips";
 
 import GrearIcon from "../assets/icons/gear.svg";
@@ -25,20 +25,22 @@ function Admin() {
   }
 
   return (
-    <section className="admin-tips-page">
+    <>
       <Title />
-      <h1 className="admin-title">Administrateur</h1>
-      <div className="navbar">
-        <NavBar />
-      </div>
-      <h2 className="manage-title">
-        <img src={GrearIcon} alt="Réglages" className="gear-icon" />
-        Gérer les Astuces
-      </h2>
-      <section className="admin-tips-section">
-        <AdminTips />
+      <section className="admin-tips-page">
+        <h1 className="admin-title">Administrateur</h1>
+        <div className="navbar">
+          <NavBar />
+        </div>
+        <h2 className="manage-title">
+          <img src={GrearIcon} alt="Réglages" className="gear-icon" />
+          Gérer les Astuces
+        </h2>
+        <section className="admin-tips-section">
+          <AdminTips />
+        </section>
       </section>
-    </section>
+    </>
   );
 }
 

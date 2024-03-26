@@ -34,7 +34,7 @@ function Profile() {
   };
 
   if (!user.isLoggedIn) {
-    return null; // Si aucun utilisateur n'est connecté, le composant ne renvoie rien
+    return null;
   }
 
   return (

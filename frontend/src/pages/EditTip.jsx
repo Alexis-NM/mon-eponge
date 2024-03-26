@@ -19,7 +19,7 @@ import WhitePlus from "../assets/icons/white_plus.svg";
 import DeleteIcon from "../assets/icons/delete.svg";
 /// STYLES ///
 import "../styles/pages/EditTip.scss";
-import NavBarMobile from "../components/NavBar/NavBar";
+import NavBarMobile from "../components/Header/NavBar";
 
 function EditTip() {
   const { tipId } = useParams();
@@ -41,6 +41,17 @@ function EditTip() {
       // Redirect to the login page if the user is not an admin
       navigate("/connexion");
     } else {
+      const formatIngredients = (ingredients) => {
+        const formattedIngredients =
+          typeof ingredients === "string"
+            ? ingredients.split(",")
+            : ingredients;
+        return formattedIngredients.map((ingredient, index) => ({
+          id: index + 1,
+          ingredient_name: ingredient.trim(),
+          isChecked: false,
+        }));
+      };
       // Fetch tip details based on tipId
       const fetchTip = async () => {
         try {
@@ -50,6 +61,10 @@ function EditTip() {
           setEditedTitle(response.data.tip_name);
           setSelectedImageId(response.data.picture_id); // Initialiser selectedImageId avec l'ID de l'image initiale
           setSelectedImage(response.data.picture_id);
+          const formattedIngredients = formatIngredients(
+            response.data.ingredients
+          );
+          setSelectedIngredients(formattedIngredients);
           // Split steps based on comma followed by an uppercase letter
           const stepsArray = response.data.steps.split(/,(?=[A-Z])/);
           setEditedSteps(stepsArray);
@@ -117,6 +132,9 @@ function EditTip() {
   /// SAUVEGARDER LES MODIFICATIONS ///
 
   const handleSaveChanges = async () => {
+    if (selectedIngredients.length === 0) {
+      return;
+    }
     try {
       // Récupérer le token depuis le local storage
       const storedToken = localStorage.getItem("token");
@@ -252,8 +270,8 @@ function EditTip() {
             />
           </div>
         </section>
-        <p className="ingredient-label">Les ingrédients :</p>
         <section className="ingredient-container">
+          <p className="ingredient-label">Les ingrédients :</p>
           <IngredientSelector
             id="ingredients"
             selectedIngredients={selectedIngredients}

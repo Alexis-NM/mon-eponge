@@ -2,7 +2,7 @@
 
 .tip-section {
   @include media-min("tablet-up") {
-    margin-top: 2.5rem;
+    margin-top: 1rem;
   }
   .pin-icon {
     display: flex;
@@ -10,9 +10,17 @@
     position: relative;
     top: 1.6rem;
     left: 13.5rem;
+    @include media-min("phone-up") {
+      top: 1.8rem;
+      left: 20rem;
+    }
     @include media-min("tablet-up") {
-      left:10rem;
+      left: 20rem;
       top: 2rem;
+    }
+    @include media-min("desktop-up") {
+      left: 31rem;
+      top: 2.2rem;
     }
   }
   .tip-main-container {
@@ -26,19 +34,41 @@
     padding: 0.6rem;
     background-color: $warm-white;
     border-radius: 20px;
+    @include media-min("phone-up") {
+      width: 22rem;
+      height: 34rem;
+    }
     @include media-min("tablet-up") {
-      height: 28rem;
+      height: 32rem;
       width: 23rem;
       margin-bottom: 0;
     }
+    @include media-min("desktop-up") {
+      width: 35rem;
+      height: 37rem;
+    }
+
     .tip-main-title {
       text-align: center;
       margin-bottom: 0;
+      font-size: 1rem;
+
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+      }
+      @include media-min("desktop-up") {
+        font-size: 1.5rem;
+      }
     }
     .tip-container {
       margin-top: 0;
       overflow-y: auto;
       padding: 0.2rem;
+      border-radius: 40px;
+
+      @include media-min("phone-up") {
+        padding-right: 0.5rem;
+      }
       @include media-min("tablet-up") {
         padding-right: 0.5rem;
       }
@@ -56,23 +86,44 @@
           justify-content: center;
           align-items: center;
           gap: 1rem;
+          @include media-min("phone-up") {
+            width: 19rem;
+          }
           @include media-min("tablet-up") {
-            width: 17rem;
+            width: 16rem;
+          }
+          @include media-min("desktop-up") {
+            width: 32rem;
           }
           .tip-icon {
             width: 2.5rem;
+            @include media-min("desktop-up") {
+              width: 3rem;
+              margin-left: 2rem;
+            }
           }
 
           .tip-title {
             width: 6rem;
             margin: auto;
+            @include media-min("phone-up") {
+              width: 16rem;
+            }
             @include media-min("tablet-up") {
               width: 13rem;
+            }
+            @include media-min("desktop-up") {
+              width: 22rem;
+              font-size: 1.1rem;
             }
           }
         }
         ul {
           padding-left: 1rem;
+          @include media-min("desktop-up") {
+            font-size: 1rem;
+            padding-left: 2.5rem;
+          }
           .step-list {
             margin-right: 0;
           }
@@ -95,47 +146,3 @@
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
   }
 }
-// @media screen and (min-width: 1024px) {
-//   .pin-icon {
-//     display: block;
-//     left: 37.5vw;
-//     z-index: 1;
-//   }
-//   .tip-main-container {
-//     margin-right: 10vw;
-//     width: 38vw;
-//     max-width: 34.5rem;
-//     min-height: 31rem;
-//     height: 40.3rem;
-//     .tip-container {
-//       padding: 0.7rem;
-//     }
-//     .tip-main-title {
-//       font-size: 1.4rem;
-//     }
-//     .tip-title {
-//       font-size: 1rem;
-//     }
-//     .step-list {
-//       font-size: 1.1rem;
-//     }
-//   }
-// }
-// @media screen and (min-width: 1500px) {
-//   .tip-main-container {
-//     width: 42rem;
-//     max-width: 100rem;
-//     .tip-main-title {
-//       font-size: 1.8rem;
-//     }
-//     .tip-title {
-//       font-size: 1.4rem;
-//     }
-//     .step-list {
-//       font-size: 1.3rem;
-//     }
-//     .tip-icon {
-//       width: 4rem;
-//     }
-//   }
-// }

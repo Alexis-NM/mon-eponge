@@ -6,6 +6,16 @@
   width: 15rem;
   margin: auto;
   margin-top: 1rem;
+  @include media-min("phone-up") {
+    width: 18rem;
+  }
+  @include media-min("tablet-up") {
+    width: 26rem;
+    margin-left: 0rem;
+  }
+  // @include media-min("desktop-up") {
+  //   // margin-left: 0.5rem;
+  // }
   .menu-list {
     display: flex;
     flex-direction: column;
@@ -13,11 +23,6 @@
     align-items: center;
     width: 13rem;
     margin: auto;
-    // max-width: 28rem;
-    @media screen and (min-width: 576px) {
-      gap: 1.5rem;
-      flex-direction: row;
-    }
     .drop-container {
       position: relative;
     }
@@ -31,10 +36,18 @@
       border-radius: 15px;
       padding-left: 1rem;
       padding-right: 1rem;
-      font-style: italic;
       height: 2.5rem;
       width: 16rem;
-
+      @include media-min("phone-up") {
+        width: 18.5rem;
+        font-size: 1rem;
+      }
+      @include media-min("tablet-up") {
+        width: 24rem;
+        font-size: 1.3rem;
+        height: 3rem;
+        margin-top: 0rem;
+      }
       img {
         width: 2rem;
         margin-left: 1.5rem;
@@ -57,45 +70,110 @@
     height: 11rem;
     overflow-y: auto;
     border-radius: 8px 15px 8px 15px;
-  }
-}
-.add-ingredient-container {
-  display: flex;
-  border: 1px solid $black;
-  width: 13rem;
-  margin: auto;
-  height: 2.2rem;
-  padding: 0.2rem;
-  margin-top: 1rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-
-  .add-button {
-    border: none;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    .cross-icon {
-      width: 2rem;
-      background-color: $warm-white;
-      border-radius: 8px;
+    @include media-min("phone-up") {
+      width: 18rem;
+      label {
+        margin-left: 0.5rem;
+      }
+    }
+    @include media-min("tablet-up") {
+      width: 23rem;
+      font-size: 1.3rem;
+      padding-left: 1rem;
+      height: 12rem;
+      label {
+        margin-left: 1rem;
+      }
     }
   }
-  .add-ingredient-input {
-    border: none;
+  .add-ingredient-container {
+    display: flex;
+    border: 1px solid $black;
+    width: 13rem;
+    margin: auto;
+    height: 2.2rem;
+    padding: 0.2rem;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
     border-radius: 15px;
-    background-color: $warm-white;
-    min-width: 10rem;
-    height: 2rem;
-    text-align: center;
+    @include media-min("tablet-up") {
+      width: 20rem;
+      margin: 0;
+      margin-left: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    @include media-min("desktop-up") {
+      margin-left: 3rem;
+    }
+
+    .add-button {
+      border: none;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      @include media-min("tablet-up") {
+        margin-right: 1rem;
+      }
+      .cross-icon {
+        width: 2rem;
+        background-color: $warm-white;
+        border-radius: 8px;
+        width: 2.5rem;
+      }
+    }
+    .add-ingredient-input {
+      border: none;
+      border-radius: 15px;
+      background-color: $warm-white;
+      min-width: 10rem;
+      height: 2rem;
+      text-align: center;
+      @include media-min("phone-up") {
+        font-size: 1rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+        width: 15rem;
+      }
+    }
+    .add-ingredient-input::placeholder {
+      text-align: center;
+      color: $black;
+      font-size: 0.9rem;
+      font-style: italic;
+      @include media-min("phone-up") {
+        font-size: 1rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+      }
+    }
   }
-  .add-ingredient-input::placeholder {
+  .add-ingredient-container:hover {
+    background-color: $green;
+  }
+  .error-message {
+    background-color: $light-red;
+    width: 15rem;
+    padding: 0.5rem 0.2rem 0.5rem 0.2rem;
     text-align: center;
-    color: $black;
+    border-radius: 15px;
     font-size: 0.9rem;
+    @include media-min("phone-up") {
+      display: flex;
+      margin: auto;
+      font-size: 1rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      width: 17rem;
+      margin-top: 1rem;
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+        width: 22rem;
+        margin-top: 1.5rem;
+        padding-left: 1.5rem;
+      }
+    }
   }
-}
-.add-ingredient-container:hover {
-  background-color: $green;
 }

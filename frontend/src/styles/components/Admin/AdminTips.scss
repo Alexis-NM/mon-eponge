@@ -5,19 +5,43 @@
   flex-direction: column;
   font-size: 0.8rem;
   width: 17rem;
-  height: 25rem;
+  height: 39rem;
   padding: 0.3rem;
   border-radius: 20px;
   background-color: $light-blue;
   margin: auto;
-  border-radius: 50%;
-  @include media-min("phone-down") {
-    background-color: $light-yellow;
+  @include media-min("phone-up") {
+    width: 24rem;
+    height: 33rem;
+  }
+  @include media-min("tablet-up") {
+    background-color: $light-purple;
+    width: 39rem;
+    justify-content: center;
+    height: 43rem;
+    padding: 2rem;
+  }
+  @include media-min("desktop-up") {
+    width: 55rem;
+    height: 42rem;
   }
   .admin-tip-container {
     margin-top: 0;
     overflow-y: auto;
     padding: 0.5rem;
+    border-radius: 40px;
+    @include media-min("phone-up") {
+      width: 23.5rem;
+    }
+    @include media-min("tablet-up") {
+      width: 38rem;
+      border-radius: 30px;
+      padding: 1rem;
+    }
+    @include media-min("desktop-up") {
+      margin: auto;
+      width: 46rem;
+    }
   }
   .admin-tip-wrapper {
     display: flex;
@@ -28,6 +52,12 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
     background-color: $warm-white;
+    @include media-min("tablet-up") {
+      width: 36rem;
+    }
+    @include media-min("desktop-up") {
+      width: 44rem;
+    }
   }
   .admin-tip-header {
     display: flex;
@@ -35,12 +65,28 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
+    @include media-min("phone-up") {
+      height: 2rem;
+      gap: 1rem;
+    }
+    @include media-min("tablet-up") {
+      margin-top: 1rem;
+    }
     .admin-tip-icon {
       width: 2rem;
+      @include media-min("tablet-up") {
+        width: 3rem;
+      }
     }
     .admin-tip-title {
       margin-left: 0.5rem;
+      @include media-min("phone-up") {
+        font-size: 1rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+      }
     }
   }
 
@@ -50,6 +96,25 @@
     .admin-step-list {
       padding-left: 1rem;
       width: 11rem;
+      @include media-min("phone-up") {
+        width: 19rem;
+        padding-left: 1.5rem;
+        font-size: 0.9rem;
+      }
+      @include media-min("tablet-up") {
+        font-size: 1.3rem;
+        width: 29rem;
+        padding-left: 2rem;
+      }
+      @include media-min("desktop-up") {
+        padding-left: 4rem;
+        width: 36rem;
+      }
+      li {
+        @include media-min("desktop-up") {
+          padding-left: 0.5rem;
+        }
+      }
     }
     .edit-button {
       height: 2.5rem;
@@ -58,6 +123,9 @@
       cursor: pointer;
       .edit-icon {
         width: 2rem;
+        @include media-min("tablet-up") {
+          width: 3rem;
+        }
       }
       .edit-icon:hover {
         border: 2px solid $green;
@@ -71,56 +139,13 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: $light-red;
+    background-color: $light-purple;
     border-radius: 6px;
-    border: 1px solid $light-purple;
+    border: 1px solid $light-red;
   }
   ::-webkit-scrollbar-track {
-    background-color: $light-blue;
+    background-color: $light-yellow;
     border-radius: 6px;
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
   }
 }
-// @media screen and (min-width: 1024px) {
-//   .pin-icon {
-//     display: block;
-//     left: 37.5vw;
-//     z-index: 1;
-//   }
-//   .tips-admin-container {
-//     width: 40rem;
-
-//     .admin-tip-container {
-//       padding: 0.7rem;
-//     }
-//     .admin-main-title {
-//       font-size: 1.4rem;
-//     }
-//     .admin-tip-title {
-//       font-size: 1rem;
-//     }
-//     .admin-step-list {
-//       font-size: 1.1rem;
-//     }
-//   }
-// }
-// @media screen and (min-width: 1500px) {
-//   .tips-admin-container {
-//     width: 42rem;
-//     max-width: 100rem;
-//     .tip-main-title {
-//       font-size: 1.8rem;
-//     }
-//     .admin-tip-title {
-//       font-size: 1.4rem;
-//       max-width: 25rem;
-//       margin: auto;
-//     }
-//     .admin-step-list {
-//       font-size: 1.3rem;
-//     }
-//     .admin-tip-icon {
-//       width: 4rem;
-//     }
-//   }
-// }
