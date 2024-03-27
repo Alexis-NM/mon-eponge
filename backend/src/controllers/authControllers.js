@@ -24,11 +24,9 @@ const login = async (req, res, next) => {
       });
 
       // Send the token in the response
-      res.status(200).json({ token });
-
-      // .cookie("user token", token, {
-      // httpOnly: true,
-      // });
+      res.status(200).json({ token }).cookie("user token", token, {
+        httpOnly: true,
+      });
     } else {
       res.sendStatus(422);
     }
